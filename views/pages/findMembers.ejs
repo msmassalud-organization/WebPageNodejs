@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+    <!-- Custom styles for this template -->
+    <link href="bootstrap/theme.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container theme-showcase" role="main">
+
+    <% include ../partials/header %>
+    <label for="findByName">Nombre: </label>
+    <input type="text" id="findByName" />
+
+    <p id="results">
+
+    </p>
+
+    <div class="row">
+      <table class="table" id="tableMembers">
+        <thead>
+          <tr>
+            <th>Nombre(s)</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+          </tr>
+        </thead>
+          <tbody>
+
+          </tbody>
+
+
+
+      </table>
+    </div>
+
+  </div>
+  <% include ../partials/jsblock %>
+  <script src="js/user.js"></script>
+</body>
+
+</html>

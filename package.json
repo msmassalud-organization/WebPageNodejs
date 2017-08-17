@@ -1,0 +1,30 @@
+{
+  "name": "appengine-mongodb",
+  "description": "An example of using MongoDB with Node.js on Google App Engine.",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache Version 2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=4.3.2"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.7",
+    "express": "^4.15.3",
+    "jade": "^1.0.4",
+    "jwt-simple": "^0.5.1",
+    "moment": "^2.18.1",
+    "mongodb": "2.2.22",
+    "mongoose": "^4.11.7",
+    "nconf": "0.8.4",
+    "nib": "^1.0.4",
+    "stylus": "^0.49.1"
+  },
+  "scripts": {
+    "start": "node ./server.js",
+    "test": "nodemon ./server.js",
+    "deploy": "gcloud app deploy --project NodejsMongo"
+  }
+}

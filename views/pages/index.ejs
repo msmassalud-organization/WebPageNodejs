@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+    <!-- Custom styles for this template -->
+    <link href="bootstrap/theme.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container theme-showcase" role="main">
+
+    <% include ../partials/header %>
+
+      <div class="row">
+        <ul class="list-group">
+          <%for (var i = 0; i < locals.userList.length; i++) {%>
+            <li class="list-group-item">
+              <%= userList[i].name + " " + userList[i].dadLastName + " " + userList[i].momLastName %>
+            </li>
+            <% } %>
+        </ul>
+      </div>
+  </div>
+  <% include ../partials/jsblock %>
+</body>
+
+</html>
