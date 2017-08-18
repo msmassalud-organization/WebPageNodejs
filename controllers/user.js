@@ -53,7 +53,6 @@ function insertMember(req, res) {
 
           res.status(200).redirect('/');
         });
-        //res.status(200).redirect('#');
       } else {
         console.log(`User found: ${user}`);
         res.status(500).render('pages/500', {
@@ -67,62 +66,75 @@ function insertMember(req, res) {
 function getMembersByName(req, res) {
   let name = req.query.name;
   User.find({
-      'name' : new RegExp(name),
-      'accType' : 'member'
+      'name': new RegExp(name),
+      'accType': 'member'
     },
     (err, members) => {
-      if(err){
+      if (err) {
         throw err;
       }
-      if(members.length == 0){
+      if (members.length == 0) {
         res.status(204).send('Not found');
-      }else{
+      } else {
         res.status(200).send(members);
       }
     });
 }
 
-function loadMemberProfile(req, res){
+function loadMemberProfile(req, res) {
 
-  User.findOne({ 'membership.memberId' : req.body.memberId},
+  User.findOne({
+      'membership.memberId': req.body.memberId
+    },
     (err, member) => {
-      if(err) {
+      if (err) {
         throw err;
       }
-      if(member){
-        res.status(200).render('pages/profile', {user: member});
-      }
-      else{
+      if (member) {
+        res.status(200).render('pages/profile', {
+          user: member
+        });
+      } else {
         res.status(204).redirect('error');
       }
     });
 }
 
 function signIn(req, res) {
-  User.findOne({ email: req.body.email },
-    (err, user) =>{
-      if(err){
-        return res.status(500).send({message: err});
+  User.findOne({
+      email: req.body.email
+    },
+    (err, user) => {
+      if (err) {
+        return res.status(500)
+        .render('pages/signin',{
+          message: err
+        });
+      }
+      if (!user) {
+        return res.status(404)
+        .render('pages/signin',{
+          message: 'No existe el usuario'
+        });
       }
 
-      if(!user){
-        return res.status(404).send({message: 'No existe el usuario'});
-      }
-
-      if(user.validPassword(req.body.password)){
+      if (user.validPassword(req.body.password)) {
         req.user = user;
         res.status(200).send({
           message: 'Te has loggeado correctamente',
           token: service.createToken(user)
         })
-      }else{
-        res.status(403).send({
+      } else {
+        return res.status(403)
+        .render('pages/signin',{
           message: 'Contraseña incorrecta'
         })
       }
-
-
     });
+}
+
+function getAccTypes(){
+  return User.schema.path('accType').enumValues;
 }
 
 module.exports = {
@@ -130,5 +142,6 @@ module.exports = {
   insertMember,
   getMembersByName,
   loadMemberProfile,
-  signIn
+  signIn,
+  getAccTypes
 }

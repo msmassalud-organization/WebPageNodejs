@@ -7,8 +7,8 @@ var userSchema = new mongoose.Schema({
   dadLastName:  {type: String, uppercase: true, required: true},
   momLastName:  {type: String, uppercase: true, required: true},
   birthday:     {type: Date, default:Date.now},
-  email:        String,
-  password:     {type: String, required: true},
+  email:        {type: String, lowercase: true, unique: true},
+  password:     {type: String, required: true, select: false},
   accType:      {type: String,
                   enum : [
                     'member','default','admin','doctor',

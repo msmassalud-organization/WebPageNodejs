@@ -19,4 +19,12 @@ function isAuth(req, res, next){
 
 }
 
-module.exports = isAuth
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+
+  res.redirect('/');
+}
+
+module.exports = isLoggedIn

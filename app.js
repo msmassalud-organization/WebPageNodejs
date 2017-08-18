@@ -5,11 +5,15 @@
 
 const express = require('express')
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 const app = express()
 const path = require('path')
-const auth = require('./middlewares/auth')
-const userController = require('./controllers/user');
-console.log(userController);
+const passport = require('passport')
+const session = require('express-session')
+const config = require('./config')
+const flash = require('connect-flash')
+
+
 //Establecemos la ruta de la carpeta de vistas
 app.set('views', __dirname + '/views');
 
@@ -27,28 +31,19 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-app.get('/', userController.getAllUsers);
-app.get('/signupMember', (req, res) =>{
-  res.status(200).render('pages/signupMember');
-});
-app.post('/signupMember', userController.insertMember);
-app.get('/signin', (req, res) =>{
-  res.status(200).render('pages/signin');
-});
-app.post('/signin', userController.signIn);
+//Configuramos la herramienta para parsear las cookies
+app.use(cookieParser());
 
-app.get('/findMembers', (req, res) =>{
-  res.status(200).render('pages/findMembers');
-});
-app.get('/getMembersByName', userController.getMembersByName);
-app.post('/loadProfile', userController.loadMemberProfile);
-app.get('/loadProfile', (req, res) =>{
-  res.status(403).render('pages/403');
-});
+//Configuración de Passport para autenticación
+require('./middlewares/passport')(passport);
+app.use(session({ secret: config.SECRET_TOKEN }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
-app.get('/private', auth,(req, res)=>{
-  res.status(200).send({message: 'Tienes acceso.'});
-});
+//configurar rutas
+require('./routes.js')(app, passport);
+
 //Not Found
 app.use(function(req, res, next){
   res.status(404);
