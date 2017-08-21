@@ -24,10 +24,26 @@ module.exports = function(app, passport) {
     failureFlash: true
   }));
   //app.post('/signin', userController.signIn);
-
+  app.get('/updateProfile', auth, (req, res) =>{
+    res.status(200).render('pages/updateProfile',{
+      user: req.user
+    });
+  });
+  app.post('/updateProfile', auth, userController.updateProfile);
   app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/signin');
+  });
+
+  app.get('/updateMedicalRecord', auth, (req, res) =>{
+    res.status(200).render('pages/updateMedicalRecord',{
+      user: req.user
+    });
+  });
+
+  app.post('/updateMedicalRecord', auth, (req, res) =>{
+    console.log(req.body);
+    res.redirect('pages/loadDashboard');
   });
 
   app.get('/findMembers', (req, res) => {

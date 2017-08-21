@@ -115,8 +115,21 @@ function signIn(req, res) {
   });
 }
 
+function updateProfile(req, res) {
+  console.log(req.body);
+  var update = req.body;
+  User.findByIdAndUpdate(req.user._id, update, function(err, userUpdated) {
+    if (err) {
+      res.status(500).send(err);
+    }
+    console.log(userUpdated);
+    res.status(200).redirect("/loadDashboard");
+  });
+}
+
 module.exports = {
   getAllUsers,
+  updateProfile,
   insertMember,
   getMembersByName,
   loadMemberProfile,

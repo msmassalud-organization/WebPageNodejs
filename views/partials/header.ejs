@@ -14,9 +14,9 @@
         <li class="active"><a href="/">Inicio</a></li>
         <li><a href="/signupMember">Registar nuevo miembro</a></li>
         <li><a href="/findMembers">Buscar miembros</a></li>
-        <% console.log(locals); %>
         <% if(locals.user) {%>
         <li><a href="/loadDashboard">Perfil</a></li>
+        <li><a href="/logout">Salir</a></li>
         <%}else{ %>
         <li><a href="/signin">Ingresar</a></li>
         <%} %>

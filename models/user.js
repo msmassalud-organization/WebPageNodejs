@@ -3,12 +3,15 @@ var bCrypt   = require('bcrypt-nodejs');
 var Schema   = mongoose.Schema;
 
 var userSchema = new mongoose.Schema({
+  isActive:     {type: Boolean, default: true},
   name:         {type: String, uppercase: true, required: true},
   dadLastName:  {type: String, uppercase: true, required: true},
   momLastName:  {type: String, uppercase: true, required: true},
   birthday:     {type: Date, default:Date.now},
   email:        {type: String, lowercase: true, unique: true},
   password:     {type: String, required: true},
+  registerDate: {type: Date, default:Date.now},
+  inactiveDate: {type: Date},
   accType:      {type: String,
                   enum : [
                     'member','default','admin','doctor',
@@ -16,7 +19,7 @@ var userSchema = new mongoose.Schema({
                     'memberAgent','doctorAgent'],
                   default:'member',
                   required: true},
-  cp:           {type: String, required: true},
+  cp:           {type: String, required: true}, //código postal
   gender:       {type: String,
                   enum : ['Masculino','Femenino'],
                   default : 'Masculino'},
@@ -28,7 +31,19 @@ var userSchema = new mongoose.Schema({
     expiringDate: {type: Date, require: true},
     type :      {type: String,
                   enum: ['A','B','C'], default: 'A'},
-  }
+  },
+  residence : {type: String, trim: true, uppercase: true},
+  occupation: {type: String,
+                enum: ['Estudiante', 'Empleado', 'Empresario',
+                       'Desempleado']},
+  civilStatus: {type: String,
+                enum: ['Soltero','Casado','Unión libre','Divorciado',' Viudo']},
+  scholarship: {type: String,
+                enum: ['Primaria','Secundaria','Preparatoria',
+                        'Licenciatura', 'Posgrado']},
+  religion:    {type: String,
+                enum: ['Católico','Judío','Ortodoxos','Otro']},
+  medicalRecord:  {type: Schema.Types.ObjectId, ref: 'MemberMedicalRecord'}
 }, { runSettersOnQuery: true });
 
 //Generar el hashSync
