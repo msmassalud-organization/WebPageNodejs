@@ -10,7 +10,8 @@ function getAllUsers(req, res) {
         throw err;
       }
       res.render('pages/index', {
-        userList: users
+        userList: users,
+        user: req.user
       });
     });
 }
@@ -45,16 +46,13 @@ function insertMember(req, res) {
       }
       if (!user) {
         let member = createMember(req);
-        console.log(`Member created: ${member}`);
         member.save((err) => {
           if (err) {
             throw err;
           }
-
           res.status(200).redirect('/');
         });
       } else {
-        console.log(`User found: ${user}`);
         res.status(500).render('pages/500', {
           message: 'El usuario ya existe'
         });
@@ -101,40 +99,20 @@ function loadMemberProfile(req, res) {
 }
 
 function signIn(req, res) {
+  var email = req.body.email;
   User.findOne({
-      email: req.body.email
-    },
-    (err, user) => {
-      if (err) {
-        return res.status(500)
-        .render('pages/signin',{
-          message: err
-        });
-      }
-      if (!user) {
-        return res.status(404)
-        .render('pages/signin',{
-          message: 'No existe el usuario'
-        });
-      }
+    'email': email
+  }, function(err, user) {
+    if (err) {
+      res.status(500).send(err);
+    }
+    if (user.validPassword(req.body.password)) {
+      res.status(200).send(user);
+    } else {
+      res.status(403).send("Contraseña incorrecta");
+    }
 
-      if (user.validPassword(req.body.password)) {
-        req.user = user;
-        res.status(200).send({
-          message: 'Te has loggeado correctamente',
-          token: service.createToken(user)
-        })
-      } else {
-        return res.status(403)
-        .render('pages/signin',{
-          message: 'Contraseña incorrecta'
-        })
-      }
-    });
-}
-
-function getAccTypes(){
-  return User.schema.path('accType').enumValues;
+  });
 }
 
 module.exports = {
@@ -142,6 +120,5 @@ module.exports = {
   insertMember,
   getMembersByName,
   loadMemberProfile,
-  signIn,
-  getAccTypes
+  signIn
 }
