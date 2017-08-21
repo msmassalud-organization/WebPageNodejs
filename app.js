@@ -36,7 +36,11 @@ app.use(cookieParser());
 
 //Configuración de Passport para autenticación
 require('./middlewares/passport')(passport);
-app.use(session({ secret: config.SECRET_TOKEN }));
+app.use(session({
+   secret: config.SECRET_TOKEN,
+   resave: true,
+   saveUninitialized: true
+ }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
