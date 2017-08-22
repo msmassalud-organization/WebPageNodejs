@@ -3,6 +3,7 @@
 const auth = require('./middlewares/auth')
 const userController = require('./controllers/user');
 const memberController = require('./controllers/member');
+const MRController = require('./controllers/medicalRecord');
 
 //Rutas
 module.exports = function(app, passport) {
@@ -47,19 +48,24 @@ module.exports = function(app, passport) {
     res.redirect('/signin');
   });
 
+//Expediente Médico
   app.get('/updateMedicalRecord', auth, (req, res) => {
-    res.status(200).render('pages/updateMedicalRecord', {
-      user: req.user
-    });
+    if(!req.user.medicalRecord){
+      //Crear expediente médico
+      MRController.insert(req, res);
+    }else{
+      //nadita nanais
+      res.status(200).render('pages/updateMedicalRecord', {
+        user: req.user
+      });
+    }
   });
 
-  app.post('/updateMedicalRecord', auth, (req, res) => {
-    console.log(req.body);
-    res.redirect('pages/loadDashboard');
-  });
+  app.post('/updateMedicalRecord', auth, MRController.update);
+  //Fin Expediente Médico
 
-  app.get('/findMembers', (req, res) => {
-    res.status(200).render('pages/findMembers', {
+  app.get('/findMembers', auth, (req, res) => {
+    res.status(200).render('pages/findMembers',{
       user: req.user
     });
   });
