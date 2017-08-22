@@ -1,0 +1,108 @@
+/**PRIMERA COLUMNA*/
+
+div.texto-principal h2 {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+div.primera-pregunta h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+div.primera-pregunta p {
+  color:  #b3b6b6;
+}
+
+div.segunda-pregunta h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+div.segunda-pregunta p {
+  color:  #b3b6b6;
+}
+
+div.tercera-pregunta h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+div.tercera-pregunta p {
+  color:  #b3b6b6;
+}
+
+div.cuarta-pregunta h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+div.cuarta-pregunta p {
+  color:  #b3b6b6;
+}
+
+/**SEGUNDA COLUMNA*/
+
+div.quinta-pregunta h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+div.quinta-pregunta p {
+  color:  #b3b6b6;
+}
+
+div.sexta-pregunta h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+div.sexta-pregunta p {
+  color:  #b3b6b6;
+}
+
+div.septima-pregunta h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+div.septima-pregunta p {
+  color:  #b3b6b6;
+}
+
+div.octava-pregunta h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+div.octava-pregunta p {
+  color:  #b3b6b6;
+}
+
+/*** TERCERA COLUMNA***/
+
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.label radio-inline {
+  font-size: 16em;
+}
+
+div.novena-pregunta h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+div.novena-pregunta p {
+  color:  #b3b6b6;
+}
+
+div.decima-pregunta p {
+  color: #b3b6b6;
+}
+
+p.consumir {
+  color: #b3b6b6;
+}
