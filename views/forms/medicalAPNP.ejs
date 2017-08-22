@@ -1,0 +1,126 @@
+>
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/css-patologicos/master-nopatologicos.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <title>Formulario</title>
+    </head>
+    <body>
+
+    <div class="container fluid">
+      <form class="form-signin" action="/updateProfile" method="post" enctype="application/x-www-form-urlencoded">
+        <h2 class="form-signin-heading"> Completar Perfil </h2>
+
+        <div class="row formularios">
+          <div class="texto-principal">
+            <h2>Antecedentes personales no patologicos</h2>
+          </div>
+
+
+          <div class="col-6 col-md-4">
+            <div class="primera-pregunta">
+              <h2>Frecuencia de enfermedades</h2>
+              <p>Numero de veces que has acudido al medico por enfermedad en los ultimos 365 dias</p>
+            </div>
+            <div class="seleccion">
+              <input type="number" name="diseasesFreq" class="form-control" placeholder="Número de veces">
+            </div>
+            <div class="segunda-pregunta">
+              <h2>Horas de sueño</h2>
+              <p>Numero de horas que duermes al día</p>
+            </div>
+            <div class="seleccion">
+              <input type="number" name="sleepingHours" class="form-control" placeholder="Número de veces que duermes al dia">
+            </div>
+            <div class="tercera-pregunta">
+              <h2>Hábitos alimenticios</h2>
+              <p>Comidas que realizas al día</p>
+            </div>
+            <div class="seleccion">
+              <input type="number" name="mealTimes" class="form-control" placeholder="Número de veces que comes al dia">
+            </div>
+            <div class="cuarta-pregunta">
+              <h2>Calidad Alimenticia</h2>
+              <p>En una escala en donde 1 es mala y 5 es buena</p>
+            </div>
+            <div class="seleccion">
+              <input type="number" name="mealQuality" class="form-control" placeholder="Calidad alimenticia">
+            </div>
+
+          </div><!--PRIMER DIV-->
+
+          <div class="col-6 col-md-4">
+            <div class="quinta-pregunta">
+              <h2>Revisiones períodicas preventivas</h2>
+              <p>En una escala donde 1 es nada frecuente y 5 es muy frecuente</p>
+            </div>
+            <div class="seleccion">
+              <input type="number" name="preventiveReviews" class="form-control" placeholder="Cantidad de revisiones">
+            </div>
+            <div class="sexta-pregunta">
+              <h2>Nivel de estrés</h2>
+              <p>En una escala en donde 1 es muy bajo y 5 es muy alto</p>
+            </div>
+            <div class="seleccion">
+              <input type="number" name="stressLevel" class="form-control" placeholder="Nivel de estrés">
+            </div>
+            <div class="septima-pregunta">
+              <h2>Hábitos deportivos</h2>
+              <p>Numero de dias que realizas deporte en el mes</p>
+            </div>
+            <div class="seleccion">
+              <input type="number" name="workoutsDays" class="form-control" placeholder="Cantidad de veces que entrenas">
+            </div>
+            <div class="octava-pregunta">
+              <h2>Refresco y bebidas azucaradas</h2>
+              <p>Numero de bebidas que consumes al mes</p>
+            </div>
+            <div class="seleccion">
+              <input type="number" name="sugaryDrinks" class="form-control" placeholder="Consumo de bebidas azucaradas">
+            </div>
+
+          </div><!--SEGUNDO DIV-->
+
+          <div class="col-6 col-md-4">
+            <label for="sexualLife">
+              <h2>Vida Sexual:</h2>
+            </label><br/>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="gender" value="Activo" checked> <span>Activo</span> </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="gender" value="Inactivo"> <span>Inactivo</span> </label><br/>
+            <div class="novena-pregunta">
+              <h2>Alcoholismo</h2>
+              <p>Numero de bebidas alcoholicas que consumes al mes</p>
+            </div>
+            <div class="seleccion">
+              <input type="number" name="alcoholicDrinks" class="form-control" placeholder="Cantidad de bebidas alcoholicas que consumes">
+            </div>
+            <div class="decima-pregunta">
+              <h2>Tabaquismo</h2>
+              <p>Numero de cigarros que consumes al mes</p>
+            </div>
+            <div class="seleccion">
+              <input type="number" name="cigarettes" class="form-control" placeholder="Cantidad cigarros">
+            </div>
+            <label for="sexualLife">
+              <h2>Otras Drogas:</h2>
+              <p class="consumir">Consumes actualmente otro tipo de drogras</p>
+            </label><br/>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="otherDrugs" value="Si" checked> <span>Si</span> </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="otherDrugs" value="No"> <span>No</span> </label><br/>
+
+            <button type="submit" class="btn btn-default">Guardar</button>
+          </div> <!--TERCER DIV-->
+
+        </div> <!-- FORMULARIOS-->
+
+
+      </form>
+    </div><!--Container Fluid-->
+
+    </body>
+  </html>
