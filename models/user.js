@@ -19,7 +19,7 @@ var userSchema = new mongoose.Schema({
                     'memberAgent','doctorAgent'],
                   default:'member',
                   required: true},
-  cp:           {type: String, required: true}, //código postal
+  cp:           {type: String}, //código postal
   gender:       {type: String,
                   enum : ['Masculino','Femenino'],
                   default : 'Masculino'},
@@ -27,10 +27,10 @@ var userSchema = new mongoose.Schema({
   //membership:   {type: Schema.Types.ObjectId, ref: 'Membership'}
   membership : {
     memberId :  {type: String},
-    startDate : {type: Date, default: Date.now, required: true },
-    expiringDate: {type: Date, require: true},
+    startDate : {type: Date },
+    expiringDate: {type: Date},
     type :      {type: String,
-                  enum: ['A','B','C'], default: 'A'},
+                  enum: ['A','B','C']},
   },
   residence : {type: String, trim: true, uppercase: true},
   occupation: {type: String,
