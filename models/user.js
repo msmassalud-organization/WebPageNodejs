@@ -1,13 +1,16 @@
-var mongoose = require('mongoose');
-var bCrypt   = require('bcrypt-nodejs');
-var Schema   = mongoose.Schema;
+'use strict'
+
+const mongoose = require('mongoose');
+const bCrypt   = require('bcrypt-nodejs');
+const Schema   = mongoose.Schema;
+const randToken = require('rand-token')
 
 var userSchema = new mongoose.Schema({
   isActive:     {type: Boolean, default: true},
   name:         {type: String, uppercase: true, required: true},
   dadLastName:  {type: String, uppercase: true, required: true},
   momLastName:  {type: String, uppercase: true, required: true},
-  fullName: {type: String, uppercase: true},
+  fullName:     {type: String, uppercase: true},
   birthday:     {type: Date, default: Date.now},
   email:        {type: String, lowercase: true, unique: true},
   password:     {type: String, required: true},
@@ -17,7 +20,7 @@ var userSchema = new mongoose.Schema({
                   enum : [
                     'member','default','admin','doctor',
                     'recepcionist', 'capturist',
-                    'memberAgent','doctorAgent'],
+                    'memberAgent','doctorAgent','noMember'],
                   default:'member',
                   required: true},
   cp:           {type: String}, //código postal
@@ -34,9 +37,14 @@ var userSchema = new mongoose.Schema({
                   enum: ['A','B','C']},
   },
   residence : {type: String, trim: true, uppercase: true},
+  city      : {type: String, trim: true, uppercase: true},
+  country   : {type: String, trim: true, uppercase: true},
+  address   : {type: String, trim: true, uppercase: true},
+  curp      : {type: String, trim: true, uppercase: true},
   occupation: {type: String,
                 enum: ['Estudiante', 'Empleado', 'Empresario',
-                       'Desempleado']},
+                       'Desempleado','Encargado del hogar',
+                       'Profesionista independiente']},
   civilStatus: {type: String,
                 enum: ['Soltero','Casado','Unión libre','Divorciado',' Viudo']},
   scholarship: {type: String,
@@ -44,7 +52,13 @@ var userSchema = new mongoose.Schema({
                         'Licenciatura', 'Posgrado']},
   religion:    {type: String,
                 enum: ['Católico','Judío','Ortodoxos','Otro']},
-  medicalRecord:  {type: Schema.Types.ObjectId, ref: 'MemberMedicalRecord'}
+  medicalRecord:  {type: Schema.Types.ObjectId, ref: 'MemberMedicalRecord'},
+  doctorProfile: {type: Schema.Types.ObjectId, ref: 'Doctor'},
+  verificationCode : {type: String,
+                      default: function(){
+                        return randToken.generate(6);
+                      }
+                    }
 }, { runSettersOnQuery: true });
 
 //Generar el hashSync
@@ -55,6 +69,10 @@ userSchema.methods.generateHash = function(password){
 userSchema.methods.validPassword = function(password){
   return bCrypt.compareSync(password, this.password);
 };
+
+userSchema.methods.validToken = function(token){
+  return bCrypt.compareSync(token, this.verificationCode);
+}
 
 userSchema.methods.getAccTypes = function(){
   return userSchema.path('accType').enumValues;

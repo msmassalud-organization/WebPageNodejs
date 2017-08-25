@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="/public/bootstrap-dashboard/assets/img/favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>MS MAS SALUD</title>
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
+
+
+  <!-- Bootstrap core CSS     -->
+  <link href="/public/bootstrap-dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Animation library for notifications   -->
+  <link href="/public/bootstrap-dashboard/assets/css/animate.min.css" rel="stylesheet" />
+
+  <!--  Light Bootstrap Table core CSS    -->
+  <link href="/public/bootstrap-dashboard/assets/css/light-bootstrap-dashboard.css" rel="stylesheet" />
+
+
+  <!--  CSS for Demo Purpose, don't include it in your project     -->
+  <link href="/public/bootstrap-dashboard/assets/css/demo.css" rel="stylesheet" />
+
+
+  <!--     Fonts and icons     -->
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+  <link href="/public/bootstrap-dashboard/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <% include sideNavBar %>
+
+      <div class="main-panel">
+        <!-- Nav Bar Top -->
+
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="card">
+                  <div class="header">
+                    <h4 class="title">Nuevo paciente</h4>
+                  </div>
+                  <div class="content">
+                    <form action="/addPatient" method="post">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Nombre(s)</label>
+                            <input type="text" name="name" class="form-control text-uppercase" placeholder="Nombre(s)" required>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Apellido Paterno</label>
+                            <input type="text" name="dadLastName" class="form-control text-uppercase" placeholder="Apellido Paterno" required>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Apellido Materno</label>
+                            <input type="text" name="momLastName" class="form-control text-uppercase" placeholder="Apellido Materno" required>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="email">Correo</label>
+                            <input type="email" name="email" class="form-control" placeholder="Email">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="cellphone">Celular</label>
+                            <input type="number" name="cellphone" class="form-control" placeholder="Celular">
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>CURP</label>
+                            <input type="text" name="address" id="curp" class="form-control" placeholder="CURP" required>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Fecha de nacimiento:</label>
+                            <input type="text" class ="form-control" name="birthday" id="date" placeholder="dd-mm-aaaa" required/>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Residencia(Municipio)</label>
+                            <input type="text" name="residence" class="form-control text-uppercase" placeholder="Zapopan...">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Estado</label>
+                            <input type="text" name="country" class="form-control text-uppercase" placeholder="Jalisco...">
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Código Postal</label>
+                            <input type="number" name="cp" class="form-control" placeholder="CP">
+                          </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-info btn-fill pull-right">Agregar paciente</button>
+                      <div class="clearfix"></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card card-user">
+                  <div class="image">
+                    <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400" alt="..." />
+                  </div>
+                  <div class="content">
+                    <div class="author">
+                      <a href="#">
+                                    <img class="avatar border-gray" src="/public/bootstrap-dashboard/assets/img/faces/face-3.jpg" alt="..."/>
+
+                                      <h4 class="title">Mike Andrew<br />
+                                         <small>michael24</small>
+                                      </h4>
+                                    </a>
+                    </div>
+                    <p class="description text-center"> "Lamborghini Mercy <br> Your chick she so thirsty <br> I'm in that two seat Lambo"
+                    </p>
+                  </div>
+                  <hr>
+                  <div class="text-center">
+                    <button href="#" class="btn btn-simple"><i class="fa fa-facebook-square"></i></button>
+                    <button href="#" class="btn btn-simple"><i class="fa fa-twitter"></i></button>
+                    <button href="#" class="btn btn-simple"><i class="fa fa-google-plus-square"></i></button>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+  </div>
+
+
+</body>
+<% include ../dashboardScripts %>
+<script src="/js/doctor.js"></script>
+</html>

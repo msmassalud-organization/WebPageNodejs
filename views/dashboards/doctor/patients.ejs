@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>MS MAS SALUD</title>
+
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
+
+
+  <!-- Bootstrap core CSS     -->
+  <link href="/public/bootstrap-dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Animation library for notifications   -->
+  <link href="/public/bootstrap-dashboard/assets/css/animate.min.css" rel="stylesheet" />
+
+  <!--  Light Bootstrap Table core CSS    -->
+  <link href="/public/bootstrap-dashboard/assets/css/light-bootstrap-dashboard.css" rel="stylesheet" />
+
+  <!--     Fonts and icons     -->
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+  <link href="/public/bootstrap-dashboard/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <% include sideNavBar %>
+
+      <div class="main-panel">
+        <% include topNavBar %>
+
+        <div class="content">
+          <% if(locals.message ){ %>
+            <h3><%= locals.message %></h3>
+            <% }%>
+            <!-- Busqueda de pacientes -->
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Buscar...</label>
+                  <input class="form-control" id="findByName" placeholder="Nombre.." type="text">
+                  <div class="input-group-btn">
+                    <button id="btnFindByName" class="btn btn-default" type="button">
+                      <i class="fa fa-search"></i>
+                    </button>
+                    <a href="/createPatient" class="btn btn-success btn-fill" role="button">Agregar paciente</a>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <label>Paciente con membresía</label>
+                      <input id="memberIdInput" class="form-control" placeholder="ID de membresía" type="text" />
+                      <button id="btnVerMember" class="btn btn-info btn-fill">Verificar</button>
+                    </div>
+                  </div>
+                  <div id="verIconMember" class="col-sm-1" hidden>
+                    <i class="fa fa-check" style="font-size: 3em" aria-hidden="true"></i>
+                  </div>
+
+                  <div class="col-sm-5">
+                    <div id="tokenPanel" class="form-group" hidden>
+                      <label>Código verificación</label>
+                      <input id="tokenInput" class="form-control" placeholder="Ej. xVcsfU" type="text" />
+                      <button id="btnVerToken" class="btn btn-info btn-fill">Verificar</button>
+                    </div>
+                  </div>
+                  <div id="verIconToken" class="col-sm-1" hidden>
+                    <i class="fa fa-check" style="font-size: 3em" aria-hidden="true"></i>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+              <hr />
+              <ul id="patientsList" class="list-group">
+              <% if(locals.patients){ %>
+                <% locals.patients.forEach(function(patient){ %>
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <% if (patient.accType == 'member'){ %>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                        <%}%>
+                        <%= patient.fullName %>
+                      </div>
+                      <div class="col-sm-3">
+                        <%= patient.cellphone %>
+                      </div>
+                      <div class="col-sm-3">
+                        <%= patient.email %>
+                      </div>
+                      <div class="col-sm-3">
+                        <a class="btn btn-xs btn-success">Editar</a>
+                        <a class="btn btn-xs btn-info">Ver</a>
+                        <a class="btn btn-xs btn-danger">Borrar</a>
+                      </div>
+                    </div>
+                  </li>
+                  <% }) %>
+                <%}%>
+              </ul>
+        </div>
+
+      </div>
+  </div>
+
+
+</body>
+
+<% include ../dashboardScripts %>
+  <script src="/js/doctor.js"></script>
+
+</html>

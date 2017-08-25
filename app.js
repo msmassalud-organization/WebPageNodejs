@@ -22,6 +22,7 @@ app.set('view engine', 'ejs');
 
 //Colocamos la carpeta 'public' visible en las direcciones
 app.use(express.static(__dirname + '/public'));
+app.use('/public',express.static('public'));
 
 //Configuramos una herramienta para parsear información en formato JSON
 app.use(bodyParser.json());

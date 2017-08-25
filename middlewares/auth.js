@@ -24,7 +24,39 @@ function isLoggedIn(req, res, next){
     return next();
   }
 
-  res.redirect('/');
+  res.redirect('/signin');
 }
 
-module.exports = isLoggedIn
+function isAdmin(req, res, next){
+  if(req.isAuthenticated()){
+    if(req.user.accType == 'admin'){
+      return next();
+    }
+  }
+  res.redirect('/signin');
+}
+
+function isDoctor(req, res, next){
+  if(req.isAuthenticated()){
+    if(req.user.accType == 'doctor'){
+      return next();
+    }
+  }
+  res.redirect('/signin');
+}
+
+function isMember(req, res, next){
+  if(req.isAuthenticated()){
+    if(req.user.accType == 'member'){
+      return next();
+    }
+  }
+  res.redirect('/signin');
+}
+
+module.exports = {
+  isLoggedIn,
+  isAdmin,
+  isDoctor,
+  isMember
+}

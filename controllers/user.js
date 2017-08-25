@@ -1,6 +1,6 @@
 'use-strict'
-var User = require('../models/user');
-const expiringTime = 365; //days
+const User = require('../models/user');
+const Doctor = require('../models/doctor');
 const service = require('../services/index')
 const moment = require('moment')
 
@@ -37,13 +37,16 @@ function signIn(req, res) {
 function updateProfile(req, res) {
   console.log(req.body);
   var update = req.body;
+  res.send(req.body);
+  //TODO
+  /*
   User.findByIdAndUpdate(req.user._id, update, function(err, userUpdated) {
     if (err) {
       res.status(500).send(err);
     }
     console.log(userUpdated);
     res.status(200).redirect("/loadDashboard");
-  });
+  });*/
 }
 
 function createUser(req, res){
@@ -69,21 +72,39 @@ function insertUser(req, res) {
       if (err) {
         throw err;
       }
+      //Creamos el usuario si no existe
       if (!user) {
         let user = createUser(req);
-        user.save((err) => {
-          if (err) {
-            throw err;
-          }
-          res.status(200).redirect('/');
-        });
+        //Si es doctor, creamos su perfil específico
+        if(user.accType == 'doctor'){
+          var doctorProfile = new Doctor();
+          user.doctorProfile = doctorProfile._id;
+          doctorProfile.save((err) =>{
+            if(err){
+              res.status(500).send(err);
+            }
+            user.save((err) => {
+              if (err) {
+                throw err;
+              }
+              res.status(200).redirect('/');
+            });
+          });
+        }else{
+          user.save((err) => {
+            if (err) {
+              throw err;
+            }
+            res.status(200).redirect('/');
+          });
+        } //Fin Crear usuario
       } else {
         res.status(500).render('pages/500', {
           message: 'El usuario ya existe'
         });
       }
-    }
-  );
+    } //fin CallbackFindOne
+  ); //fin FindOne
 }
 
 module.exports = {
