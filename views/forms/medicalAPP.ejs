@@ -1,0 +1,207 @@
+<div class="container fluid">
+  <form class="form-signin" action="/updateMedicalRecord" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="row formularios">
+    <div class="texto-principal">
+      <h2>Antecedentes personales patologicos Enfermedades</h2>
+    </div><!--.texto-principal-->
+
+        <div class="col-6 col-md-4">
+
+          <label for="enfInfectocontagiosas">
+            <h2>Enfermedades infectocontagiosas</h2>
+            <p class="consumir">La manifestacion clinica consecuente a una infección provocada por un microorganismo como bacterias,hongos, virus o síntomas</p>
+          </label><br/>
+                <label onclick="toggleLabel('Infect')" class="radio"><input type="radio"  name="enfInfectocontagiosas" value="SI"> SI </label>
+                <div id="Infect" style="display:none">
+                  <label for="infectoType">
+                    <h2 class="tipo-enfer" >Tipo de enfermedad infectocontagiosa</h2>
+                  </label><br/>
+                    <label class="checkbox"><input type="checkbox" name="infectoType" value="Varicela" > Varicela </label>
+                    <label class="checkbox"><input type="checkbox" name="infectoType" value="Rubeola"> Rubeola</label>
+                    <label class="checkbox"><input type="checkbox" name="infectoType" value="Sarampion"> Sarampion </label>
+                    <label class="checkbox"><input type="checkbox" name="infectoType" value="Colera"> Colera </label>
+                    <label class="checkbox"><input type="checkbox" name="infectoType" value="Influenza" > Influenza </label>
+                    <label class="checkbox"><input type="checkbox" name="infectoType" value="Fiebre tifoidea"> Fiebra tifoidea </label>
+                    <label class="checkbox"><input type="checkbox" name="infectoType" value="Otro tipo"> Otro tipo </label><br/>
+                </div> <!--.Desplegar opciones-->
+                <label class="radio" onclick="ocultar('Infect')"><input type="radio"  name="enfInfectocontagiosas" value="NO"> NO </label>
+                <label class="radio" onclick="ocultar('Infect')"><input type="radio"  name="enfInfectocontagiosas" value="DESCONOCE" checked> DESCONOCE </label>
+
+
+                <label for="diabetes">
+                  <h2>Diabetes</h2>
+                </label><br/>
+                      <label onclick="toggleLabel('dia')" class="radio"><input type="radio"  name="diabetes" value="SI"> SI </label>
+                      <div id="dia" style="display:none">
+                        <label for="diabetesType">
+                          <h2>Tipo de diabetes</h2>
+                        </label><br/>
+                        <label class="checkbox"><input type="checkbox" name="diabetesType" value="Gestacional" > Gestacional </label>
+                        <label class="checkbox"><input type="checkbox" name="diabetesType" value="Tipo I"> Tipo I</label>
+                        <label class="checkbox"><input type="checkbox" name="diabetesType" value="Tipo II"> Tipo II</label>
+                        <label class="checkbox"><input type="checkbox" name="diabetesType" value="Tipo III"> Tipo II</label>
+                        <label class="checkbox"><input type="checkbox" name="diabetesType" value="Otro" > Otro </label>
+                      </div> <!--.Desplegar opciones-->
+                      <label class="radio"><input type="radio"  name="diabetes" value="NO"> NO </label>
+                      <label class="radio"><input type="radio"  name="diabetes" value="DESCONOCE" checked> DESCONOCE </label>
+
+            <label for="obesity">
+              <h2>Obesidad o sobrepeso</h2>
+              <p class="consumir">Acumulacion anormal o excesiva de grasa que puede ser perjudicial para la salud</p>
+            </label><br/>
+            <label class="radio"><input type="radio" name="obesity" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="obesity" value="No"> No </label>
+            <label class="radio"><input type="radio" name="obesity" value="Desconoce" checked> Desconoce </label>
+
+            <label for="arthritis">
+              <h2>Artritis</h2>
+              <p class="consumir">Inflamación de una o más articulaciones que provoca dolor y rigidez, y puede empeorar con la edad</p>
+            </label><br/>
+            <label class="radio"><input type="radio" name="arthritis" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="arthritis" value="No"> No </label>
+            <label class="radio"><input type="radio" name="arthritis" value="Desconoce" checked> Desconoce </label>
+        </div> <!--PRIMER DIV-->
+
+        <div class="col-6 col-md-4"><!--INICIA SEGUNDO DIV-->
+              <label for="arthritis">
+                <h2>Cardiopatias</h2>
+                <p class="consumir">Término que se aplica a todas las enfermadades del sistema circulatorio tanto congénitas, heredadas o adquiridas</p>
+              </label><br/>
+              <label class="checkbox"><input type="checkbox" name="arthritis" value="Hipertencion" checked> Hipertencion </label>
+              <label class="checkbox"><input type="checkbox" name="arthritis" value="Hipotension"> Hipotension </label>
+              <label class="checkbox"><input type="checkbox" name="arthritis" value="isquemia"> isquemia </label>
+              <label class="checkbox"><input type="checkbox" name="arthritis" value="angina de pecho" checked> angina de pecho </label>
+              <label class="checkbox"><input type="checkbox" name="arthritis" value="Infarto de miocardio"> Infarto de miocardio </label>
+              <label class="checkbox"><input type="checkbox" name="arthritis" value="Muerte súbita"> Muerte súbita</label>
+              <label class="checkbox"><input type="checkbox" name="arthritis" value="Enfermedad reumática" checked> Enfermedad reumática </label>
+              <label class="checkbox"><input type="checkbox" name="arthritis" value="No"> No </label>
+              <label class="checkbox"><input type="checkbox" name="arthritis" value="Desconoce"> Desconoce </label>
+
+              <label for="cancer">
+                <h2>Cancer</h2>
+                <p class="consumir">Enfermedad en la que células anómalas se dividen sin control y destruyen los tejidos corporales</p>
+              </label><br/>
+                    <label onclick="toggleLabel('canc')" class="radio"><input type="radio"  name="cancer" value="SI"> SI </label>
+                    <div id="canc" style="display:none">
+                      <label for="cancerType">
+                        <h2>Tipo de cáncer</h2>
+                      </label><br/>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="colon y recto" > colon y recto </label>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="pulmon"> pulmon</label>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="endométrico"> endométrico </label>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="Colera"> Colera </label>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="mama" > mama </label>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="prostata"> prostata </label>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="leucemia"> leucemia </label>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="páncreas" > páncreas </label>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="tiroides"> tiroides </label>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="riñon"> riñon </label>
+                        <label class="checkbox"><input type="checkbox" name="cancerType" value="Otro tipo"> Otro tipo </label><br/>
+                    </div> <!--.Desplegar opciones-->
+                    <label class="radio" onclick="ocultar('canc')"><input type="radio"  name="cancer" value="NO"> NO </label>
+                    <label class="radio" onclick="ocultar('canc')"><input type="radio"  name="cancer" value="DESCONOCE" checked> DESCONOCE </label>
+
+                  <label for="headache">
+                    <h2>Cefalea</h2>
+                    <p class="consumir">Dolores y molestias localizadas en cualquier parte de la cabeza</p>
+                  </label><br/>
+                  <label class="radio"><input type="radio" name="headache" value="Si" > Si </label>
+                  <label class="radio"><input type="radio" name="headache" value="No"> No </label>
+                  <label class="radio"><input type="radio" name="headache" value="Desconoce" checked> Desconoce </label>
+
+        </div><!--SEGUNDO DIV-->
+
+        <div class="col-6 col-md-4"><!--INICIA TERCER DIV-->
+
+          <label for="convulsiones">
+            <h2>Convulsiones</h2>
+            <p class="consumir">Dolores y molestias localizadas en cualquier parte de la cabeza</p>
+          </label><br/>
+          <label class="radio"><input type="radio" name="convulsiones" value="Si" > Si </label>
+          <label class="radio"><input type="radio" name="convulsiones" value="No"> No </label>
+          <label class="radio"><input type="radio" name="convulsiones" value="Desconoce" checked> Desconoce </label>
+
+
+          <label for="cerebralPalsy">
+            <h2>Parálisis cerebral</h2>
+            <p class="consumir">La parálisis cerebral no permite y/o dificulta los mensajes enviados por el cerebro hacia los músculos, obstaculizando su movimiento</p>
+          </label><br/>
+                <label onclick="toggleLabel('cerebro')" class="radio"><input type="radio"  name="cerebralPalsy" value="SI"> SI </label>
+                <div id="cerebro" style="display:none">
+                  <label for="cerebralType">
+                    <h2>Tipo de paralisis</h2>
+                  </label><br/>
+                    <label class="checkbox"><input type="checkbox" name="cerebralType" value="Extremidades superiores" > Extremidades superiores </label>
+                    <label class="checkbox"><input type="checkbox" name="cerebralType" value="Extremidades inferiores"> Extremidades inferiores </label>
+                    <label class="checkbox"><input type="checkbox" name="cerebralType" value="Facial"> Facial </label>
+                    <label class="checkbox"><input type="checkbox" name="cerebralType" value="Tipos Mixtos" > Tipos Mixtos </label>
+                    <label class="checkbox"><input type="checkbox" name="cerebralType" value="Otro tipo"> Otro tipo </label><br/>
+                </div> <!--.Desplegar opciones-->
+                <label class="radio" onclick="ocultar('cerebro')"><input type="radio"  name="cerebralPalsy" value="NO"> NO </label>
+                <label class="radio" onclick="ocultar('cerebro')"><input type="radio"  name="cerebralPalsy" value="DESCONOCE" checked> DESCONOCE </label>
+
+
+            <label for="lungDisease">
+              <h2>Enfermedades pulmonares</h2>
+              <p class="consumir"></p>
+            </label><br/>
+                  <label onclick="toggleLabel('lu')" class="radio"><input type="radio"  name="lungDisease" value="SI"> SI </label>
+                  <div id="lu" style="display:none">
+                    <label for="lungType">
+                      <h2>Tipo de neumopatía</h2>
+                    </label><br/>
+                      <label class="checkbox"><input type="checkbox" name="lungType" value="neumonia" >neumonia </label>
+                      <label class="checkbox"><input type="checkbox" name="lungType" value="asma"> asma  </label>
+                      <label class="checkbox"><input type="checkbox" name="lungType" value="enfisema"> enfisema </label>
+                      <label class="checkbox"><input type="checkbox" name="lungType" value="EPOC" > EPOC  </label>
+                      <label class="checkbox"><input type="checkbox" name="lungType" value=" endema">  endema </label>
+                      <label class="checkbox"><input type="checkbox" name="lungType" value="Otro tipo"> Otro tipo </label><br/>
+                  </div> <!--.Desplegar opciones-->
+                  <label class="radio" onclick="ocultar('lu')"><input type="radio"  name="lungDisease" value="NO"> NO </label>
+                  <label class="radio" onclick="ocultar('lu')"><input type="radio"  name="lungDisease" value="DESCONOCE" checked> DESCONOCE </label>
+
+            <label for="kindneyDiseases">
+              <h2>Enfermedades renales</h2>
+              <p class="consumir"></p>
+            </label><br/>
+                  <label onclick="toggleLabel('ki')" class="radio"><input type="radio"  name="kindneyDiseases" value="SI"> SI </label>
+                  <div id="ki" style="display:none">
+                    <label for="kindneyType">
+                      <h2>Tipo de nefropatias</h2>
+                    </label><br/>
+                      <label class="checkbox"><input type="checkbox" name="kindneyType" value="insuficiencia renal" >insuficiencia renal </label>
+                      <label class="checkbox"><input type="checkbox" name="kindneyType" value="calculos renales"> calculos renales  </label>
+                      <label class="checkbox"><input type="checkbox" name="kindneyType" value="Otro tipo"> Otro tipo </label><br/>
+                  </div> <!--.Desplegar opciones-->
+                  <label class="radio" onclick="ocultar('ki')"><input type="radio"  name="kindneyDiseases" value="NO"> NO </label>
+                  <label class="radio" onclick="ocultar('ki')"><input type="radio"  name="kindneyDiseases" value="DESCONOCE" checked> DESCONOCE </label>
+
+
+            <label for="liverDisease">
+              <h2>Enfermedades hepaticas</h2>
+              <p class="consumir"></p>
+            </label><br/>
+                  <label onclick="toggleLabel('liver')" class="radio"><input type="radio"  name="liverDisease" value="SI"> SI </label>
+                  <div id="liver" style="display:none">
+                    <label for="liverType">
+                      <h2>Tipo de hepatopatias</h2>
+                    </label><br/>
+                      <label class="checkbox"><input type="checkbox" name="liverType" value="hepatitis A" >hepatitis A</label>
+                      <label class="checkbox"><input type="checkbox" name="liverType" value="hepatitis B">hepatitis B</label>
+                      <label class="checkbox"><input type="checkbox" name="liverType" value="hepatitis C" >hepatitis C</label>
+                      <label class="checkbox"><input type="checkbox" name="liverType" value="cirrosis">Cirrosis</label>
+                      <label class="checkbox"><input type="checkbox" name="liverType" value="nemocromatosis">Nemocromatosis</label>
+                      <label class="checkbox"><input type="checkbox" name="liverType" value="Otro tipo"> Otro tipo </label>
+                  </div> <!--.Desplegar opciones-->
+                  <label class="radio" onclick="ocultar('liver')"><input type="radio"  name="liverDisease" value="NO"> NO </label>
+                  <label class="radio" onclick="ocultar('liver')"><input type="radio"  name="liverDisease" value="DESCONOCE" checked> DESCONOCE </label>
+
+
+
+
+
+        </div> <!--TERCER DIV-->
+
+    </div><!--.row formularios-->
+  </form>
+</div><!--Container Fluid-->

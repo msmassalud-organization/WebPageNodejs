@@ -1,0 +1,82 @@
+<div class="conteiner-fluid">
+  <form class="form-signin" action="/updateMedicalRecord" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="row formularios">
+      <div class="texto-principal"><h2>Hospitalización y cirugias</h2></div>
+
+
+
+        <div class="col-6 col-md-4"><!-- INICIA PRIMER DIV-->
+
+          <label for="isBeenHospitalizes">
+            <h2>Alguna vez se le ha hospitalizado</h2>
+            <p class="consumir">La persona que visita un establecimiento de atención de la salud por razón de diagnóstico o tratamiento y pasa la noche en el recinto</p>
+          </label><br/>
+                <label onclick="toggleLabel('hospital')" class="radio"><input type="radio"  name="isBeenHospitalizes" value="SI"> SI </label>
+                <div id="hospital" style="display:none">
+                  <label for="times">
+                    <h2>Número de veces de hospitalización</h2>
+                  </label><br/>
+                  <div class="seleccion">
+                    <input type="text" id="timeHospitalizacion" value="" onKeyPress="return numbersMaximo(event,'timeHospitalizacion',1)" name="times" class="form-control" placeholder="Número de veces que te han hospitalizado">
+                  </div>
+
+                  <label for="HospitalizationType">
+                    <h2>Tipo de hospitalización</h2>
+                  </label><br/>
+                    <label class="checkbox"><input type="checkbox" name="HospitalizationType" value="urgencias(medicas o traumaticas)" > Urgencias(medicas o traumaticas)</label>
+                    <label class="checkbox"><input type="checkbox" name="HospitalizationType" value="unidad de cuidados intensivos"> Unidad de cuidados intensivos </label>
+                    <label class="checkbox"><input type="checkbox" name="HospitalizationType" value="enfermedades o patologias"> Enfermedades o patologias </label>
+                    <label class="checkbox"><input type="checkbox" name="HospitalizationType" value="cirugias programadas" > cirugias programadas </label></br>
+
+                </div> <!--.Desplegar opciones-->
+                <label class="radio" onclick="ocultar('hospital')"><input type="radio"  name="isBeenHospitalizes" value="NO" checked> NO </label>
+
+
+
+
+
+
+        </div> <!--FINALIZA PRIMER DIV-->
+
+        <div class="col-6 col-md-4"><!--INICIA SEGUNDO DIV-->
+          <label for="blood">
+            <h2>Conoces tu tipo sanguineo</h2>
+            <p class="consumir"></p>
+          </label><br/>
+                <label onclick="toggleLabel('sangre')" class="radio"><input type="radio"  name="blood" value="SI"> SI </label>
+                <div id="sangre" style="display:none">
+                  <label for="bloodType">
+                    <h2>Tipo de sangre</h2>
+                  </label><br/>
+                    <label class="checkbox"><input type="checkbox" name="bloodType" value="O-" > O- </label>
+                    <label class="checkbox"><input type="checkbox" name="bloodType" value=" O+"> O+  </label>
+                    <label class="checkbox"><input type="checkbox" name="bloodType" value="A-"> A- </label>
+                    <label class="checkbox"><input type="checkbox" name="bloodType" value="A+" > A+ </label>
+                    <label class="checkbox"><input type="checkbox" name="bloodType" value="B-"> B- </label>
+                    <label class="checkbox"><input type="checkbox" name="bloodType" value="B+"> B+ </label>
+                    <label class="checkbox"><input type="checkbox" name="bloodType" value="AB-"> AB- </label>
+                    <label class="checkbox"><input type="checkbox" name="bloodType" value="AB"> AB </label>
+                    <br/>
+                </div> <!--.Desplegar opciones-->
+                <label class="radio" onclick="ocultar('sangre')"><input type="radio"  name="blood" value="NO"> NO </label>
+
+        <label for="bloodTransfer">
+          <h2>Alguna vez ha recibido transfusiones sanguineas</h2>
+        </label><br/>
+        <label class="radio"><input type="radio" name="bloodTransfer" value="Si" > Si </label>
+        <label class="radio"><input type="radio" name="bloodTransfer" value="No"> No </label>
+        <label class="radio"><input type="radio" name="bloodTransfer" value="Desconoce" checked> Desconoce </label>
+
+        </div><!--FINALIZA SEGUNDO DIV-->
+
+
+        <div class="col-6 col-md-4"><!--INICIA TERCER DIV-->
+
+        </div> <!--FINALIZA TERCER DIV-->
+
+
+
+
+      </div><!--.row formularios-->
+  </form>
+</div><!--Container Fluid-->

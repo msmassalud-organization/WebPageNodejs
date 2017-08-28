@@ -11,7 +11,7 @@ div.primera-pregunta h2 {
 }
 
 div.primera-pregunta p {
-  color:  #b3b6b6;
+  color: #b3b6b6;
 }
 
 div.segunda-pregunta h2 {
@@ -105,4 +105,9 @@ div.decima-pregunta p {
 
 p.consumir {
   color: #b3b6b6;
+  font-weight: normal;
+}
+
+button {
+  margin-top: 30px;
 }

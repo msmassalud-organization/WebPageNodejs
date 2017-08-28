@@ -36,6 +36,27 @@ function update(req, res){
   //var update = req.body;
   //MR.findByIdAndUpdate(req.user.medicalRecord, update, function(err,mr){})
 
+  var update;
+  var noPathological;
+
+update = {
+    noPathological : {
+      sexualLife : req.body.sexualLife == 'Activo',
+      diseasesFreq : req.body.diseasesFreq,
+      sleepingHours : req.body.sleepingHours,
+      mealQuality: req.body.mealQuality,
+      preventiveReviews: req.body.preventiveReviews,
+      stressLevel: req.body.stressLevel,
+      workoutsDays: req.body.workoutsDays,
+      sugaryDrinks: req.body.sugaryDrinks,
+      alcoholicDrinks: req.body.alcoholicDrinks,
+      cigarettes: req.body.cigarettes,
+      otherDrugs: req.body.otherDrugs
+    }
+};
+
+
+  console.log(update);
   MR.findById(req.user.medicalRecord, function(err, mr){
     if(err){
       res.status(500).send(err);

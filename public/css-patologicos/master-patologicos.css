@@ -1,0 +1,9 @@
+div.texto-principal h2 {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+p {
+  color: #b3b6b6;
+  font-weight: normal;
+}

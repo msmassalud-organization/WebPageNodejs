@@ -1,0 +1,105 @@
+<div class="container fluid">
+  <form class="form-signin" action="/updateMedicalRecord" method="post" enctype="application/x-www-form-urlencoded">
+    <div class="row formularios">
+      <div class="texto-principal"><h2>Traumatismos</h2></div>
+
+          <div class="col-6 col-md-4"><!-- INICIA PRIMER DIV-->
+
+            <label for="sprains">
+              <h2>Esguince</h2>
+              <p class="consumir">Una lesión de los ligamentos que se encuentre alrededor de una articulación</p>
+            </label><br/>
+            <label class="radio"><input type="radio" name="sprains" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="sprains" value="No"> No </label>
+            <label class="radio"><input type="radio" name="sprains" value="Desconoce" checked> Desconoce </label>
+
+            <label for="dislocations">
+              <h2>Luxaciones</h2>
+              <p class="consumir">Una luxación es una separación de dos huesos en el lugar donde se juntan, es decir, en la articulación</p>
+            </label><br/>
+            <label class="radio"><input type="radio" name="dislocations" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="dislocations" value="No"> No </label>
+            <label class="radio"><input type="radio" name="dislocations" value="Desconoce" checked> Desconoce </label>
+
+            <label for="boneFracture">
+              <h2>Fracturas oseas</h2>
+              <p class="consumir">Una fractura es la pérdida de continuindad normal de la sustancia ósea o cartilaginosa, a consecuncia de golpes fuerza o tracciones</p>
+            </label><br/>
+            <label class="radio"><input type="radio" name="boneFracture" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="boneFracture" value="No"> No </label>
+            <label class="radio"><input type="radio" name="boneFracture" value="Desconoce"checked> Desconoce </label>
+
+            <label for="muscleStrain">
+              <h2> Desgarro Muscular </h2>
+              <p class="consumir">El desgarro muscular es la lesión en el tejido muscular, que va acompañada de hmorrogia provocada por la rotura de los vasos sangüineos</p>
+            </label><br/>
+            <label class="radio"><input type="radio" name="muscleStrain" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="muscleStrain" value="No"> No </label>
+            <label class="radio"><input type="radio" name="muscleStrain" value="Desconoce" checked> Desconoce </label>
+
+          </div> <!--FINALIZA PRIMER DIV-->
+
+
+          <div class="col-6 col-md-4"><!--INICIA SEGUNDO DIV-->
+
+            <label for="bruises">
+              <h2> Contusiones </h2>
+              <p class="consumir">Se produce cuando se origina un golpe, caída o cualquier impacto sobre la piel, pero sin llegar a romper su continuidad ni ocasionar heridas abiertas </p>
+            </label>
+            <label class="radio"><input type="radio" name="bruises" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="bruises" value="No"> No </label>
+            <label class="radio"><input type="radio" name="bruises" value="Desconoce" checked> Desconoce </label>
+
+            <label for="stringOrBites">
+              <h2> Mordeduras y picaduras </h2>
+              <p class="consumir">Las heridas producidas por mordeduras de mamíferos o insectos con bastante frecuentes, incluyendo también arañazos o picaduras, pueden provocar una hemorragia , infección o intoxicación por veneno dependiendo del tipo de que se trate</p>
+            </label>
+            <label class="radio"><input type="radio" name="stringOrBites" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="stringOrBites" value="No"> No </label>
+            <label class="radio"><input type="radio" name="stringOrBites" value="Desconoce" checked> Desconoce </label>
+
+            <label for="considerableInjuries">
+              <h2> Heridas considerables </h2>
+              <p class="consumir">Hay diferentes tipos de heridas, unas necesitan una atención más urgente que otras. Su aspecto nos dará uan idea de a qué tipo de herida nos enfrentamos y cómo actuar ante ellas</p>
+            </label>
+            <label class="radio"><input type="radio" name="considerableInjuries" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="considerableInjuries" value="No"> No </label>
+            <label class="radio"><input type="radio" name="considerableInjuries" value="Desconoce" checked> Desconoce </label>
+
+
+
+          </div><!--FINALIZA SEGUNDO DIV-->
+
+          <div class="col-6 col-md-4"><!--INICIA TERCER DIV-->
+
+            <label for="rehabilitationTherapy">
+              <h2> Terapia de rehabilitacion </h2>
+              <p class="consumir">Has estado en algun tipo de terapia para recuperar una funcion o actividad del cuerpo</p>
+            </label>
+            <label class="radio"><input type="radio" name="rehabilitationTherapy" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="rehabilitationTherapy" value="No"> No </label>
+
+            <label for="physicalTraumasAreas">
+              <h2>Zonas de traumatismo fisico</h2>
+              <p class="consmir">Selecciona las zonas afectadas por las situaciones de dano mencionadas anteriormente</p>
+            </label><br/>
+            <label class="checkbox"><input type="checkbox" name="physicalTraumasAreas" value="Cabeza (Craneo,cara)" > Cabeza (Craneo,cara) </label>
+            <label class="checkbox"><input type="checkbox" name="physicalTraumasAreas" value="Cuello"> Cuello </label>
+            <label class="checkbox"><input type="checkbox" name="physicalTraumasAreas" value="Tronco(zona dorsal, pectoral, abdominal, perineal)"> Tronco(zona dorsal, pectoral, abdominal, perineal)</label>
+            <label class="checkbox"><input type="checkbox" name="physicalTraumasAreas" value="Miembros superiores(deltoide, brazo, codo, antebrazo, mano,)"> Miembros superiores(deltoide, brazo, codo, antebrazo, mano,)</label>
+            <label class="checkbox"><input type="checkbox" name="physicalTraumasAreas" value="Miembro inferiores(gluteo, muslo, rodilla, pierna, pie)" > Miembro inferiores(gluteo, muslo, rodilla, pierna, pie)</label>
+
+            <label for="pyschologicalTrauma">
+              <h2> Trauma psicológico </h2>
+              <p class="consumir">Un evento que amenaza profundamente el bienestar o la vida del individuo , como consecuencia de ese evento en el aparato o estructura mentalo vida emocional del mismo</p>
+            </label>
+            <label class="radio"><input type="radio" name="pyschologicalTrauma" value="Si" > Si </label>
+            <label class="radio"><input type="radio" name="pyschologicalTrauma" value="No"> No </label>
+            <label class="radio"><input type="radio" name="pyschologicalTrauma" value="Desconoce" checked> Desconoce </label>
+
+          </div> <!--FINALIZA TERCER DIV-->
+
+
+    </div><!--.row formularios-->
+  </form>
+</div><!--Container Fluid-->

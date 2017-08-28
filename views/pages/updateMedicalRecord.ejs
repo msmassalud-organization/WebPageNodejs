@@ -4,20 +4,24 @@
 <head>
   <% include ../partials/head %>
     <!-- Custom styles for this template -->
-    <link href="bootstrap/theme.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css-patologicos/master-nopatologicos.css">
+    <link rel="stylesheet" href="/css/patologicos/master-patologicos.css">
 </head>
 
 <body>
   <div class="container theme-showcase" role="main">
 
     <% include ../partials/header %>
-    <% include ../forms/medicalAPNP %>
-
-
+    <!--% include ../forms/medicalAPNP % formularios-->
+    <!--% include ../forms/medicalAPP % formularios-->
+    <!--*% include ../forms/medicaltraumatismos % formularios-->
+    <% include ../forms/medicalHospital %>
 
 
   </div>
   <% include ../partials/jsblock %>
+  <script src="/js/main.js"></script>
+
 
 
 
