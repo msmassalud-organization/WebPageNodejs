@@ -52,7 +52,7 @@ mongodb.connect(uri, (err, db) => {
 
   // Create a simple little server.
   app.listen(process.env.PORT || 8080, () => {
-    console.log('started web process');
+    console.log('Magic happens in PORT 8080');
   });
 });
 // [END client]

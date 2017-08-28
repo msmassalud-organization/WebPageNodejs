@@ -8,23 +8,7 @@
 
   <title>MS MAS SALUD</title>
 
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-  <meta name="viewport" content="width=device-width" />
-
-
-  <!-- Bootstrap core CSS     -->
-  <link href="/public/bootstrap-dashboard/assets/css/bootstrap.min.css" rel="stylesheet" />
-
-  <!-- Animation library for notifications   -->
-  <link href="/public/bootstrap-dashboard/assets/css/animate.min.css" rel="stylesheet" />
-
-  <!--  Light Bootstrap Table core CSS    -->
-  <link href="/public/bootstrap-dashboard/assets/css/light-bootstrap-dashboard.css" rel="stylesheet" />
-
-  <!--     Fonts and icons     -->
-  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-  <link href="/public/bootstrap-dashboard/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+  <% include head %>
 </head>
 
 <body>
@@ -85,6 +69,7 @@
               <hr />
               <ul id="patientsList" class="list-group">
               <% if(locals.patients){ %>
+                <% var i = 0 %>
                 <% locals.patients.forEach(function(patient){ %>
                   <li class="list-group-item">
                     <div class="row">
@@ -97,16 +82,19 @@
                       <div class="col-sm-3">
                         <%= patient.cellphone %>
                       </div>
-                      <div class="col-sm-3">
+                      <div id="patient<%=i%>"class="col-sm-3">
                         <%= patient.email %>
                       </div>
                       <div class="col-sm-3">
+                        <% if (patient.accType == 'noMember'){ %>
                         <a class="btn btn-xs btn-success">Editar</a>
-                        <a class="btn btn-xs btn-info">Ver</a>
-                        <a class="btn btn-xs btn-danger">Borrar</a>
+                        <%}%>
+                        <a id="<%=i%>" onclick="loadPatientProfile(this.id)" class="btn btn-xs btn-info">Ver</a>
+                        <a id="<%=i%>" onclick="deletePatient(this.id)" class="btn btn-xs btn-danger">Borrar</a>
                       </div>
                     </div>
                   </li>
+                  <% i++; %>
                   <% }) %>
                 <%}%>
               </ul>

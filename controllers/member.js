@@ -4,6 +4,7 @@ const User = require('../models/user')
 const Membership = require('../models/membership')
 const memberTypes = Membership.schema.path('type').enumValues
 const Doctor = require('../models/doctor')
+const MR  = require('../models/medicalRecord')
 const service = require('../services/index')
 const expiringTime = 365; //days
 
@@ -28,7 +29,7 @@ function createMember(req) {
   return member;
 }
 
-function createMembership(req, member, resRoute){
+function createMembership(req, res, member, resRoute){
 
   //Primero debemos revisar que la membresía no esté ocupada
   Membership.findOne({
@@ -41,33 +42,51 @@ function createMembership(req, member, resRoute){
       if(membership){
         //Si la membresía no está ligada a un usuario, se liga y se actualiza
         if(!membership.userProfile){
+          member.membership = membership._id;
           membership.type = req.body.type;
           membership.userProfile = member._id;
           membership.startDate = Date.now();
           membership.expiringDate = Date.now();
           membership.expiringDate.setTime(
-            member.membership.expiringDate.getTime() + expiringTime * 86400000);
+            membership.expiringDate.getTime() + expiringTime * 86400000);
+          //Creamos el expediente médico
+          let mr = new MR();
+          member.medicalRecord = mr._id;
           //Verificamos si hay alguien ayudando al usuario
           if(req.user){
             membership.helpedBy = req.user._id;
           }
-          //Guardamos primero al usuario
-          member.save((err)=>{
-            if(err){
-              throw err;
-            }
-            //Actualizamos la membresía
-            membership.save((err, membershipUpdated)=>{
+          //Guardamos el expediente médico
+          mr.save((err)=>{
+            //Guardamos primero al usuario
+            member.save((err)=>{
               if(err){
                 throw err;
               }
-              if(req.user){
-                res.redirect('/dashboard');
-              }else{
-                res.status(200).send(membershipUpdated);
-              }
+              //Actualizamos la membresía
+              membership.save((err, membershipUpdated)=>{
+                if(err){
+                  throw err;
+                }
+                if(req.user){
+                  res.redirect('/dashboard');
+                }else{
+                  res.status(200).send(membershipUpdated);
+                }
+              });
             });
           });
+        }else{
+          //La membresía está ocupada
+          if(req.user){
+            res.status(404).render(resRoute,{
+              user: req.user,
+              message: 'Esa membresía ya está ocupada.',
+              'memberTypes': memberTypes
+            });
+          }else{
+            res.status(404).send('Membresia no encontrada.');
+          }
         }
       }else{
         //Esa membresía es incorrecta y se debe notificar
@@ -102,7 +121,7 @@ function insertMember(req, res) {
       //Si no existe el usuario, creamos la membresía
       if (!user) {
         let member = createMember(req);
-        createMembership(req, member, resRoute);
+        createMembership(req, res, member, resRoute);
       } else {
         if(req.user){
           res.status(204).render(resRoute,{

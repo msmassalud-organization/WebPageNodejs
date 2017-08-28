@@ -198,3 +198,47 @@ $(function() {
     });
   });
 });
+
+function loadPatientProfile(id){
+  var email = $('#patient'+id).text();
+  email = email.replace(/\s/g,'');
+
+  var form = document.createElement('form');
+  form.setAttribute('method', 'get');
+  form.setAttribute('action', '/loadPatientProfile');
+  form.setAttribute('id', 'hiddenForm');
+  form.style.display = 'hidden';
+  document.body.appendChild(form);
+
+  var input = document.createElement("input");
+  input.setAttribute("type", "hidden");
+  input.setAttribute("name", "email");
+  input.setAttribute("value", email);
+
+  //append to form element that you want .
+  document.getElementById("hiddenForm").appendChild(input);
+
+  form.submit();
+}
+
+function deletePatient(id){
+  var email = $('#patient'+id).text();
+  email = email.replace(/\s/g,'');
+
+  var form = document.createElement('form');
+  form.setAttribute('method', 'post');
+  form.setAttribute('action', '/deletePatient');
+  form.setAttribute('id', 'hiddenForm');
+  form.style.display = 'hidden';
+  document.body.appendChild(form);
+
+  var input = document.createElement("input");
+  input.setAttribute("type", "hidden");
+  input.setAttribute("name", "email");
+  input.setAttribute("value", email);
+
+  //append to form element that you want.
+  document.getElementById("hiddenForm").appendChild(input);
+
+  form.submit();
+}

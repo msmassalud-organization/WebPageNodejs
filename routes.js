@@ -12,10 +12,7 @@ module.exports = function(app, passport) {
   //Raiz
   //app.get('/', userController.getAllUsers);
   app.get('/', (req, res, next) => {
-    //Actualiza vistas
-    req.session.views = (req.session.views || 0) + 1;
-    //Manda la respuesta
-    res.end(req.session.views + ' views');
+    res.status(200).redirect('/signin');
   })
 
   // User
@@ -61,18 +58,7 @@ module.exports = function(app, passport) {
   });
 
 //Expediente Médico
-  app.get('/updateMedicalRecord', auth.isLoggedIn, (req, res) => {
-    if(!req.user.medicalRecord){
-      //Crear expediente médico
-      MRController.insert(req, res);
-    }else{
-      //nadita nanais
-      res.status(200).render('pages/updateMedicalRecord', {
-        user: req.user
-      });
-    }
-  });
-
+  app.get('/updateMedicalRecord', auth.isLoggedIn, MRController.loadMedicalRecord);
   app.post('/updateMedicalRecord', auth.isLoggedIn, MRController.update);
   //Fin Expediente Médico
 
@@ -83,6 +69,8 @@ module.exports = function(app, passport) {
   app.get('/findPatientByName', auth.isDoctor, doctorController.findPatientByName);
   app.get('/createPatient', auth.isDoctor, doctorController.loadPatientForm);
   app.post('/addPatientByMemberIdToken', auth.isDoctor, doctorController.addPatientByMemberIdToken);
+  app.get('/loadPatientProfile', auth.isDoctor, doctorController.loadPatientProfile);
+  app.post('/deletePatient', auth.isDoctor, doctorController.deletePatient);
   //Fin Dashboard
 
   //Administrador

@@ -15,6 +15,7 @@ var userSchema = new mongoose.Schema({
   password:     {type: String, required: true},
   registerDate: {type: Date, default: Date.now},
   inactiveDate: {type: Date},
+  pictureURL:   {type: String},
   accType:      {type: String,
                   enum : [
                     'member','default','admin','doctor',
