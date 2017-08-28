@@ -6,6 +6,18 @@ function create(req, res){
   return mr;
 }
 
+function loadMedicalRecord(req, res){
+  if(!req.user.medicalRecord){
+    //Crear expediente médico
+    MRController.insert(req, res);
+  }else{
+    //nadita nanais
+    res.status(200).render('pages/updateMedicalRecord', {
+      user: req.user
+    });
+  }
+}
+
 function insert(req, res){
   //Creamos el expediente médico
   let mr = create(req);
@@ -71,5 +83,6 @@ update = {
 
 module.exports = {
   insert,
-  update
+  update,
+  loadMedicalRecord
 }

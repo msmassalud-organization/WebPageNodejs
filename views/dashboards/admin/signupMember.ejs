@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="/public/bootstrap-dashboard/assets/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>MS MAS SALUD</title>
+
+	<% include head %>
+</head>
+
+<body>
+
+	<div class="wrapper">
+		<% include sideNavBar %>
+
+			<div class="main-panel">
+				<% include topNavBar %>
+
+				<div class="content">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-8">
+                <div class="card">
+                  <div class="header">
+                    <h4 class="title">Registro de usuarios</h4>
+                  </div>
+                  <div class="content">
+										<% if(locals.message.length > 0){ %>
+											<div class="alert alert-danger">
+												<strong><%= locals.message %></strong>
+											</div>
+										<%}%>
+                    <form action="/signupMember" method="post">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="accType">Tipo de cuenta:</label>
+                            <select class="form-control" name="accType">
+                              <% for(var i = 0; i < memberTypes.length; i++){ %>
+                                <option value="<%=memberTypes[i]%>"><%=memberTypes[i]%></option>
+                              <%} %>
+                            </select>
+                          </div>
+                        </div>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="memberId">Número de membresía</label>
+														<input type="number" class="form-control" name="memberId" id="memberId" required/>
+													</div>
+												</div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label for="name">Nombre(s):</label>
+                          <input type="text" class="text-uppercase form-control" id="name" name="name" required />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="dadLastName">Apellido Paterno:</label>
+                          <input type="text" class="text-uppercase form-control" id="dadLastName" name="dadLastName" required />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="momLastName">Apellido Materno:</label>
+                          <input type="text" class="text-uppercase form-control" id="momLastName" name="momLastName" required />
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label for="cellphone">Celular:</label>
+                          <input placeholder="3315643598" type="number" class="form-control" id="cellphone" name="cellphone" />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="email">Correo:</label>
+                          <input placeholder="ramon.corona@gmail.com" type="email" class="form-control text-lowercase" id="email" name="email" />
+                        </div>
+												<div class="col-md-4">
+                          <label for="birthday">Fecha de nacimiento:</label>
+                          <input placeholder="25-05-1983" type="text" class="form-control text-lowercase" id="date" name="birthday" />
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <label for="residence">Residencia:</label>
+                          <input placeholder="ZAPOPAN" type="text" class="form-control text-uppercase" id="residence" name="residence" />
+                        </div>
+                        <div class="col-md-6">
+                          <label for="cp">Código postal:</label>
+                          <input placeholder="45390" type="number" class="form-control text-lowercase" id="cp" name="cp" />
+                        </div>
+                      </div>
+
+                      <button type="submit" class="btn btn-info btn-fill pull-right">Registrar</button>
+                      <div class="clearfix"></div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+	</div>
+
+
+</body>
+
+<% include ../dashboardScripts %>
+<script src="/js/admin.js"></script>
+</html>

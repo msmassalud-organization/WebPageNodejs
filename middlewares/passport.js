@@ -24,23 +24,18 @@ module.exports = function(passport) {
     passReqToCallback: true
 
   }, function(req, email, password, done){
-    console.log("Finding USER");
     process.nextTick(()=>{
       User.findOne({'email': email}, function(err, user){
         if(err){
           return done(err);
         }
-        console.log("QUERY EXECUTED");
         if(!user){
-          console.log("USER NOT FOUND");
           return done(null, false, req.flash('loginMessage','No se encontró el usuario'));
         }
 
         if(!user.validPassword(password)){
-          console.log("PASSWORD INCORRECT");
           return done(null, false, req.flash('loginMessage', 'Contraeña incorrecta!'));
         }
-        console.log("RETURNING USER");
         return done(null, user);
       });
     });

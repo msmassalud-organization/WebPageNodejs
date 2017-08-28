@@ -12,7 +12,10 @@ const passport = require('passport')
 const session = require('express-session')
 const config = require('./config')
 const flash = require('connect-flash')
+const cookieSession = require('cookie-session')
 
+//Confiamos en el primer proxy
+app.set('trust proxy',1);
 
 //Establecemos la ruta de la carpeta de vistas
 app.set('views', __dirname + '/views');
@@ -22,6 +25,7 @@ app.set('view engine', 'ejs');
 
 //Colocamos la carpeta 'public' visible en las direcciones
 app.use(express.static(__dirname + '/public'));
+app.use('/public',express.static('public'));
 
 //Configuramos una herramienta para parsear información en formato JSON
 app.use(bodyParser.json());
@@ -36,10 +40,15 @@ app.use(cookieParser());
 
 //Configuración de Passport para autenticación
 require('./middlewares/passport')(passport);
-app.use(session({
+/*app.use(session({
    secret: config.SECRET_TOKEN,
    resave: true,
    saveUninitialized: true
+ }));*/
+ app.use(cookieSession({
+   name: 'session',
+   keys: [config.SECRET_TOKEN],
+   maxAge: 24 * 60 * 60 * 1000 // 24 horas
  }));
 app.use(passport.initialize());
 app.use(passport.session());
