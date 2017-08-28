@@ -3,7 +3,6 @@
 const mongoose = require('mongoose');
 const bCrypt   = require('bcrypt-nodejs');
 const Schema   = mongoose.Schema;
-const randToken = require('rand-token')
 
 var userSchema = new mongoose.Schema({
   isActive:     {type: Boolean, default: true},
@@ -28,14 +27,6 @@ var userSchema = new mongoose.Schema({
                   enum : ['Masculino','Femenino'],
                   default : 'Masculino'},
   cellphone:     {type: String},
-  //membership:   {type: Schema.Types.ObjectId, ref: 'Membership'}
-  membership : {
-    memberId :  {type: String},
-    startDate : {type: Date },
-    expiringDate: {type: Date},
-    type :      {type: String,
-                  enum: ['A','B','C']},
-  },
   residence : {type: String, trim: true, uppercase: true},
   city      : {type: String, trim: true, uppercase: true},
   country   : {type: String, trim: true, uppercase: true},
@@ -52,13 +43,9 @@ var userSchema = new mongoose.Schema({
                         'Licenciatura', 'Posgrado']},
   religion:    {type: String,
                 enum: ['Católico','Judío','Ortodoxos','Otro']},
+  membership:   {type: Schema.Types.ObjectId, ref: 'Membership'},
   medicalRecord:  {type: Schema.Types.ObjectId, ref: 'MemberMedicalRecord'},
-  doctorProfile: {type: Schema.Types.ObjectId, ref: 'Doctor'},
-  verificationCode : {type: String,
-                      default: function(){
-                        return randToken.generate(6);
-                      }
-                    }
+  doctorProfile: {type: Schema.Types.ObjectId, ref: 'Doctor'}
 }, { runSettersOnQuery: true });
 
 //Generar el hashSync

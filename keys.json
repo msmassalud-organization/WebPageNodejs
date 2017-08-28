@@ -1,7 +1,7 @@
 {
-  "mongoHost":"localhost",
-  "mongoPort":"27018",
+  "mongoHost":"ds129143.mlab.com",
+  "mongoPort":"29143",
   "mongoDatabase":"testmongo",
-  "mongoUser":"",
-  "mongoPass":""
+  "mongoUser":"Ruxaxup",
+  "mongoPass":"1234"
 }

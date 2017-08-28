@@ -17,6 +17,7 @@ function loadPatients(req, res) {
     }
     var renderPage = dashRoute + 'patients';
     var parameters = {}
+    //TODO: verificar si la variable patients existe (es obligatoria)
     if (doctorProfile.patients.length > 0) {
       parameters = {
         user: req.user,

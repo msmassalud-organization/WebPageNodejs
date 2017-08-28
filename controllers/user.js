@@ -87,7 +87,7 @@ function insertUser(req, res) {
               if (err) {
                 throw err;
               }
-              res.status(200).redirect('/');
+              res.status(200).redirect('/signin');
             });
           });
         }else{
@@ -95,7 +95,7 @@ function insertUser(req, res) {
             if (err) {
               throw err;
             }
-            res.status(200).redirect('/');
+            res.status(200).redirect('/signin');
           });
         } //Fin Crear usuario
       } else {

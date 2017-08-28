@@ -5,41 +5,44 @@ const userController = require('./controllers/user');
 const memberController = require('./controllers/member');
 const MRController = require('./controllers/medicalRecord');
 const doctorController = require('./controllers/doctor');
+const adminController = require('./controllers/admin');
+
 //Rutas
 module.exports = function(app, passport) {
+  //Raiz
+  //app.get('/', userController.getAllUsers);
+  app.get('/', (req, res, next) => {
+    //Actualiza vistas
+    req.session.views = (req.session.views || 0) + 1;
+    //Manda la respuesta
+    res.end(req.session.views + ' views');
+  })
 
-  app.get('/', userController.getAllUsers);
   // User
-  app.get('/signupMember', (req, res) => {
-    res.status(200).render('pages/signupMember', {
-      user: req.user
-    });
-  });
-  app.post('/signupUser', userController.insertUser);
   app.get('/signin', (req, res) => {
     res.status(200).render('pages/signin', {
       message: req.flash('loginMessage'),
       user: req.user
     });
   });
-  app.get('/signupUser', (req, res)=> {
-    var accTypes = require('./models/user').schema.path('accType').enumValues;
-    res.status(200).render('pages/signupUser', {
-      user: req.user,
-      'accTypes' : accTypes
-    });
-  });
   app.post('/signin', passport.authenticate('local-login', {
-    successRedirect: '/loadDashboard',
+    successRedirect: '/dashboard',
     failureRedirect: '/signin',
     failureFlash: true
   }));
   //Fin User
 
   //Miembros
+//  app.get('/signupMember', memberController.loadSignupMember);
   app.post('/signupMember', memberController.insertMember);
   app.get('/isMember', auth.isLoggedIn, memberController.isMember);
   app.post('/verifyToken',auth.isLoggedIn, memberController.verifyToken);
+  app.get('/findMembers', auth.isLoggedIn, (req, res) => {
+    res.status(200).render('pages/findMembers',{
+      user: req.user
+    });
+  });
+  app.get('/getMembersByName', memberController.getMembersByName);
   //Fin Miembros
 
 
@@ -82,18 +85,13 @@ module.exports = function(app, passport) {
   app.post('/addPatientByMemberIdToken', auth.isDoctor, doctorController.addPatientByMemberIdToken);
   //Fin Dashboard
 
-  app.get('/findMembers', auth.isLoggedIn, (req, res) => {
-    res.status(200).render('pages/findMembers',{
-      user: req.user
-    });
-  });
-  app.get('/getMembersByName', memberController.getMembersByName);
-  app.post('/loadProfile', memberController.loadMemberProfile);
-  app.get('/loadProfile', (req, res) => {
-    res.status(403).render('pages/403', {
-      user: req.user
-    });
-  });
+  //Administrador
+  app.get('/signupMember', auth.isAdmin, adminController.loadSignupMember);
+  app.get('/signupUser', auth.isAdmin, adminController.loadSignupUser);
+  app.post('/signupUser', auth.isAdmin, adminController.signupUser);
+  app.post('/createMemberships', auth.isAdmin, adminController.createMemberships);
+  //Fin Administrador
+
 
   app.get('/loadDashboard', auth.isLoggedIn, (req, res) => {
     var accType = req.user.accType;
@@ -102,6 +100,7 @@ module.exports = function(app, passport) {
     });
   });
 
+  //Dashboard
   app.get('/dashboard', auth.isLoggedIn, (req, res) => {
     var accType = req.user.accType;
     var route = `dashboards/${accType}/index`;
@@ -120,3 +119,4 @@ module.exports = function(app, passport) {
     });
   });
 }
+//Fin Dashboard
