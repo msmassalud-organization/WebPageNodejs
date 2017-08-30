@@ -32,6 +32,10 @@ var membershipSchema = new Schema({
       return randToken.generate(6);
     },
     required: true
+  },
+  isActive: {
+    type: String,
+    default: 'false'
   }
 });
 

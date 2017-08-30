@@ -20,7 +20,7 @@ const mongodb = require('mongoose');
 const http = require('http');
 const nconf = require('nconf');
 const app = require('./app');
-
+const autoIncrement = require('mongoose-auto-increment');
 // read in keys and secrets.  You can store these in a variety of ways.
 // I like to use a keys.json  file that is in the .gitignore file,
 // but you can also store them in environment variables
@@ -48,8 +48,7 @@ mongodb.Promise = global.Promise;
 mongodb.connect(uri, (err, db) => {
   if (err) {
     throw err;
-  }
-
+  }  
   // Create a simple little server.
   app.listen(process.env.PORT || 8080, () => {
     console.log('Magic happens in PORT 8080');

@@ -64,6 +64,7 @@ function createMembership(req, res, member, resRoute){
                 throw err;
               }
               //Actualizamos la membresía
+              membership.isActive = true;
               membership.save((err, membershipUpdated)=>{
                 if(err){
                   throw err;

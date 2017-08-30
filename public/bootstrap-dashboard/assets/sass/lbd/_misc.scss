@@ -4,16 +4,17 @@ body,
     min-height: 100vh;
     position: relative;
 }
+
 a{
   color: $info-color;
-    
+
   &:hover, &:focus{
-     color: $info-states-color; 
-     text-decoration: none; 
+     color: $info-states-color;
+     text-decoration: none;
   }
 }
 
-a:focus, a:active, 
+a:focus, a:active,
 button::-moz-focus-inner,
 input::-moz-focus-inner,
 input[type="reset"]::-moz-focus-inner,
@@ -30,16 +31,30 @@ input:focus {
 }
 
 /*           Animations              */
-.form-control, 
-.input-group-addon, 
+
+.animation-transition-general{
+    @include transition($general-transition-time, $transition-linear);
+}
+
+.animation-transition-fast{
+    @include transition($fast-transition-time, $transition-linear);
+}
+
+.animation-transition-ultra-fast{
+    @include transition($ultra-fast-transition-time, $transition-ease-in);
+}
+
+.form-control,
+.input-group-addon,
 .tagsinput,
-.navbar,
-.navbar .alert{
+.navbar .alert,
+.panel-collapse.collapse-hover {
     @include transition($general-transition-time, $transition-linear);
 }
 
 .sidebar .nav a,
-.table > tbody > tr .td-actions .btn{
+.table > tbody > tr .td-actions .btn,
+.caret{
     @include transition($fast-transition-time, $transition-ease-in);
 }
 
@@ -54,9 +69,19 @@ input:focus {
     margin-top: 50px;
 }
 
-.wrapper{
-    position: relative;
-    top: 0;
-    height: 100vh;
+a[data-toggle="collapse"][aria-expanded="true"] .caret,
+.btn[data-toggle="collapse"][aria-expanded="true"] .caret,
+a.dropdown-toggle[aria-expanded="true"] .caret{
+    @include rotate-180();
 }
 
+legend{
+    font-size: $font-size-h4;
+    font-weight: $font-weight-light;
+}
+
+.full-screen-map{
+    position:relative;
+    width:100%;
+    height: calc(100% - 60px);
+}
