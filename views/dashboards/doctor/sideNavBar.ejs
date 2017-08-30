@@ -1,41 +1,63 @@
-<div class="sidebar" data-color="green" data-image="/public/bootstrap-dashboard/assets/img/sidebar-5.jpg">
+<div class="sidebar" data-color="green" data-image="bootstrap-dashboard/assets/img/full-screen-image-3.jpg">
+  <!--
+
+            Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+            Tip 2: you can also add an image using data-image tag
+
+        -->
+
+  <div class="logo">
+    <a href="#" class="logo-text">MS Mas Salud</a>
+  </div>
+  <div class="logo logo-mini">
+    <a href="#" class="logo-text">
+				MS+S
+			</a>
+  </div>
+
   <div class="sidebar-wrapper">
-    <div class="logo">
-      <a href="/" class="simple-text">
-                Ms + Salud
-            </a>
+    <div class="user">
+      <div class="photo">
+        <img src="bootstrap-dashboard/assets/img/faces/face-0.jpg" />
+      </div>
+      <div class="info">
+        <a data-toggle="collapse" href="#collapseExample" class="collapsed">
+                        <%= user.name %>
+                        <b class="caret"></b>
+                    </a>
+        <div class="collapse" id="collapseExample">
+          <ul class="nav">
+            <li><a href="/profile">Perfil</a></li>
+            <li><a href="#">Configuración</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <ul class="nav">
-      <% if(locals.menu == '/dashboard') {%>
-        <li class="active">
-      <%}else{ %>
-        <li>
+      <%if(locals.menu == '/dashboard'){%>
+      <li class="active">
       <%}%>
-        <a href="/dashboard">
-                    <i class="pe-7s-graph"></i>
-                    <p>Dashboard</p>
-                </a>
+      <li>
+        <a href="/dashboard"><i class="pe-7s-date"></i><p>Panel de control</p></a>
       </li>
-      <% if(locals.menu == '/profile') {%>
-        <li class="active">
-      <%}else{ %>
-        <li>
+      <%if(locals.menu == '/profile'){%>
+      <li class="active">
       <%}%>
-        <a href="/profile">
-                    <i class="pe-7s-user"></i>
-                    <p>User Profile</p>
-                </a>
+      <li>
+        <a href="/profile"><i class="pe-7s-user"></i><p>Perfil</p></a>
       </li>
-      <% if(locals.menu == '/patients') {%>
-        <li class="active">
-      <%}else{ %>
-        <li>
+      <%if(locals.menu == '/patients'){%>
+      <li class="active">
       <%}%>
-        <a href="/patients">
-                    <i class="pe-7s-note2"></i>
-                    <p>Pacientes</p>
-                </a>
+      <li>
+        <a href="/patients"><i class="pe-7s-users"></i><p>Pacientes</p></a>
+      </li>
+      <%if(locals.menu == '/myServices'){%>
+      <li class="active">
+      <%}%>
+      <li>
+        <a href="/myServices"><i class="pe-7s-portfolio"></i><p>Servicios</p></a>
       </li>
     </ul>
   </div>

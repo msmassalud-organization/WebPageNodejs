@@ -71,6 +71,9 @@ module.exports = function(app, passport) {
   app.post('/addPatientByMemberIdToken', auth.isDoctor, doctorController.addPatientByMemberIdToken);
   app.get('/loadPatientProfile', auth.isDoctor, doctorController.loadPatientProfile);
   app.post('/deletePatient', auth.isDoctor, doctorController.deletePatient);
+  app.get('/doctorCalendar', auth.isDoctor, doctorController.loadCalendar);
+  app.get('/getDoctorEvents',auth.isDoctor, doctorController.getEvents);
+  app.post('/registerEvent', auth.isDoctor, doctorController.registerEvent);
   //Fin Dashboard
 
   //Administrador

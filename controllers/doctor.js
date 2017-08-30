@@ -3,6 +3,7 @@ const User = require('../models/user')
 const Doctor = require('../models/doctor')
 const Membership = require('../models/membership')
 const MR = require('../models/medicalRecord')
+const Event = require('../models/event')
 const dashRoute = 'dashboards/doctor/'
 //Si está loggeado como doctor
 // /addPatient
@@ -11,7 +12,7 @@ function loadPatients(req, res) {
   populate({
     path: 'patients',
     model: 'User',
-    select: 'password fullName cellphone email accType membership',
+    select: 'fullName cellphone email accType membership',
     populate: {
       path: 'membership',
       model: 'Membership',
@@ -41,7 +42,7 @@ function loadPatients(req, res) {
   });
 }
 
-function createPatient(req, res){
+function createPatient(req, res) {
   let user = new User();
   var birthday = req.body.birthday;
   birthday = birthday.split("-");
@@ -235,6 +236,96 @@ function deletePatient(req, res) {
   });
 }
 
+function loadCalendar(req, res) {
+  console.log('/doctorCalendar');
+  res.status(200).render(dashRoute + 'calendar', {
+    user: req.user,
+    menu: '/doctorCalendar',
+    fecha: Date.now()
+  });
+}
+
+/**
+  Function: getEvents.
+  Obtenemos el arreglo perteneciente a la agenda
+  del doctor. Cada elemento del arreglo contiene
+  un objeto para mostrar en el calendario. Se crea
+  un arreglo por cada objeto y es el que se envía y
+  muestra en el Dashboard del doctor.
+
+  Ej. de los parametros de la colección:
+  doctor : {
+    agenda: [Event]
+  }
+  event: {
+    calendar : {
+      start: <Date>,
+      end: <Date>
+    }
+  }
+*/
+function getEvents(req, res){
+  console.log('/getEvents');
+  Doctor.findById(req.user.doctorProfile).
+    populate({
+      path: 'agenda',
+      model: 'Event',
+      select: '-id'
+    }).exec(function(err, doctor){
+      if(err){
+        throw err;
+      }
+
+      if(doctor){
+        console.log(`${doctor}`);
+        var events = [];
+        doctor.agenda.forEach(function(event){
+          events.push(event.calendar);
+        });
+        console.log(events);
+        res.status(200).send(events);
+      }
+    });
+}
+
+//Creación del objeto Evento
+function createEvent(req){
+  let _event = new Event();
+  console.log(_event);
+  console.log(new Date(req.body.start));
+  console.log(new Date(req.body.end));
+  _event.calendar.title = req.body.title;
+  _event.calendar.start = new Date(req.body.start);
+  _event.calendar.end = new Date(req.body.end);
+  _event.doctor = req.user._id;
+  return _event;
+}
+
+function registerEvent(req, res){
+  console.log('/registerEvent');
+  console.log(req.body);
+  //Creamos el evento
+  let _event = createEvent(req);
+  //Registramos el evento en la base de datos
+  _event.save((err)=>{
+    if(err){
+      throw err;
+    }
+    //Agregamos el evento al doctor
+    Doctor.findByIdAndUpdate(req.user.doctorProfile, {
+      '$addToSet': {
+        agenda: _event._id
+      }
+    }, function(err, doctorUpdated) {
+      if (err) {
+        console.log(error.errors['doctors'].message);
+        throw err;
+      }
+      res.status(200).redirect('/dashboard');
+    });
+  })
+}
+
 module.exports = {
   loadPatients,
   addPatient,
@@ -243,5 +334,8 @@ module.exports = {
   loadPatientForm,
   addPatientByMemberIdToken,
   loadPatientProfile,
-  deletePatient
+  deletePatient,
+  loadCalendar,
+  getEvents,
+  registerEvent
 }

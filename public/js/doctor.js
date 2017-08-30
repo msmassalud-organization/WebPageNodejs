@@ -12,14 +12,15 @@ function addPatient(id) {
     }
   });
 }
-function addPatientByMemberIdToken(memberId,token) {
+
+function addPatientByMemberIdToken(memberId, token) {
   console.log("Agregando paciente");
   $.ajax({
     type: "POST",
     url: '/addPatientByMemberIdToken',
     data: {
       'memberId': memberId,
-      'token':token
+      'token': token
     },
     success: function(data) {
       console.log(data);
@@ -33,23 +34,25 @@ Requiere:
   - <input id='memberIdInput'> => Se ingresa la membresía
   - <button id='btnVerMember'> => Verifica que sea valida
 */
-$(function(){
-  $("#btnVerMember").click(function(){
+$(function() {
+  $("#btnVerMember").click(function() {
     //Obtenemos la membresia
     var memberId = $("#memberIdInput").val();
     console.log(memberId);
-    $.ajax('/isMember',{
-      data: {'memberId': memberId},
+    $.ajax('/isMember', {
+      data: {
+        'memberId': memberId
+      },
       statusCode: {
-        200: function(data){
+        200: function(data) {
           //Si encontró la membresía habilita la verificación de token
           //Muestra una palomita
           console.log("Si existe la membresía");
           $("#tokenInput").val("");
           $("#tokenPanel").show("slow");
-          $("#memberIdInput").prop("disabled",true);
+          $("#memberIdInput").prop("disabled", true);
         },
-        204: function(data){
+        204: function(data) {
           //No se encontró la membresía, pone una equis
           console.log("No existe la membresía");
         }
@@ -61,24 +64,27 @@ $(function(){
 - <input id='tokenInput'> => Se ingresa token del miembro
 - <button id='btnVerToken'> => Verifica que el token sea válido
 */
-$(function(){
-  $("#btnVerToken").click(function(){
+$(function() {
+  $("#btnVerToken").click(function() {
     //Obtenemos la membresia
     var token = $("#tokenInput").val();
     var memberId = $("#memberIdInput").val();
-    $.ajax('/verifyToken',{
+    $.ajax('/verifyToken', {
       method: "POST",
-      data: {'memberId':memberId,'token': token},
+      data: {
+        'memberId': memberId,
+        'token': token
+      },
       statusCode: {
-        200: function(data){
+        200: function(data) {
           //Si el token es correcto
           console.log("Token correcto");
           $("#tokenInput").val("");
           $("#tokenPanel").hide("slow");
-          $("#memberIdInput").prop("disabled",false);
-          addPatientByMemberIdToken(memberId,token);
+          $("#memberIdInput").prop("disabled", false);
+          addPatientByMemberIdToken(memberId, token);
         },
-        204: function(data){
+        204: function(data) {
           //Token incorrecto
           console.log("Token incorrecto");
         }
@@ -109,16 +115,16 @@ $(function() {
     }
 
     var length = $('#date').val().length;
-    if(length > 9){
+    if (length > 9) {
       e.preventDefault();
     }
   });
 
   $("#date").keyup(function(e) {
     var length = $('#date').val().length;
-    if(length == 2 || length == 5){
+    if (length == 2 || length == 5) {
       var text = $('#date').val();
-      $('#date').val(text+'-');
+      $('#date').val(text + '-');
     }
   });
 });
@@ -199,9 +205,9 @@ $(function() {
   });
 });
 
-function loadPatientProfile(id){
-  var email = $('#patient'+id).text();
-  email = email.replace(/\s/g,'');
+function loadPatientProfile(id) {
+  var email = $('#patient' + id).text();
+  email = email.replace(/\s/g, '');
 
   var form = document.createElement('form');
   form.setAttribute('method', 'get');
@@ -221,9 +227,9 @@ function loadPatientProfile(id){
   form.submit();
 }
 
-function deletePatient(id){
-  var email = $('#patient'+id).text();
-  email = email.replace(/\s/g,'');
+function deletePatient(id) {
+  var email = $('#patient' + id).text();
+  email = email.replace(/\s/g, '');
 
   var form = document.createElement('form');
   form.setAttribute('method', 'post');
@@ -241,4 +247,94 @@ function deletePatient(id){
   document.getElementById("hiddenForm").appendChild(input);
 
   form.submit();
+}
+
+function registerEvent(){
+  var start = $('#start').data('DateTimePicker').date();
+  var end = $('#end').data('DateTimePicker').date();
+  var title = $('#title').val();
+
+  var form = document.createElement('form');
+  form.setAttribute('method', 'post');
+  form.setAttribute('action', '/registerEvent');
+  form.setAttribute('id', 'hiddenForm');
+  form.style.display = 'hidden';
+  document.body.appendChild(form);
+
+  var inputStart = document.createElement("input");
+  inputStart.setAttribute("type", "hidden");
+  inputStart.setAttribute("name", "start");
+  inputStart.setAttribute("value", start);
+
+  var inputEnd = document.createElement("input");
+  inputEnd.setAttribute("type", "hidden");
+  inputEnd.setAttribute("name", "end");
+  inputEnd.setAttribute("value", end);
+
+  var inputTitle = document.createElement("input");
+  inputTitle.setAttribute("type", "hidden");
+  inputTitle.setAttribute("name", "title");
+  inputTitle.setAttribute("value", title);
+
+  //append to form element that you want.
+  document.getElementById("hiddenForm").appendChild(inputStart);
+  document.getElementById("hiddenForm").appendChild(inputEnd);
+  document.getElementById("hiddenForm").appendChild(inputTitle);
+
+  form.submit();
+}
+
+function initFullCalendar() {
+  $.ajax('/getDoctorEvents', {
+    success: function(data) {
+      $('#fullCalendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'listDay,agendaDay,month'
+        },
+
+        // customize the button names,
+        // otherwise they'd all just say "list"
+        views: {
+          listDay: {
+            buttonText: 'list day'
+          },
+          listWeek: {
+            buttonText: 'list week'
+          }
+        },
+        timezone: 'local',
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end){
+          $('#eventCreation').show();
+          console.log(start._d);
+          $('#start').data("DateTimePicker").date(start._d).format('h:mm A');
+
+          /*swal({
+            title: 'Crea un evento',
+            html: '<br><input class="form-control" placeholder="Nombre" id="input-field">'+
+                  '<input class="form-control timepicker" placeholder="Time Picker Here" type="text">',
+            showCancelButton: true,
+            closeOnConfirm: true
+          }, function(){
+            var eventData;
+            titulo = $('#input-field').val();
+            console.log(titulo);
+            console.log(start._d);
+            console.log(end._d);
+            $('#fullCalendar').fullCalendar('unselect');
+          });*/
+        },
+        defaultView: 'agendaDay',
+        defaultDate: Date.now(),
+        navLinks: true, // can click day/week names to navigate views
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
+        events: data
+      });
+    }
+  });
+
 }

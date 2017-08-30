@@ -2,7 +2,7 @@
 .checkbox,
 .radio {
   margin-bottom: 12px;
-  padding-left: 32px;
+  padding-left: 24px;
   position: relative;
   -webkit-transition: color 0.25s linear;
   transition: color 0.25s linear;
@@ -13,8 +13,10 @@
 }
 .checkbox input,
 .radio input {
-  outline: none !important;
-  display: none;
+    outline: none !important;
+    opacity: 0;
+    margin-left: -9999px;
+    position: absolute;
 }
 .checkbox .icons,
 .radio .icons {
@@ -63,8 +65,8 @@
 .radio:hover .second-icon {
  @include opacity (1);
 }
-.checkbox.checked,
-.radio.checked {
+.checkbox.checked .icons,
+.radio.checked .icons{
   color: $info-color;
 }
 .checkbox.checked .first-icon,
@@ -115,6 +117,12 @@
   color: #D9D9D9;
 }
 
+.checkbox label.error,
+.radio label.error{
+    position: absolute;
+    top: 15px;
+    left: 5px;
+}
 
 
 /* ============================================================
@@ -132,17 +140,17 @@
     overflow: hidden;
     position: relative;
     text-align: left;
-    width: 60px;    
- 
-   -webkit-user-select: none;  
+    width: 60px;
+
+   -webkit-user-select: none;
    -moz-user-select: none;
    -ms-user-select: none;
    -o-user-select: none;
    user-select: none;
-     
+
     /*   this code is for fixing safari bug with hidden overflow for border-radius   */
     -webkit-mask: url('../img/mask.png') 0 0 no-repeat;
-    -webkit-mask-size: 60px 24px;
+    -webkit-mask-size: 60px 28px;
     mask: url('../img/mask.png') 0 0 no-repeat;
 }
 .has-switch.deactivate {
@@ -164,7 +172,7 @@
   transition: left 0.25s ease-out;
 }
 .has-switch > div.switch-off {
-  left: -35px;
+  left: -32px;
 }
 
 .has-switch > div.switch-on {
@@ -172,8 +180,8 @@
 }
 .has-switch > div label {
   background-color: #FFFFFF;
-  @include icon-gradient (rgba(255,255,255,1), rgba(241,241,242,1));
-  
+  @include line-gradient (rgba(255,255,255,1), rgba(241,241,242,1));
+
   box-shadow: 0 1px 1px #FFFFFF inset, 0 1px 1px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
@@ -186,11 +194,11 @@
     float: left;
     font-size: 11px;
     font-weight: 400;
-    height: 24px;
+    height: 28px;
     line-height: 15px;
     margin: 0;
     padding-bottom: 6px;
-    padding-top: 5px;
+    padding-top: 7px;
     position: relative;
     text-align: center;
     text-indent: -10px;
@@ -212,7 +220,7 @@
   border-radius: 0 30px 30px 0;
   background-color: $info-color;
   color: #ffffff;
-  text-indent: 1px;
+  text-indent: -3px;
 }
 .has-switch .switch-off span.switch-right{
     background-color: $medium-gray;
@@ -222,7 +230,7 @@
     border-radius: 12px;
     float: left;
     height: 22px;
-    margin: 1px -13px;
+    margin: 3px -15px;
     padding: 0;
     position: relative;
     transition: all 0.25s ease-out 0s;
@@ -236,11 +244,10 @@
     margin-left: 10px;
 }
 .has-switch:hover .switch-on label{
-    margin: 1px -17px;
+    margin: 3px -19px;
     width: 26px;
 }
 .has-switch:hover .switch-off label{
-    margin: 1px -13px;
+    margin: 3px -15px;
     width: 26px;
 }
-
