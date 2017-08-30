@@ -1,0 +1,440 @@
+<div class="conteiner-fluid">
+  <form class="form-signin">
+    <h2 class="form-signin-heading">Antecedentes Familiares</h2>
+    <h5 class="text-muted">Menciona si su padre o madre padece o padecio alguna de las siguientes enfermedades o sintomas:</h5>
+    <div class="row">
+    <div class="col-md-6"><!--INICIO PADRE-->
+      <h3>Padre</h4>
+              <div class="col-md-2">
+                <label>Vive</label>
+                </div>
+                <div class="col-md-1">Sí
+                </div>
+                <div class="col-md-2">
+                  <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider round"></span>
+                  </label>
+                </div>
+              <div class="col-md-1">No</div>
+    </div>
+          <div class="row">
+
+                <label>Diabetes</label>
+                  <div class="radio" id="prueba">
+                      <label><input type="radio" name="diabetesP" onclick="mostrarRadios('tipoD')" value="Si">Sí</label><br>
+                      <label><input type="radio" name="diabetesP" onclick="ocultarRadios('tipoD')" value="No">No</label><br>
+                      <label><input type="radio" name="diabetesP" onclick="ocultarRadios('tipoD')" value="Desconoce">Desconoce</label><br>
+                  </div>
+
+              <div class="radio" id="tipoD" style="display:none">
+                <label><input type="radio" name="tipoDP" value="Gestacional">Gestacional</label><br>
+                <label><input type="radio" name="tipoDP" value="Tipo I">Tipo I</label><br>
+                <label><input type="radio" name="tipoDP" value="Tipo II">Tipo II</label><br>
+                <label><input type="radio" name="tipoDP" value="Otro tipo">Otro tipo</label><br>
+              </div>
+              <div class="col-md-6">
+                <label>Obesidad o Sobrepeso</label>
+                <div class="radio">
+                    <label><input type="radio" name="obesidadP">Sí</label><br>
+                    <label><input type="radio" name="obesidadP">No</label><br>
+                    <label><input type="radio" name="obesidadP">Desconoce</label><br>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Cancer</label>
+              <div class="radio">
+                <label for="cancerP">
+                  <input type="radio" name="cancerP">Sí
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cancerP">
+                  <input type="radio" name="cancerP">No
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cancerP">
+                  <input type="radio" name="cancerP">Desconoce
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <label>Artitris</label>
+                <div class="radio">
+                  <label for="artitrisP">
+                    <input type="radio" name="artitrisP">Sí
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="artitrisP">
+                    <input type="radio" name="artitrisP">No
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="artitrisP">
+                    <input type="radio" name="artitrisP">Desconoce
+                  </label>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Enfermedades Renales</label>
+              <div class="radio">
+                <label for="erenalP">
+                  <input type="radio" name="erenalP">Sí
+                </label>
+              </div>
+              <div class="radio">
+                <label for="erenalP">
+                  <input type="radio" name="erenalP">No
+                </label>
+              </div>
+              <div class="radio">
+                <label for="erenalP">
+                  <input type="radio" name="erenalP">Desconoce
+                </label>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <label>Enfermedades Pulmonares</label>
+                <div class="radio">
+                  <label for="epulmoP">
+                    <input type="radio" name="epulmoP">Sí
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="epulmoP">
+                    <input type="radio" name="epulmoP">No
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="epulmoP">
+                    <input type="radio" name="epulmoP">Desconoce
+                  </label>
+                </div>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-md-6">
+                <label>Cefalea</label>
+                <div class="radio">
+                  <label for="cefaleaP">
+                    <input type="radio" name="cefaleaP">Sí
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cefaleaP">
+                    <input type="radio" name="cefaleaP">No
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cefaleaP">
+                    <input type="radio" name="cefaleaP">Desconoce
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label>Enfermedades Hepaticas</label>
+                <div class="radio">
+                  <label for="ehepaticasP">
+                    <input type="radio" name="ehepaticasP">Sí
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="ehepaticasP">
+                    <input type="radio" name="ehepaticasP">No
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="ehepaticasP">
+                    <input type="radio" name="ehepaticasP">Desconoce
+                  </label>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Cardiopatías</label>
+              <div class="radio">
+                <label for="cardioP">
+                  <input type="radio" name="cardioP">Ninguna
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cardioP">
+                  <input type="radio" name="cardioP">Desconoce
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cardioP">
+                  <input type="radio" name="cardioP">Hipertensión
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cardioP">
+                  <input type="radio" name="cardioP">Hipotensión
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cardioP">
+                  <input type="radio" name="cardioP">Isquemia
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cardioP">
+                  <input type="radio" name="cardioP">Angina de pecho
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cardioP">
+                  <input type="radio" name="cardioP" >Infarto de miocardio
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cardioP">
+                  <input type="radio" name="cardioP">Muerte subita
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cardioP">
+                  <input type="radio" name="cardioP">Enfermedad reumatica
+                </label>
+              </div>
+              <div class="radio">
+                <label for="cardioP">
+                  <input type="radio" name="cardioP">Más de una
+                </label>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-md-6"><!--INICIO MADRE-->
+        <h3>Madre</h4>
+          <div class="row">
+              <div class="col-md-2">
+                <label>Vive</label>
+                </div>
+                <div class="col-md-1">Sí
+                </div>
+                <div class="col-md-2">
+                  <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider round"></span>
+                  </label>
+                </div>
+              <div class="col-md-1">No</div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                  <label>Diabetes</label>
+                    <div class="radio">
+                      <label for="diabetesM">
+                        <input type="radio" name="diabetesM">Sí
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label for="diabetesM">
+                        <input type="radio" name="diabetesM">No
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label for="diabetesM">
+                        <input type="radio" name="diabetesM">Desconoce
+                      </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                  <label>Obesidad o Sobrepeso</label>
+                  <div class="radio">
+                    <label for="obesidadM">
+                      <input type="radio" name="obesidadM">Sí
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label for="obesidadM">
+                      <input type="radio" name="obesidadM">No
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label for="obesidadM">
+                      <input type="radio" name="obesidadM">Desconoce
+                    </label>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Cancer</label>
+                <div class="radio">
+                  <label for="cancerM">
+                    <input type="radio" name="cancerM">Sí
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cancerM">
+                    <input type="radio" name="cancerM">No
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cancerM">
+                    <input type="radio" name="cancerM">Desconoce
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                  <label>Artitris</label>
+                  <div class="radio">
+                    <label for="artitrisM">
+                      <input type="radio" name="artitrisM">Sí
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label for="artitrisM">
+                      <input type="radio" name="artitrisM">No
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label for="artitrisM">
+                      <input type="radio" name="artitrisM">Desconoce
+                    </label>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Enfermedades Renales</label>
+                <div class="radio">
+                  <label for="erenalM">
+                    <input type="radio" name="erenalM">Sí
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="erenalM">
+                    <input type="radio" name="erenalM">No
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="erenalM">
+                    <input type="radio" name="erenalM">Desconoce
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                  <label>Enfermedades Pulmonares</label>
+                  <div class="radio">
+                    <label for="epulmoM">
+                      <input type="radio" name="epulmoM">Sí
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label for="epulmoM">
+                      <input type="radio" name="epulmoM">No
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label for="epulmoM">
+                      <input type="radio" name="epulmoM">Desconoce
+                    </label>
+                  </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                  <label>Cefalea</label>
+                  <div class="radio">
+                    <label for="cefaleaM">
+                      <input type="radio" name="cefaleaM">Sí
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label for="cefaleaM">
+                      <input type="radio" name="cefaleaM">No
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label for="cefaleaM">
+                      <input type="radio" name="cefaleaM">Desconoce
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label>Enfermedades Hepaticas</label>
+                  <div class="radio">
+                    <label for="ehepaticasM">
+                      <input type="radio" name="ehepaticasM">Sí
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label for="ehepaticasM">
+                      <input type="radio" name="ehepaticasM">No
+                    </label>
+                  </div>
+                  <div class="radio">
+                    <label for="ehepaticasM">
+                      <input type="radio" name="ehepaticasM">Desconoce
+                    </label>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Cardiopatías</label>
+                <div class="radio">
+                  <label for="cardioM">
+                    <input type="radio" name="cardioM">Ninguna
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cardioM">
+                    <input type="radio" name="cardioM">Desconoce
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cardioM">
+                    <input type="radio" name="cardioM">Hipertensión
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cardioM">
+                    <input type="radio" name="cardioM">Hipotensión
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cardioM">
+                    <input type="radio" name="cardioM">Isquemia
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cardioM">
+                    <input type="radio" name="cardioM">Angina de pecho
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cardioM">
+                    <input type="radio" name="cardioM">Infarto de miocardio
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cardioM">
+                    <input type="radio" name="cardioM">Muerte subita
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cardioM">
+                    <input type="radio" name="cardioM">Enfermedad reumatica
+                  </label>
+                </div>
+                <div class="radio">
+                  <label for="cardioM">
+                    <input type="radio" name="cardioM">Más de una
+                  </label>
+                </div>
+              </div>
+            </div>
+      </div>
+  </form>
+</div>

@@ -1,0 +1,306 @@
+<div class="container-fluid">
+    <form action="#" class="form-signin">
+      <div class="row">
+        <h2 class="form-signin-heading">Antecedentes Familiares</h2>
+      </div>
+        <!-- ANTECEDENTES MADRE -->
+      <div class="row"> <!--PRIMERA FILA MADRE -->
+        <h3 class="form-signin-heading bg-info">Madre</h3>
+        <h4 class="form-signin-heading">Mencione si padece o padecio alguna de las siguientes enfermedades o sintomas:</h4>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Diabetes</label>
+            <div class="radio" name="diabetesMadre" id="diabetesMadre">
+              <label><input type="radio" name="diabetesM" onclick="mostrarRadios('siTipoDiabetesM')" value="siDiabetesM">Sí</label><br>
+              <label><input type="radio" name="diabetesM" onclick="ocultarRadios('siTipoDiabetesM')" value="noDiabetesM">No</label><br>
+              <label><input type="radio" name="diabetesM" onclick="ocultarRadios('siTipoDiabetesM')" value="desconoceDiabetesM">Desconoce</label><br>
+            </div>
+            <!-- OCULTO DIABETES SI -->
+            <div class="radio" name="siTipoDiabetesM" id="siTipoDiabetesM" style="display:none">
+              <h5>Tipo de diabetes</h5>
+              <label><input type="radio" name="tipoDM" value="gestacionalDM">Gestacional</label><br>
+              <label><input type="radio" name="tipoDM" value="tipo1DM">Tipo I</label><br>
+              <label><input type="radio" name="tipoDM" value="tipo2DM">Tipo II</label><br>
+              <label><input type="radio" name="tipoDM" value="otroDM">Otro tipo</label><br>
+            </div>
+            <!-- FIN  OCULTO DIABETES SI -->
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Artitris</label>
+            <div class="radio" name="artitrisMadre" id="artitrisMadre">
+              <label><input type="radio" name="artitrisM" value="siArtitrisM">Sí</label><br>
+              <label><input type="radio" name="artitrisM" value="noArtitrisM">No</label><br>
+              <label><input type="radio" name="artitrisM" value="desconoceArtitrisM">Desconoce</label><br>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Cefalea</label>
+            <div class="radio" name="cefaleaMadre" id="cefaleaMadre">
+              <label><input type="radio" name="cefaleaM" value="siCefaleaM">Sí</label><br>
+              <label><input type="radio" name="cefaleaM" value="noCefaleaM">No</label><br>
+              <label><input type="radio" name="cefaleaM" value="desconoCecefaleaM">Desconoce</label><br>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Obesidad o sobrepreso</label>
+            <div class="radio" name="obesidadMadre" id="obesidadMadre">
+              <label><input type="radio" name="obesidadM" value="siObesidadM">Sí</label><br>
+              <label><input type="radio" name="obesidadM" value="noObesidadM">No</label><br>
+              <label><input type="radio" name="obesidadM" value="desconoObesidadM">Desconoce</label><br>
+            </div>
+        </div>
+      </div> <!--FIN PRIMERA FILA MADRE -->
+      <div class="row"> <!--SEGUNDA FILA MADRE -->
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Cardiopatias</label>
+            <div class="radio" name="cardiopatiasMadre" id="cardiopatiasMadre">
+              <label><input type="radio" name="cardioM" value="ningunaCardioM">Ninguna</label><br>
+              <label><input type="radio" name="cardioM" value="desconoceCardioM">Desconoce</label><br>
+              <label><input type="radio" name="cardioM" value="hipertensionCardioM">Hipertension</label><br>
+              <label><input type="radio" name="cardioM" value="hipotensionCardioM">Hipotension</label><br>
+              <label><input type="radio" name="cardioM" value="isquemiaCardioM">Isquemia</label><br>
+              <label><input type="radio" name="cardioM" value="anginaCardioM">Angina de pecho</label><br>
+              <label><input type="radio" name="cardioM" value="infartoCardioM">Infarto de miocardio</label><br>
+              <label><input type="radio" name="cardioM" value="subitaCardioM">Muerte subita</label><br>
+              <label><input type="radio" name="cardioM" value="reumaticasCardioM">Enfermedad reumatica</label><br>
+              <label><input type="radio" name="cardioM" value="masCardioM">Mas de una</label><br>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Enfermedades Pulmonares</label>
+            <div class="radio" name="pulmonaresMadre" id="pulmonaresMadre">
+              <label><input type="radio" name="pulmonaresM" onclick="mostrarRadios('siTipoPulmonaresM')" value="siPulmonarM">Sí</label><br>
+              <label><input type="radio" name="pulmonaresM" onclick="ocultarRadios('siTipoPulmonaresM')" value="noPulmonarM">No</label><br>
+              <label><input type="radio" name="pulmonaresM" onclick="ocultarRadios('siTipoPulmonaresM')" value="desconocePulmonarM">Desconoce</label><br>
+            </div>
+            <!-- OCULTO PULMONARES SI -->
+            <div class="radio" name="siTipoPulmonaresM" id="siTipoPulmonaresM" style="display:none">
+              <h5>Tipo de neumopatias</h5>
+              <label><input type="radio" name="tipoPM" value="neumoniaM">Neumonia</label><br>
+              <label><input type="radio" name="tipoPM" value="asmaM">Asma</label><br>
+              <label><input type="radio" name="tipoPM" value="enfisemaM">Enfisema</label><br>
+              <label><input type="radio" name="tipoPM" value="epocM">EPOC</label><br>
+              <label><input type="radio" name="tipoPM" value="edemaM">Edema</label><br>
+              <label><input type="radio" name="tipoPM" value="otroPulmonarM">Otro</label><br>
+              <label><input type="radio" name="tipoPM" value="masPulmonarM">Mas de uno</label><br>
+              <label><input type="radio" name="tipoPM" value="desconocePulmonarM">Desconoce</label><br>
+            </div>
+            <!-- FIN OCULTO CANCER SI -->
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <label>Cancer</label>
+          <div class="radio" name="cancerMadre" id="cancerMadre">
+            <label><input type="radio" name="pulmonaresM" onclick="mostrarRadios('siTipoCancerM')" value="siCancerM">Sí</label><br>
+            <label><input type="radio" name="pulmonaresM" onclick="ocultarRadios('siTipoCancerM')" value="noCancerM">No</label><br>
+            <label><input type="radio" name="pulmonaresM" onclick="ocultarRadios('siTipoCancerM')" value="desconoceCancerM">Desconoce</label><br>
+          </div>
+          <!-- OCULTO PULMONARES SI -->
+          <div class="radio" name="siTipoCancerM" id="siTipoCancerM" style="display:none">
+            <h5>Tipo de neumopatias</h5>
+            <label><input type="radio" name="tipoCM" value="colonM">Colon y recto</label><br>
+            <label><input type="radio" name="tipoCM" value="endometrioM">Endometrio</label><br>
+            <label><input type="radio" name="tipoCM" value="mamaM">Mama</label><br>
+            <label><input type="radio" name="tipoCM" value="pulmonM">Pulmon</label><br>
+            <label><input type="radio" name="tipoCM" value="leucemiaM">Leucemia</label><br>
+            <label><input type="radio" name="tipoCM" value="pancreasM">Pancreas</label><br>
+            <label><input type="radio" name="tipoCM" value="tiroidesM">Tiroides</label><br>
+            <label><input type="radio" name="tipoCM" value="rinonM">Riñon</label><br>
+            <label><input type="radio" name="tipoCM" value="otroCancerM">Otro</label><br>
+            <label><input type="radio" name="tipoCM" value="masCancerM">Mas de uno</label><br>
+            <label><input type="radio" name="tipoCM" value="desconoceCancerM">Desconoce</label><br>
+          </div>
+          <!-- FIN OCULTO PULMONARES SI -->
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <label>Enfermedades Renales</label>
+          <div class="radio" name="renalesMadre" id="renalesMadre">
+            <label><input type="radio" name="renalesM" onclick="mostrarRadios('siTipoRenalesM')" value="siRenalM">Sí</label><br>
+            <label><input type="radio" name="renalesM" onclick="ocultarRadios('siTipoRenalesM')" value="noRenalM">No</label><br>
+            <label><input type="radio" name="renalesM" onclick="ocultarRadios('siTipoRenalesM')" value="desconoceRenalM">Desconoce</label><br>
+          </div>
+          <!-- OCULTO RENALES SI -->
+          <div class="radio" name="siTipoRenalesM" id="siTipoRenalesM" style="display:none">
+            <h5>Tipo de nefropatias</h5>
+            <label><input type="radio" name="tipoRM" value="insuficenciaM">Insuficiencia Renal</label><br>
+            <label><input type="radio" name="tipoRM" value="calculosM">Calculos Renales</label><br>
+            <label><input type="radio" name="tipoRM" value="otroRenalM">Otro</label><br>
+            <label><input type="radio" name="tipoRM" value="masRenalM">Mas de uno</label><br>
+            <label><input type="radio" name="tipoRM" value="desconoceRenalM">Desconoce</label><br>
+          </div>
+          <!-- FIN OCULTO RENALES SI -->
+        </div>
+      </div> <!--FIN SEGUNDA FILA MADRE -->
+      <div class="row"><!--TERCERA FILA MADRE -->
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <label>Enfermedades Hepaticas</label>
+          <div class="radio" name="hepaticasMadre" id="hepaticasMadre">
+            <label><input type="radio" name="hepaticasM" onclick="mostrarRadios('siTipoHepaticasM')" value="siHepaticaM">Sí</label><br>
+            <label><input type="radio" name="hepaticasM" onclick="ocultarRadios('siTipoHepaticasM')" value="noHepaticaM">No</label><br>
+            <label><input type="radio" name="hepaticasM" onclick="ocultarRadios('siTipoHepaticasM')" value="desconoceHepaticaM">Desconoce</label><br>
+          </div>
+          <!-- OCULTO RENALES SI -->
+          <div class="radio" name="siTipoHepaticasM" id="siTipoHepaticasM" style="display:none">
+            <h5>Tipo de nefropatias</h5>
+            <label><input type="radio" name="tipoHM" value="hepaAM">Hepatitis A</label><br>
+            <label><input type="radio" name="tipoHM" value="hepaBM">Hepatitis B</label><br>
+            <label><input type="radio" name="tipoHM" value="hepaCM">Hepatitis C</label><br>
+            <label><input type="radio" name="tipoHM" value="cirrosisM">Cirrosis</label><br>
+            <label><input type="radio" name="tipoHM" value="hemocromaM">Hemocromatosis</label><br>
+            <label><input type="radio" name="tipoHM" value="otroHepaticasM">Otro</label><br>
+            <label><input type="radio" name="tipoHM" value="masHepaticasM">Mas de uno</label><br>
+            <label><input type="radio" name="tipoHM" value="desconoceHepaticasM">Desconoce</label><br>
+          </div>
+          <!-- FIN OCULTO RENALES SI -->
+        </div>
+      </div><!--FIN TERCERA FILA MADRE -->
+      <!-- FIN ANTECEDENTES MADRE -->
+      <!-- ANTECEDENTES PADRE-->
+      <div class="row"> <!--PRIMERA FILA PADRE -->
+        <h3 class="form-signin-heading bg-info">Padre</h3>
+        <h4 class="form-signin-heading">Mencione si padece o padecio alguna de las siguientes enfermedades o sintomas:</h4>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Diabetes</label>
+            <div class="radio" name="diabetesPadre" id="diabetesPadre">
+              <label><input type="radio" name="diabetesP" onclick="mostrarRadios('siTipoDiabetesP')" value="siDiabetesP">Sí</label><br>
+              <label><input type="radio" name="diabetesP" onclick="ocultarRadios('siTipoDiabetesP')" value="noDiabetesP">No</label><br>
+              <label><input type="radio" name="diabetesP" onclick="ocultarRadios('siTipoDiabetesP')" value="desconoceDiabetesP">Desconoce</label><br>
+            </div>
+            <!-- OCULTO DIABETES SI -->
+            <div class="radio" name="siTipoDiabetesP" id="siTipoDiabetesP" style="display:none">
+              <h5>Tipo de diabetes</h5>
+              <label><input type="radio" name="tipoDP" value="gestacionalDP">Gestacional</label><br>
+              <label><input type="radio" name="tipoDP" value="tipo1DP">Tipo I</label><br>
+              <label><input type="radio" name="tipoDP" value="tipo2DP">Tipo II</label><br>
+              <label><input type="radio" name="tipoDP" value="otroDP">Otro tipo</label><br>
+            </div>
+            <!-- FIN  OCULTO DIABETES SI -->
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Artitris</label>
+            <div class="radio" name="artitrisPadre" id="artitrisPadre">
+              <label><input type="radio" name="artitrisP" value="siArtitrisP">Sí</label><br>
+              <label><input type="radio" name="artitrisP" value="noArtitrisP">No</label><br>
+              <label><input type="radio" name="artitrisP" value="desconoceArtitrisP">Desconoce</label><br>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Cefalea</label>
+            <div class="radio" name="cefaleaPadre" id="cefaleaPadre">
+              <label><input type="radio" name="cefaleaP" value="siCefaleaP">Sí</label><br>
+              <label><input type="radio" name="cefaleaP" value="noCefaleaP">No</label><br>
+              <label><input type="radio" name="cefaleaP" value="desconoCecefaleaP">Desconoce</label><br>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Obesidad o sobrepreso</label>
+            <div class="radio" name="obesidadPadre" id="obesidadPadre">
+              <label><input type="radio" name="obesidadP" value="siObesidadP">Sí</label><br>
+              <label><input type="radio" name="obesidadP" value="noObesidadP">No</label><br>
+              <label><input type="radio" name="obesidadP" value="desconoObesidadP">Desconoce</label><br>
+            </div>
+        </div>
+      </div> <!--FIN PRIMERA FILA PADRE -->
+      <div class="row"> <!--SEGUNDA FILA PADRE -->
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Cardiopatias</label>
+            <div class="radio" name="cardiopatiasPadre" id="cardiopatiasPadre">
+              <label><input type="radio" name="cardioP" value="ningunaCardioP">Ninguna</label><br>
+              <label><input type="radio" name="cardioP" value="desconoceCardioP">Desconoce</label><br>
+              <label><input type="radio" name="cardioP" value="hipertensionCardioP">Hipertension</label><br>
+              <label><input type="radio" name="cardioP" value="hipotensionCardioP">Hipotension</label><br>
+              <label><input type="radio" name="cardioP" value="isquemiaCardioP">Isquemia</label><br>
+              <label><input type="radio" name="cardioP" value="anginaCardioP">Angina de pecho</label><br>
+              <label><input type="radio" name="cardioP" value="infartoCardioP">Infarto de miocardio</label><br>
+              <label><input type="radio" name="cardioP" value="subitaCardioP">Muerte subita</label><br>
+              <label><input type="radio" name="cardioP" value="reumaticasCardioP">Enfermedad reumatica</label><br>
+              <label><input type="radio" name="cardioP" value="masCardioP">Mas de una</label><br>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <label>Enfermedades Pulmonares</label>
+            <div class="radio" name="pulmonaresPadre" id="pulmonaresPadre">
+              <label><input type="radio" name="pulmonaresP" onclick="mostrarRadios('siTipoPulmonaresP')" value="siPulmonarP">Sí</label><br>
+              <label><input type="radio" name="pulmonaresP" onclick="ocultarRadios('siTipoPulmonaresP')" value="noPulmonarP">No</label><br>
+              <label><input type="radio" name="pulmonaresP" onclick="ocultarRadios('siTipoPulmonaresP')" value="desconocePulmonarP">Desconoce</label><br>
+            </div>
+            <!-- OCULTO PULMONARES SI -->
+            <div class="radio" name="siTipoPulmonaresP" id="siTipoPulmonaresP" style="display:none">
+              <h5>Tipo de neumopatias</h5>
+              <label><input type="radio" name="tipoPP" value="neumoniaP">Neumonia</label><br>
+              <label><input type="radio" name="tipoPP" value="asmaP">Asma</label><br>
+              <label><input type="radio" name="tipoPP" value="enfisemaP">Enfisema</label><br>
+              <label><input type="radio" name="tipoPP" value="epocP">EPOC</label><br>
+              <label><input type="radio" name="tipoPP" value="edemaP">Edema</label><br>
+              <label><input type="radio" name="tipoPP" value="otroPulmonarP">Otro</label><br>
+              <label><input type="radio" name="tipoPP" value="masPulmonarP">Mas de uno</label><br>
+              <label><input type="radio" name="tipoPP" value="desconocePulmonarP">Desconoce</label><br>
+            </div>
+            <!-- FIN OCULTO CANCER SI -->
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <label>Cancer</label>
+          <div class="radio" name="cancerPadre" id="cancerPadre">
+            <label><input type="radio" name="pulmonaresP" onclick="mostrarRadios('siTipoCancerP')" value="siCancerP">Sí</label><br>
+            <label><input type="radio" name="pulmonaresP" onclick="ocultarRadios('siTipoCancerP')" value="noCancerP">No</label><br>
+            <label><input type="radio" name="pulmonaresP" onclick="ocultarRadios('siTipoCancerP')" value="desconoceCancerP">Desconoce</label><br>
+          </div>
+          <!-- OCULTO PULMONARES SI -->
+          <div class="radio" name="siTipoCancerP" id="siTipoCancerP" style="display:none">
+            <h5>Tipo de neumopatias</h5>
+            <label><input type="radio" name="tipoCP" value="colonP">Colon y recto</label><br>
+            <label><input type="radio" name="tipoCP" value="endometrioP">Endometrio</label><br>
+            <label><input type="radio" name="tipoCP" value="mamaP">Mama</label><br>
+            <label><input type="radio" name="tipoCP" value="pulmonP">Pulmon</label><br>
+            <label><input type="radio" name="tipoCP" value="leucemiaP">Leucemia</label><br>
+            <label><input type="radio" name="tipoCP" value="pancreasP">Pancreas</label><br>
+            <label><input type="radio" name="tipoCP" value="tiroidesP">Tiroides</label><br>
+            <label><input type="radio" name="tipoCP" value="rinonP">Riñon</label><br>
+            <label><input type="radio" name="tipoCP" value="otroCancerP">Otro</label><br>
+            <label><input type="radio" name="tipoCP" value="masCancerP">Mas de uno</label><br>
+            <label><input type="radio" name="tipoCP" value="desconoceCancerP">Desconoce</label><br>
+          </div>
+          <!-- FIN OCULTO PULMONARES SI -->
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <label>Enfermedades Renales</label>
+          <div class="radio" name="renalesPadre" id="renalesPadre">
+            <label><input type="radio" name="renalesP" onclick="mostrarRadios('siTipoRenalesP')" value="siRenalP">Sí</label><br>
+            <label><input type="radio" name="renalesP" onclick="ocultarRadios('siTipoRenalesP')" value="noRenalP">No</label><br>
+            <label><input type="radio" name="renalesP" onclick="ocultarRadios('siTipoRenalesP')" value="desconoceRenalP">Desconoce</label><br>
+          </div>
+          <!-- OCULTO RENALES SI -->
+          <div class="radio" name="siTipoRenalesP" id="siTipoRenalesP" style="display:none">
+            <h5>Tipo de nefropatias</h5>
+            <label><input type="radio" name="tipoRP" value="insuficenciaP">Insuficiencia Renal</label><br>
+            <label><input type="radio" name="tipoRP" value="calculosP">Calculos Renales</label><br>
+            <label><input type="radio" name="tipoRP" value="otroRenalP">Otro</label><br>
+            <label><input type="radio" name="tipoRP" value="masRenalP">Mas de uno</label><br>
+            <label><input type="radio" name="tipoRP" value="desconoceRenalP">Desconoce</label><br>
+          </div>
+          <!-- FIN OCULTO RENALES SI -->
+        </div>
+      </div> <!--FIN SEGUNDA FILA PADRE -->
+      <div class="row"><!--TERCERA FILA PADRE -->
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <label>Enfermedades Hepaticas</label>
+          <div class="radio" name="hepaticasPadre" id="hepaticasPadre">
+            <label><input type="radio" name="hepaticasP" onclick="mostrarRadios('siTipoHepaticasP')" value="siHepaticaP">Sí</label><br>
+            <label><input type="radio" name="hepaticasP" onclick="ocultarRadios('siTipoHepaticasP')" value="noHepaticaP">No</label><br>
+            <label><input type="radio" name="hepaticasP" onclick="ocultarRadios('siTipoHepaticasP')" value="desconoceHepaticaP">Desconoce</label><br>
+          </div>
+          <!-- OCULTO RENALES SI -->
+          <div class="radio" name="siTipoHepaticasP" id="siTipoHepaticasP" style="display:none">
+            <h5>Tipo de nefropatias</h5>
+            <label><input type="radio" name="tipoHP" value="hepaAP">Hepatitis A</label><br>
+            <label><input type="radio" name="tipoHP" value="hepaBP">Hepatitis B</label><br>
+            <label><input type="radio" name="tipoHP" value="hepaCP">Hepatitis C</label><br>
+            <label><input type="radio" name="tipoHP" value="cirrosisP">Cirrosis</label><br>
+            <label><input type="radio" name="tipoHP" value="hemocromaP">Hemocromatosis</label><br>
+            <label><input type="radio" name="tipoHP" value="otroHepaticasP">Otro</label><br>
+            <label><input type="radio" name="tipoHP" value="masHepaticasP">Mas de uno</label><br>
+            <label><input type="radio" name="tipoHP" value="desconoceHepaticasP">Desconoce</label><br>
+          </div>
+          <!-- FIN OCULTO RENALES SI -->
+        </div>
+      </div><!--FIN TERCERA FILA PADRE -->
+    </form>
+</div>
