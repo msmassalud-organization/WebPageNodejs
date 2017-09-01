@@ -326,6 +326,13 @@ function registerEvent(req, res){
   })
 }
 
+function loadServices(req, res){
+  res.status(200).render(dashRoute+'services',{
+    user: req.user,
+    menu: '/myServices'
+  });
+}
+
 module.exports = {
   loadPatients,
   addPatient,
@@ -337,5 +344,6 @@ module.exports = {
   deletePatient,
   loadCalendar,
   getEvents,
-  registerEvent
+  registerEvent,
+  loadServices
 }

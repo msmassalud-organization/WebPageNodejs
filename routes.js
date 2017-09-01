@@ -30,12 +30,12 @@ module.exports = function(app, passport) {
   //Fin User
 
   //Miembros
-//  app.get('/signupMember', memberController.loadSignupMember);
+  //  app.get('/signupMember', memberController.loadSignupMember);
   app.post('/signupMember', memberController.insertMember);
   app.get('/isMember', auth.isLoggedIn, memberController.isMember);
-  app.post('/verifyToken',auth.isLoggedIn, memberController.verifyToken);
+  app.post('/verifyToken', auth.isLoggedIn, memberController.verifyToken);
   app.get('/findMembers', auth.isLoggedIn, (req, res) => {
-    res.status(200).render('pages/findMembers',{
+    res.status(200).render('pages/findMembers', {
       user: req.user
     });
   });
@@ -57,7 +57,7 @@ module.exports = function(app, passport) {
     res.redirect('/signin');
   });
 
-//Expediente Médico
+  //Expediente Médico
   app.get('/updateMedicalRecord', auth.isLoggedIn, MRController.loadMedicalRecord);
   app.post('/updateMedicalRecord', auth.isLoggedIn, MRController.update);
   //Fin Expediente Médico
@@ -72,15 +72,18 @@ module.exports = function(app, passport) {
   app.get('/loadPatientProfile', auth.isDoctor, doctorController.loadPatientProfile);
   app.post('/deletePatient', auth.isDoctor, doctorController.deletePatient);
   app.get('/doctorCalendar', auth.isDoctor, doctorController.loadCalendar);
-  app.get('/getDoctorEvents',auth.isDoctor, doctorController.getEvents);
+  app.get('/getDoctorEvents', auth.isDoctor, doctorController.getEvents);
   app.post('/registerEvent', auth.isDoctor, doctorController.registerEvent);
+  app.get('/myServices', auth.isDoctor, doctorController.loadServices);
   //Fin Dashboard
 
   //Administrador
   app.get('/signupMember', auth.isAdmin, adminController.loadSignupMember);
   app.get('/signupUser', auth.isAdmin, adminController.loadSignupUser);
+  app.get('/services', auth.isAdmin, adminController.loadServices);
   app.post('/signupUser', auth.isAdmin, adminController.signupUser);
   app.post('/createMemberships', auth.isAdmin, adminController.createMemberships);
+  app.post('/getServices', auth.isAdmin, adminController.getServices);
   //Fin Administrador
 
 
