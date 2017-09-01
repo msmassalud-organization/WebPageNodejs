@@ -24,7 +24,7 @@
                     <div class="col-md-12">
                         <div class="card">
 													<div class="header">
-														<h4 class="title">Servicios</h4>
+														<h4 class="title">Miembros</h4>
 													</div>
                             <div class="toolbar">
                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
@@ -33,29 +33,35 @@
                             <table id="bootstrap-table" class="table">
                                 <thead>
                                   <th data-field="state" data-checkbox="true"></th>
-																	<th data-field="id" class="text-center"></th>
-                                  <th data-field="CveEstu" class="text-center">CveEstu</th>
-                                	<th data-field="classification" data-sortable="true">Clasificación</th>
-                                	<th data-field="name" data-sortable="true">Nombre</th>
-                                	<th data-field="gPrice" data-sortable="true">Precio General</th>
-                                	<th data-field="mPrice" data-sortable="true">Precio Miembro</th>
-																	<th data-field="cPrice" data-sortable="true">Precio Convenio</th>
-																	<th data-field="directions" data-sortable="true">Observaciones</th>
+																	<th data-field="memberId" class="text-center">Membresía</th>
+                                  <th data-field="verificationCode" class="text-center">Token</th>
+                                	<th data-field="fullName" data-sortable="true">Nombre</th>
+																	<th data-field="email" data-sortable="true">Correo</th>
+																	<th data-field="cellphone" data-sortable="true">Telefono</th>
+																	<th data-field="startDate" data-sortable="true">Fecha inicio</th>
+                                  <th data-field="expiringDate" data-sortable="true">Fecha fin</th>
                                 	<th data-field="actions" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">Actions</th>
                                 </thead>
                                 <tbody>
 																	<% var i = 1; %>
-																	<% locals.services.forEach(function(service){ %>
+																	<% locals.memberships.forEach(function(member){ %>
+                                    <% var dStart = member.startDate.getDate();
+                                      dStart += '/'+ member.startDate.getMonth();
+                                      dStart += '/'+ member.startDate.getFullYear();
+
+                                      var dEnd = member.expiringDate.getDate();
+                                        dEnd += '/'+ member.expiringDate.getMonth();
+                                        dEnd += '/'+ member.expiringDate.getFullYear();
+                                    %>
 																			<tr>
 	                                      <td></td>
-																				<td><%=i++;%></td>
-	                                    	<td><%=service.CveEstu%></td>
-	                                    	<td><%=service.classification%></td>
-	                                    	<td><%=service.name%></td>
-	                                    	<td><%=service.gPrice%></td>
-	                                    	<td><%=service.mPrice%></td>
-																				<td><%=service.cPrice%></td>
-																				<td><%=service.directions%></td>
+																				<td><%=member.memberId%></td>
+                                        <td><%=member.verificationCode%></td>
+	                                    	<td><%=member.userProfile.fullName%></td>
+	                                    	<td><%=member.userProfile.email%></td>
+	                                    	<td><%=member.userProfile.cellphone%></td>
+	                                    	<td><%=dStart%></td>
+																				<td><%=dEnd%></td>
 	                                    	<td></td>
 	                                    </tr>
 																	<% });%>

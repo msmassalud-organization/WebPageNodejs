@@ -46,7 +46,8 @@ var userSchema = new mongoose.Schema({
                 enum: ['Católico','Judío','Ortodoxos','Otro']},
   membership:   {type: Schema.Types.ObjectId, ref: 'Membership'},
   medicalRecord:  {type: Schema.Types.ObjectId, ref: 'MemberMedicalRecord'},
-  doctorProfile: {type: Schema.Types.ObjectId, ref: 'Doctor'}
+  doctorProfile: {type: Schema.Types.ObjectId, ref: 'Doctor'},
+  registeredBy: {type: Schema.Types.ObjectId, ref: 'User'}
 }, { runSettersOnQuery: true });
 
 //Generar el hashSync

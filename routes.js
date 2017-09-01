@@ -81,6 +81,10 @@ module.exports = function(app, passport) {
   app.get('/signupMember', auth.isAdmin, adminController.loadSignupMember);
   app.get('/signupUser', auth.isAdmin, adminController.loadSignupUser);
   app.get('/services', auth.isAdmin, adminController.loadServices);
+  app.get('/loadAllUsers', auth.isAdmin, adminController.loadAllUsers);
+  app.get('/loadAllMembers', auth.isAdmin, adminController.loadAllMembers);
+  app.get('/loadAllNoMembers', auth.isAdmin, adminController.loadAllNoMembers);
+  app.get('/getMembershipsFile', auth.isAdmin, adminController.getMembershipsFile);
   app.post('/signupUser', auth.isAdmin, adminController.signupUser);
   app.post('/createMemberships', auth.isAdmin, adminController.createMemberships);
   app.post('/getServices', auth.isAdmin, adminController.getServices);

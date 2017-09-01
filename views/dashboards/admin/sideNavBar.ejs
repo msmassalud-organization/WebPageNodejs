@@ -29,7 +29,7 @@
           <ul class="nav">
             <li><a href="/profile">Perfil</a></li>
             <li><a href="#">Configuración</a></li>
-          </ul>
+          </ul><
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
       <li class="active">
       <%}%>
       <li>
-        <a href="/profile"><i class="pe-7s-user"></i><p>Perfil</p></a>
+        <a href="/profile"><i class="pe-7s-note2"></i><p>Perfil</p></a>
       </li>
       <%if(locals.menu == '/services'){%>
       <li class="active">
@@ -53,6 +53,30 @@
       <li>
         <a href="/services"><i class="pe-7s-user"></i><p>Servicios</p></a>
       </li>
+      <% var showCollapse = locals.menu == '/loadAllUsers' || locals.menu == '/loadAllMembers' || locals.menu == '/loadAllNoMembers';%>
+      <% if(showCollapse){ %>
+        <li class="active">
+      <%}else{%>
+        <li>
+      <%}%>
+        <a data-toggle="collapse" href="#userPages">
+            <i class="pe-7s-users"></i>
+            <p>Usuarios
+               <b class="caret"></b>
+            </p>
+        </a>
+        <%if(showCollapse){%>
+          <div class="collapse in" id="userPages">
+        <%}else{%>
+          <div class="collapse" id="userPages">
+        <%}%>
+            <ul class="nav">
+                <li class="<%= locals.menu=='/loadAllUsers'?'active':' '%>"><a href="/loadAllUsers">Todos</a></li>
+                <li class="<%= locals.menu=='/loadAllMembers'?'active':' '%>"><a href="/loadAllMembers">Miembros</a></li>
+                <li class="<%= locals.menu=='/loadAllNoMembers'?'active':' '%>"><a href="/loadAllNoMembers">Pacientes No Miembros</a></li>
+            </ul>
+        </div>
+    </li>
     </ul>
   </div>
 </div>

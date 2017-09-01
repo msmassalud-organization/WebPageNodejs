@@ -1,14 +1,64 @@
-$(function(){
-  $('#createMemberships').click(function(){
+$(function() {
+  $('#createMemberships').click(function() {
+    $.notify({
+      icon: "pe-7s-rocket",
+      message: "Insertando membresías..."
+
+    }, {
+      type: 'warning',
+      timer: 4000,
+      placement: {
+        from: 'bottom',
+        align: 'center'
+      }
+    });
     $.ajax({
       type: "POST",
       url: '/createMemberships',
-      data: {cant: 1000},
-      success: function(data){
+      data: {
+        cant: 1000
+      },
+      success: function(data) {
         console.log(data);
+        $.notify({
+          icon: "pe-7s-rocket",
+          message: "La ultima membresia fue: " + data
+
+        }, {
+          type: 'success',
+          timer: 4000,
+          placement: {
+            from: 'bottom',
+            align: 'center'
+          }
+        });
       }
     });
   });
+});
+
+$(function() {
+  $('#downloadMemberships').click(function() {
+    $.ajax({
+      type: "GET",
+      url: '/getMembershipsFile',
+      success: function(data) {
+        console.log(data);
+        $.notify({
+          icon: "pe-7s-rocket",
+          message: "Success"
+
+        }, {
+          type: 'info',
+          timer: 4000,
+          placement: {
+            from: 'bottom',
+            align: 'center'
+          }
+        });
+      }
+    });
+  })
 });
 
 //Date format
@@ -33,16 +83,16 @@ $(function() {
     }
 
     var length = $('#date').val().length;
-    if(length > 9){
+    if (length > 9) {
       e.preventDefault();
     }
   });
 
   $("#date").keyup(function(e) {
     var length = $('#date').val().length;
-    if(length == 2 || length == 5){
+    if (length == 2 || length == 5) {
       var text = $('#date').val();
-      $('#date').val(text+'-');
+      $('#date').val(text + '-');
     }
   });
 });

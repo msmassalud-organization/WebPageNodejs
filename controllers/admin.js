@@ -11,16 +11,21 @@ const memberTypes = Membership.schema.path('type').enumValues;
 const areaTypes = ServTypes.schema.path('area').enumValues;
 //Ruta de renderizado
 const route = 'dashboards/admin/'
-
+//Files
+const fs = require('fs')
+const csv = require('express-csv')
+//In-class functions (privadas)
 function createUser(req) {
   let user = new User();
   user.name = req.body.name;
   user.dadLastName = req.body.dadLastName;
   user.momLastName = req.body.momLastName;
+  user.fullName = `${user.name} ${user.dadLastName} ${user.momLastName}`;
   user.email = req.body.email;
   user.password = user.generateHash(req.body.password);
   user.cellphone = req.body.cellphone;
   user.accType = req.body.accType;
+  user.registeredBy = req.user._id;
   return user;
 }
 
@@ -39,165 +44,268 @@ function insertDoctor(req, res, user) {
     });
   });
 }
-
-function signupUser(req, res) {
-  //Primero tenemos que asegurar que no exista el usuario
-  User.findOne({
-      'email': req.body.email
-    },
-    (err, user) => {
-      if (err) {
-        res.status(500).render('pages/500', {
-          message: err
-        });
-      } else {
-        //Creamos el usuario si no existe
-        if (!user) {
-          let user = createUser(req);
-          if (user.accType == 'doctor') {
-            insertDoctor(req, res, user);
-          } else {
-            user.save((err) => {
-              if (err) {
-                res.status(500).render('pages/500', {
-                  message: err
-                });
-              } else {
-                res.status(200).redirect('/dashboard');
-              }
-            })
-          }
-        } else {
-          res.status(204).render(`${route}/signup`, {
-            user: req.user,
-            'accTypes': accTypes,
-            message: 'El usuario ya existe.'
-          });
-        }
-      }
-    }
-  );
-}
-
-function loadSignupUser(req, res) {
-  res.status(200).render(`${route}/signup`, {
-    user: req.user,
-    'accTypes': accTypes
-  });
-}
-
-function loadSignupMember(req, res) {
-  res.status(200).render(`${route}/signupMember`, {
-    user: req.user,
-    'memberTypes': memberTypes,
-    message: ''
-  });
-}
-
-function createMemberships(req, res) {
-  Membership.find({}, (err, memberships) => {
-    if (err) {
-      throw err;
-    }
-
-    //El ultimo ingresado será  equivalente al tamaño del arreglo
-    var initId = memberships.length;
-    var arr = [];
-    for (var i = 0; i < req.body.cant; i++) {
-      var membAux = new Membership();
-      membAux.memberId = i + 1;
-      arr.push(membAux);
-    }
-    Membership.insertMany(arr, (err, docs) => {
+//FIN In-class
+module.exports = {
+  //Load Functions {Render Pages}
+  loadEditService: function(req, res) {
+    ServTypes.find({}).
+    select("-id classification").
+    exec(function(err, servTypes) {
       if (err) {
         throw err;
       }
-      res.status(200).send(`${arr.length}`);
+      if (servTypes) {
+        res.status(200).render(route + 'editService', {
+          user: req.user,
+          'areaTypes': areaTypes
+        });
+      } else {
+        res.status(200).render(route + 'editService', {
+          user: req.user,
+          'areaTypes': []
+        });
+      }
     });
+  },
 
-  });
-}
+  loadSignupUser: function(req, res) {
+    res.status(200).render(`${route}signup`, {
+      user: req.user,
+      'accTypes': accTypes
+    })
+  },
 
-function loadServices(req, res) {
-  console.log('/loadServices');
-  Service.find({}).
-  select('-id').
-  exec(function(err, services) {
-    if (err) {
-      throw err;
-    }
-    if (services) {
-      res.status(200).render(route + 'services', {
-        user: req.user,
-        menu: '/services',
-        'services': services
+  loadSignupMember: function(req, res) {
+    res.status(200).render(`${route}/signupMember`, {
+      user: req.user,
+      'memberTypes': memberTypes,
+      message: ''
+    });
+  },
+
+  loadServices: function(req, res) {
+    console.log('/loadServices');
+    Service.find({}).
+    select('-id').
+    exec(function(err, services) {
+      if (err) {
+        throw err;
+      }
+      if (services) {
+        res.status(200).render(route + 'services', {
+          user: req.user,
+          menu: '/services',
+          'services': services
+        });
+      } else {
+        res.status(200).render(route + 'services', {
+          user: req.user,
+          menu: '/services',
+          'services': []
+        });
+      }
+    });
+  },
+
+  loadAllUsers: function(req, res) {
+    console.log('/loadMembers');
+    User.find().exec((err, users) => {
+      if (err) {
+        throw err;
+      }
+      if (users) {
+        res.status(200).render(`${route}allUsers`, {
+          user: req.user,
+          'users': users,
+          menu: '/loadAllUsers'
+        });
+      } else {
+        res.status(200).render(`${route}allUsers`, {
+          user: req.user,
+          'users': [],
+          menu: '/loadAllUsers'
+        });
+      }
+    });
+  },
+
+  loadAllMembers: function(req, res) {
+    console.log('/loadAllMembers');
+    Membership.find({
+      'isActive': true
+    }).
+    populate({
+      path: 'userProfile',
+      model: 'User',
+      select: '-id -helpedBy'
+    }).exec((err, memberships) => {
+      if (err) {
+        throw err;
+      }
+      if (memberships) {
+        res.status(200).render(`${route}allMembers`, {
+          user: req.user,
+          'memberships': memberships,
+          menu: '/loadAllMembers'
+        });
+      } else {
+        res.status(200).render(`${route}allMembers`, {
+          user: req.user,
+          'memberships': [],
+          menu: '/loadAllMembers'
+        });
+      }
+    });
+  },
+  loadAllNoMembers: function(req, res) {
+    User.find({
+      'accType': 'noMember'
+    }).populate({
+      path: 'registeredBy',
+      model: 'User',
+      select: 'fullName',
+    }).exec((err, noMembers) => {
+      if (err) {
+        throw err;
+      }
+      if (noMembers) {
+        res.status(200).render(`${route}allNoMembers`, {
+          user: req.user,
+          'noMembers': noMembers,
+          menu: '/loadAllNoMembers'
+        });
+      } else {
+        res.status(200).render(`${route}allNoMembers`, {
+          user: req.user,
+          'noMembers': noMembers,
+          menu: '/loadAllNoMembers'
+        });
+      }
+    });
+  },
+  //FIN LOAD
+
+  signupUser: function(req, res) {
+    //Primero tenemos que asegurar que no exista el usuario
+    User.findOne({
+        'email': req.body.email
+      },
+      (err, user) => {
+        if (err) {
+          res.status(500).render('pages/500', {
+            message: err
+          });
+        } else {
+          //Creamos el usuario si no existe
+          if (!user) {
+            let user = createUser(req);
+            if (user.accType == 'doctor') {
+              insertDoctor(req, res, user);
+            } else {
+              user.save((err) => {
+                if (err) {
+                  res.status(500).render('pages/500', {
+                    message: err
+                  });
+                } else {
+                  res.status(200).redirect('/dashboard');
+                }
+              })
+            }
+          } else {
+            res.status(204).render(`${route}/signup`, {
+              user: req.user,
+              'accTypes': accTypes,
+              message: 'El usuario ya existe.'
+            });
+          }
+        }
+      }
+    );
+  },
+
+  createMemberships: function(req, res) {
+    //Obtenemos la ultima membresia insertada
+    Membership.findOne({}).
+    sort({
+      _id: -1
+    }).
+    limit(1).
+    exec((err, membership) => {
+      if (err) {
+        throw err;
+      }
+      console.log(membership.memberId);
+      //Empezaremos a insertar a partir del siguiente
+      var initId = membership.memberId;
+      var arr = [];
+      console.log(`Cantidad a insertar: ${req.body.cant}`);
+      console.log('Ultimo ID: ' + (parseInt(req.body.cant) + initId));
+      for (var i = initId; i < (parseInt(req.body.cant) + initId); i++) {
+        var membAux = new Membership();
+        membAux.memberId = i + 1;
+        arr.push(membAux);
+      }
+      Membership.insertMany(arr, (err, docs) => {
+        if (err) {
+          throw err;
+        }
+        res.status(200).send(`${i}`);
       });
-    } else {
-      res.status(200).render(route + 'services', {
-        user: req.user,
-        menu: '/services',
-        'services': []
-      });
-    }
-  });
 
-}
+    });
+  },
 
-function getServices(req, res) {
-  Service.find({}).
-  select('-id').
-  exec(function(err, services) {
-    if (err) {
-      throw err;
-    }
-    if (services) {
-      res.status(200).send(services);
-    } else {
-      res.status(404).send([]);
-    }
-  });
-}
+  getServices: function(req, res) {
+    Service.find({}).
+    select('-id').
+    exec(function(err, services) {
+      if (err) {
+        throw err;
+      }
+      if (services) {
+        res.status(200).send(services);
+      } else {
+        res.status(404).send([]);
+      }
+    });
+  },
 
-function getServiceByCve(req, res) {
-  var cve = req.query.CveEstu;
-  Service.finOne({
-    'CveEstu': cve
-  }).
-  select('-id').
-  exec(function(err, service) {
-    if (err) {
-      throw err;
-    }
-    if (service) {
-      res.status(200).send(service);
-    } else {
-      res.status(404).send();
-    }
+  getServiceByCve: function(req, res) {
+    var cve = req.query.CveEstu;
+    Service.finOne({
+      'CveEstu': cve
+    }).
+    select('-id').
+    exec(function(err, service) {
+      if (err) {
+        throw err;
+      }
+      if (service) {
+        res.status(200).send(service);
+      } else {
+        res.status(404).send();
+      }
 
-  });
-}
+    });
+  },
 
-function loadEditService(req, res) {
-  ServTypes.find({}).
-  select("-id classification").
-  exec(function(err, servTypes) {
-    if (err) {
-      throw err;
-    }
-    if (servTypes) {
-      res.status(200).render(route + 'editService', {
-        user: req.user,
-        'areaTypes': areaTypes
-      });
-    }else{
-      res.status(200).render(route + 'editService', {
-        user: req.user,
-        'areaTypes': []
-      });
-    }
-  });
-}
+  getMembershipsFile: function(req, res) {
+    console.log('/getMembershipsFile');
+    Membership.find({}).
+    select('-_id memberId verificationCode').
+    sort('memberId').
+    exec((err,memberships)=>{
+        if(err){
+          throw err;
+        }
+        res.csv(memberships);
+    })
 
+  }
+
+} //FIN EXPORTS
+/*
 module.exports = {
   signupUser,
   loadSignupUser,
@@ -208,3 +316,4 @@ module.exports = {
   getServiceByCve,
   loadEditService
 }
+*/
