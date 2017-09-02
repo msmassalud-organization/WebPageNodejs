@@ -13,7 +13,10 @@ const session = require('express-session')
 const config = require('./config')
 const flash = require('connect-flash')
 const cookieSession = require('cookie-session')
+const morgan = require('morgan')
 
+//Observamos la direccion de todas las peticiones
+app.use(morgan('dev'))
 //Confiamos en el primer proxy
 app.set('trust proxy',1);
 

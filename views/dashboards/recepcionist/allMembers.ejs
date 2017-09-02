@@ -20,44 +20,52 @@
 				<% include topNavBar %>
 					<div class="content">
 						<div class="container-fluid">
-							<div class="row">
+								<div class="row">
                     <div class="col-md-12">
                         <div class="card">
 													<div class="header">
-														<h4 class="title">Usuarios</h4>
+														<h4 class="title">Miembros</h4>
 													</div>
                             <div class="toolbar">
                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
+																<a href="/signupMember" class="btn btn-info btn-round btn-fill">
+																	<span class="btn-label">
+																			<i class="pe-7s-add-user" style="font-size: 2em"></i>
+																	</span></a>
                             </div>
 
                             <table id="bootstrap-table" class="table">
                                 <thead>
                                   <th data-field="state" data-checkbox="true"></th>
-																	<th data-field="id" class="text-center"></th>
-                                  <th data-field="accType" class="text-center" data-sortable="true">Cuenta</th>
+																	<th data-field="memberId" class="text-center">Membresía</th>
+                                  <th data-field="verificationCode" class="text-center">Token</th>
                                 	<th data-field="fullName" data-sortable="true">Nombre</th>
 																	<th data-field="email" data-sortable="true">Correo</th>
 																	<th data-field="cellphone" data-sortable="true">Telefono</th>
-                                	<th data-field="isActive" data-sortable="true">Activo</th>
-																	<th data-field="registerDate" data-sortable="true">Fecha Registro</th>
+																	<th data-field="startDate" data-sortable="true">Fecha inicio</th>
+                                  <th data-field="expiringDate" data-sortable="true">Fecha fin</th>
                                 	<th data-field="actions" class="td-actions text-right" data-events="operateEvents" data-formatter="operateFormatter">Actions</th>
                                 </thead>
                                 <tbody>
 																	<% var i = 1; %>
-																	<% locals.users.forEach(function(user){ %>
-																		<% var registro = user.registerDate.getDate();
-                                      registro += '/'+ user.registerDate.getMonth();
-                                      registro += '/'+ user.registerDate.getFullYear();
+																	<% locals.memberships.forEach(function(member){ %>
+                                    <% var dStart = member.startDate.getDate();
+                                      dStart += '/'+ member.startDate.getMonth();
+                                      dStart += '/'+ member.startDate.getFullYear();
+
+                                      var dEnd = member.expiringDate.getDate();
+                                        dEnd += '/'+ member.expiringDate.getMonth();
+                                        dEnd += '/'+ member.expiringDate.getFullYear();
                                     %>
 																			<tr>
 	                                      <td></td>
-																				<td><%=i++;%></td>
-	                                    	<td><%=user.accType%></td>
-	                                    	<td><%=user.fullName%></td>
-	                                    	<td><%=user.email%></td>
-	                                    	<td><%=user.cellphone%></td>
-	                                    	<td><%=user.isActive%></td>
-																				<td><%=registro%></td>
+																				<td><%=member.memberId%></td>
+                                        <td><%=member.verificationCode%></td>
+	                                    	<td><%=member.userProfile.fullName%></td>
+	                                    	<td><%=member.userProfile.email%></td>
+	                                    	<td><%=member.userProfile.cellphone%></td>
+	                                    	<td><%=dStart%></td>
+																				<td><%=dEnd%></td>
 	                                    	<td></td>
 	                                    </tr>
 																	<% });%>

@@ -41,6 +41,12 @@
       <li>
         <a href="/dashboard"><i class="pe-7s-graph"></i><p>Panel de control</p></a>
       </li>
+      <%if(locals.menu == '/loadAllMembers'){%>
+      <li class="active">
+      <%}%>
+      <li>
+        <a href="/loadAllMembers"><i class="pe-7s-users"></i><p>Miembros</p></a>
+      </li>
       <%if(locals.menu == '/profile'){%>
       <li class="active">
       <%}%>
