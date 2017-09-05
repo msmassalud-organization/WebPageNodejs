@@ -8,6 +8,9 @@ const doctorController = require('./controllers/doctor');
 const adminController = require('./controllers/admin');
 const recepcionistController = require('./controllers/recepcionist')
 const globalController = require('./controllers/global')
+
+//TEST
+const testController = require('./testControllers/test')
 //Rutas
 module.exports = function(app, passport) {
   //Raiz
@@ -82,6 +85,9 @@ module.exports = function(app, passport) {
   //app.get('/signupMember', auth.isRecepcionist, recepcionistController.loadSignupMember);
   //Fin Recepcionista
 
+  //TEST ONLY
+  app.post('/test', testController.test);
+  app.get('/test', testController.loadTest);
 
 }
 //Fin Dashboard

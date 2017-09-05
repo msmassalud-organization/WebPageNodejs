@@ -45,7 +45,7 @@ function createEvent(req) {
 
 module.exports = {
   //Load functions {Render pages}
-  loadPatients: function(req, res) {
+  loadPatients: (req, res)=> {
     Doctor.findById(req.user.doctorProfile).
     populate({
       path: 'patients',
@@ -80,14 +80,14 @@ module.exports = {
     });
   },
 
-  loadServices: function(req, res) {
+  loadServices: (req, res)=> {
     res.status(200).render(dashRoute + 'services', {
       user: req.user,
       menu: '/myServices'
     });
   },
 
-  loadCalendar: function(req, res) {
+  loadCalendar: (req, res)=> {
     console.log('/doctorCalendar');
     res.status(200).render(dashRoute + 'calendar', {
       user: req.user,
@@ -96,14 +96,14 @@ module.exports = {
     });
   },
 
-  loadPatientForm: function(req, res) {
+  loadPatientForm: (req, res)=> {
     res.status(200).render(dashRoute + 'signupPatient', {
       user: req.user,
       menu: '/patients'
     });
   },
 
-  loadPatientProfile: function(req, res) {
+  loadPatientProfile: (req, res)=> {
     console.log('/loadPatientProfile');
     console.log(req.query.email);
     User.findOne({
@@ -118,15 +118,23 @@ module.exports = {
       if (err) {
         throw err;
       }
-      console.log(patient);
-      res.status(200).send(patient);
+      if(patient){
+        res.status(200).render(`${dashRoute}patientProfile`,{
+          user: req.user,
+          menu: "/loadPatientProfile",
+          'patient': patient
+        });
+      }else{
+        //TODO: 404
+        res.status(404).send('Error 404: Not found!');
+      }
     });
   },
   //Fin LOAD
 
   //Se manda en el request el memberId
   //El doctor está usando su cuenta
-  addPatient: function(req, res) {
+  addPatient: (req, res)=> {
     User.findOne({
         'email': req.body.email
       },
@@ -170,7 +178,7 @@ module.exports = {
       });
   },
 
-  addPatientByMemberIdToken: function(req, res) {
+  addPatientByMemberIdToken: (req, res)=> {
     var memberId = req.body.memberId;
     var token = req.body.token;
     console.log(req.body);
@@ -204,7 +212,7 @@ module.exports = {
   //Envía pacientes cuando se hace la petición por ajax.
   //Como el doctor está loggeado, se utiliza su id para
   //obtener la información.
-  sendPatients: function(req, res) {
+  sendPatients: (req, res)=> {
     Doctor.findById(req.user.doctorProfile).
     populate({
       path: 'patients',
@@ -219,7 +227,7 @@ module.exports = {
     });
   },
 
-  findPatientByName: function(req, res) {
+  findPatientByName: (req, res)=> {
     var toFind = req.query.name;
     Doctor.findById(req.user.doctorProfile).
     populate({
@@ -242,7 +250,7 @@ module.exports = {
     });
   },
 
-  deletePatient: function(req, res) {
+  deletePatient: (req, res)=> {
     console.log('/deletePatient');
     //TODO: hacer update a isActive: false
     User.findOne({
@@ -288,7 +296,7 @@ module.exports = {
       }
     }
   */
-  getEvents: function(req, res) {
+  getEvents: (req, res)=> {
     console.log('/getEvents');
     Doctor.findById(req.user.doctorProfile).
     populate({
@@ -312,7 +320,7 @@ module.exports = {
     });
   },
 
-  registerEvent: function(req, res) {
+  registerEvent: (req, res)=> {
     console.log('/registerEvent');
     console.log(req.body);
     //Creamos el evento
