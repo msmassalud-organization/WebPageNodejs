@@ -30,16 +30,13 @@ module.exports = function(app, passport) {
     failureRedirect: '/signin',
     failureFlash: true
   }));
-  app.get('/logout', function(req, res) {
-    req.logout();
-    res.redirect('/signin');
-  });
+  app.get('/logout', userController.logOut);
   //Fin User
 
   //Miembros
   app.get('/isMember', auth.isLoggedIn, memberController.isMember);
   app.get('/getMembersByName', memberController.getMembersByName);
-  app.post('/signupMember', memberController.insertMember);
+  app.post('/signupMember', memberController.signupMember);
   app.post('/verifyToken', auth.isLoggedIn, memberController.verifyToken);
   //Fin Miembros
 
@@ -79,6 +76,9 @@ module.exports = function(app, passport) {
   app.get('/loadAllMembers', auth.hasAccessToMembers, globalController.loadAllMembers);
   app.get('/dashboard', auth.isLoggedIn, globalController.loadDashboard);
   app.get('/profile', auth.isLoggedIn, globalController.loadProfile);
+  app.get('/medicalRecord', auth.isLoggedIn, globalController.loadMedicalRecord);
+
+  app.post('/updateProfile', auth.isLoggedIn, globalController.updateProfile);
   //Fin globales
 
   //Recepcionista
@@ -87,6 +87,7 @@ module.exports = function(app, passport) {
 
   //TEST ONLY
   app.post('/test', testController.test);
+  app.post('/testTwilio', testController.twilioTest);
   app.get('/test', testController.loadTest);
 
 }

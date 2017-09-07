@@ -8,22 +8,44 @@ const MR = require('../models/medicalRecord')
 const service = require('../services/index')
 const expiringTime = 365; //days
 
+function pad(num, size) {
+    var s = "0000" + num;
+    return s.substr(s.length-size);
+}
+
 function createMember(req) {
   let member = new User();
   var birthday = req.body.birthday;
-  birthday = birthday.split("-");
-  var dateFormat = birthday[2] + "-" + birthday[1] + "-" + birthday[0];
-
+  /*var dateFields = birthday.split("/");
+  var day = dateFields[0];
+  var month = dateFields[1];
+  var year = dateFields[2];*/
+  var day = birthday.substring(birthday.length-2,birthday.length);
+  var month = birthday.substring(4, 6);
+  var year = birthday.substring(0,4);
+  //ATRIBUTOS SEGUN LA NOM
   member.name = req.body.name;
   member.dadLastName = req.body.dadLastName;
   member.momLastName = req.body.momLastName;
-  //member.birthday = req.body.birthday;
+  member.nac_origen = req.body.nac_origen;
+  member.edo_nac = pad(req.body.edo_nac,2);
+  member.municipio = pad(req.body.mun,3);
+  member.localidad = pad(req.body.loc,4);
+  member.residence = pad(req.body.residence,2);
+  member.curp = req.body.curp;
+  member.gender = req.body.gender;
+  member.folio = member.curp;
+  member.fecnac = birthday;
+  //FIN NOM
+
+  member.fullName = `${member.name} ${member.dadLastName} ${member.momLastName}`;
   member.email = req.body.email;
   member.cp = req.body.cp;
-  //member.gender       = req.body.gender;
   member.cellphone = req.body.cellphone;
-  member.fullName = `${member.name} ${member.dadLastName} ${member.momLastName}`;
+  member.birthday = new Date(year, month, day);
 
+
+  console.log(member);
   return member;
 }
 
@@ -47,6 +69,7 @@ function createMembership(req, res, member, resRoute) {
         membership.expiringDate = Date.now();
         membership.expiringDate.setTime(
           membership.expiringDate.getTime() + expiringTime * 86400000);
+        membership.folio = req.body.folio;
         //Creamos el expediente médico
         let mr = new MR();
         member.medicalRecord = mr._id;
@@ -72,7 +95,7 @@ function createMembership(req, res, member, resRoute) {
               if (req.user) {
                 //Mostrar información del miembro: Id, email, contraseña
                 var accType = req.user.accType;
-                res.status(200).render(`dashboards/${accType}/newMemberInfo`, {
+                res.status(200).render(`pages/newMemberInfo`, {
                   user: req.user,
                   'membership': membership,
                   'member': member
@@ -112,13 +135,13 @@ function createMembership(req, res, member, resRoute) {
 
 }
 
-function insertMember(req, res) {
+function signupMember(req, res) {
   var resRoute = "";
   //Si fue un usuario
   if (req.user) {
-    resRoute = `dashboards/${req.user.accType}/signupMember`;
+    resRoute = `pages/signupMember`;
   }
-  User.findOne({
+  /*User.findOne({
       'email': req.body.email
     },
     (err, user) => {
@@ -141,7 +164,9 @@ function insertMember(req, res) {
         }
       }
     }
-  );
+  );*/
+  let member = createMember(req);
+  res.status(200).send(member);
 }
 
 function getMembersByName(req, res) {
@@ -212,7 +237,7 @@ function loadSignupMember(req, res) {
 
 module.exports = {
   createMember,
-  insertMember,
+  signupMember,
   getMembersByName,
   loadMemberProfile,
   isMember,

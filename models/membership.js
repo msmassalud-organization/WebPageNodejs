@@ -40,6 +40,14 @@ var membershipSchema = new Schema({
   },
   folio: {
     type: Number,
+  },
+  completedMR: {
+    type: Boolean,
+    default: false
+  },
+  freeBC: {
+    type: Boolean,
+    default: false
   }
 });
 
