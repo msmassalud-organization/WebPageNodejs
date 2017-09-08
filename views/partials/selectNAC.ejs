@@ -1,0 +1,11 @@
+<select name="nac_origen" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+  <option value='NND'>DESCONOCIDA</option>
+  <% nac_catalog.forEach((nacionalidad)=>{ %>
+    <% if(nacionalidad.clave_nacionalidad == 'MEX'){%>
+      <option selected="selected" value='<%=nacionalidad.clave_nacionalidad%>'><%=nacionalidad.pais%></option>
+    <%}else{%>
+      <option value='<%=nacionalidad.clave_nacionalidad%>'><%=nacionalidad.pais%></option>
+    <%}%>
+
+  <%})%>
+</select>

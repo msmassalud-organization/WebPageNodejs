@@ -1,55 +1,12 @@
 'use-strict'
-const User = require('../models/user');
-const Doctor = require('../models/doctor');
-const service = require('../services/index')
-const moment = require('moment')
+const User = require('../models/user')
+const Doctor = require('../models/doctor')
+const SystemEvent = require('../models/systemEvent')
+const SEC = require('../controllers/systemEvent')
 
-function getAllUsers(req, res) {
-  User.find({},
-    (err, users) => {
-      if (err) {
-        throw err;
-      }
-      res.render('pages/index', {
-        userList: users,
-        user: req.user
-      });
-    });
-}
+const LOGOUT = 'LOGOUT'
 
-function signIn(req, res) {
-  var email = req.body.email;
-  User.findOne({
-    'email': email
-  }, function(err, user) {
-    if (err) {
-      res.status(500).send(err);
-    }
-    if (user.validPassword(req.body.password)) {
-      res.status(200).send(user);
-    } else {
-      res.status(403).send("Contraseña incorrecta");
-    }
-
-  });
-}
-
-function updateProfile(req, res) {
-  console.log(req.body);
-  var update = req.body;
-  res.send(req.body);
-  //TODO
-  /*
-  User.findByIdAndUpdate(req.user._id, update, function(err, userUpdated) {
-    if (err) {
-      res.status(500).send(err);
-    }
-    console.log(userUpdated);
-    res.status(200).redirect("/loadDashboard");
-  });*/
-}
-
-function createUser(req, res){
+function createUser(req, res) {
   let user = new User();
   console.log(req.body);
   user.name = req.body.name;
@@ -64,52 +21,95 @@ function createUser(req, res){
   return user;
 }
 
-function insertUser(req, res) {
-  User.findOne({
-      'email': req.body.email
-    },
-    (err, user) => {
+module.exports = {
+
+  getAllUsers: (req, res) => {
+    User.find({},
+      (err, users) => {
+        if (err) {
+          throw err;
+        }
+        res.render('pages/index', {
+          userList: users,
+          user: req.user
+        });
+      });
+  },
+
+  signIn: (req, res) => {
+    var email = req.body.email;
+    User.findOne({
+      'email': email
+    }, function(err, user) {
       if (err) {
-        throw err;
+        res.status(500).send(err);
       }
-      //Creamos el usuario si no existe
-      if (!user) {
-        let user = createUser(req);
-        //Si es doctor, creamos su perfil específico
-        if(user.accType == 'doctor'){
-          var doctorProfile = new Doctor();
-          user.doctorProfile = doctorProfile._id;
-          doctorProfile.save((err) =>{
-            if(err){
-              res.status(500).send(err);
-            }
+      if (user.validPassword(req.body.password)) {
+        res.status(200).send(user);
+      } else {
+        res.status(403).send("Contraseña incorrecta");
+      }
+
+    });
+  },
+
+  insertUser: (req, res) => {
+    User.findOne({
+        'email': req.body.email
+      },
+      (err, user) => {
+        if (err) {
+          throw err;
+        }
+        //Creamos el usuario si no existe
+        if (!user) {
+          let user = createUser(req);
+          //Si es doctor, creamos su perfil específico
+          if (user.accType == 'doctor') {
+            var doctorProfile = new Doctor();
+            user.doctorProfile = doctorProfile._id;
+            doctorProfile.save((err) => {
+              if (err) {
+                res.status(500).send(err);
+              }
+              user.save((err) => {
+                if (err) {
+                  throw err;
+                }
+                res.status(200).redirect('/signin');
+              });
+            });
+          } else {
             user.save((err) => {
               if (err) {
                 throw err;
               }
               res.status(200).redirect('/signin');
             });
+          } //Fin Crear usuario
+        } else {
+          res.status(500).render('pages/500', {
+            message: 'El usuario ya existe'
           });
-        }else{
-          user.save((err) => {
-            if (err) {
-              throw err;
-            }
-            res.status(200).redirect('/signin');
-          });
-        } //Fin Crear usuario
-      } else {
-        res.status(500).render('pages/500', {
-          message: 'El usuario ya existe'
-        });
-      }
-    } //fin CallbackFindOne
-  ); //fin FindOne
-}
+        }
+      } //fin CallbackFindOne
+    ); //fin FindOne
+  },
 
-module.exports = {
-  insertUser,
-  getAllUsers,
-  updateProfile,
-  signIn
+  logOut: (req,res)=>{
+    if(req.user){
+      let systemEvent = new SystemEvent();
+      systemEvent.description = SEC.getEventDescription(LOGOUT, req.user);
+      systemEvent.performedBy = req.user._id;
+      systemEvent.save((err)=>{
+        if(err){
+          throw err;
+        }
+        req.logout();
+        res.redirect('/signin');
+      });
+    }else{
+      res.redirect('/signin');
+    }
+  }
 }

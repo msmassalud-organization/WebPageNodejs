@@ -82,6 +82,7 @@ var MemberMedicalRecord = new mongoose.Schema({
       physicalType: {type: Boolean},
       pyschologicalTrauma : {type: Boolean}
     }, // **Cierre Trauma**
+
     Hospitalizations: {
       isBeenHospitalizes : {type: Boolean},
       times : {type: Number},
