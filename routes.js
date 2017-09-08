@@ -59,7 +59,7 @@ module.exports = function(app, passport) {
 
   //Expediente Médico
   app.get('/updateMedicalRecord', auth.isLoggedIn, MRController.loadMedicalRecord);
-  app.post('/updateMedicalRecord', auth.isLoggedIn, MRController.update);
+  app.post('/updateMedicalRecord', MRController.update);
   //Fin Expediente Médico
 
   //Dashboard del doctor

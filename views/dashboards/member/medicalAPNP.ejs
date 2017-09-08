@@ -1,0 +1,119 @@
+        <div class="row formularios">
+          <div class="texto-principal">
+            <h2>Antecedentes personales no patologicos</h2>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="primera-pregunta">
+              <h2>Frecuencia de enfermedades</h2>
+              <p>Numero de veces que has acudido al medico por enfermedad en los ultimos 365 dias</p>
+            </div>
+            <div class="seleccion">
+              <input type="text" id="txtCosto" value="" onKeyPress="return numbersMaximo(event,'txtCosto',2)" name="diseasesFreq" class="form-control" placeholder="Número de veces">
+            </div>
+            <div class="segunda-pregunta">
+              <h2>Horas de sueño</h2>
+              <p>Numero de horas que duermes al día</p>
+            </div>
+            <div class="seleccion">
+              <input type="text" id="sueño" value="" onKeyPress="return numbersMaximo(event,'sueño',1)" name="sleepingHours" class="form-control" placeholder="Número de veces que duermes al dia">
+            </div>
+
+            <label for="mealTimes">
+              <h2>Habitos alimenticios</h2>
+              <p class="consumir">Numero de comidas que realizas al dia</p>
+            </label><br/>
+            <label class="radio-inline"><input type="radio" name="mealTimes" value="1" checked> 1 </label>
+            <label class="radio-inline"><input type="radio" name="mealTimes" value="2"> 2</label>
+            <label class="radio-inline"><input type="radio" name="mealTimes" value="3"> 3 </label>
+            <label class="radio-inline"><input type="radio" name="mealTimes" value="4"> 4 </label>
+            <label class="radio-inline"><input type="radio" name="mealTimes" value="5" > 5 </label>
+            <label class="radio-inline"><input type="radio" name="mealTimes" value="6">6</label>
+            <label class="radio-inline"><input type="radio" name="mealTimes" value="7">7</label>
+            <label class="radio-inline"><input type="radio" name="mealTimes" value="8">8</label><br/>
+
+            <label for="mealQuality">
+              <h2>Calidad alimentica</h2>
+              <p class="consumir">En una escala en donde 1 es mala y 5 es buena</p>
+            </label><br/>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="mealQuality" value="1" checked> 1 </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="mealQuality" value="2"> 2</label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="mealQuality" value="3"> 3 </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="mealQuality" value="4"> 4 </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="mealQuality" value="5" > 5 </label><br/>
+          </div><!--PRIMER DIV-->
+
+          <div class="col-6 col-md-4">
+
+            <label for="preventiveReviews">
+              <h2>Revisiones períodicas preventivas</h2>
+              <p class="consumir">En una escala donde 1 es nada frecuente y 5 es muy frecuente</p>
+            </label><br/>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="preventiveReviews" value="1" checked> 1 </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="preventiveReviews" value="2"> 2</label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="preventiveReviews" value="3"> 3 </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="preventiveReviews" value="4"> 4 </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="preventiveReviews" value="5" > 5 </label><br/>
+
+            <label for="stressLevel">
+              <h2>Nivel de estrés</h2>
+              <p class="consumir">En una escala en donde 1 es muy bajo y 5 es muy alto</p>
+            </label><br/>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="stressLevel" value="1" checked> 1 </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="stressLevel" value="2"> 2</label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="stressLevel" value="3"> 3 </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="stressLevel" value="4"> 4 </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="stressLevel" value="5" > 5 </label><br/>
+
+
+            <label for="workoutsDays">
+              <h2>Habitos deportivos</h2>
+              <p class="consumir">Numero de dias que realizas deporte a la semana</p>
+            </label><br/>
+            <label class="radio-inline"><input type="radio" name="workoutsDays" value="1" checked> 1 </label>
+            <label class="radio-inline"><input type="radio" name="workoutsDays" value="2"> 2</label>
+            <label class="radio-inline"><input type="radio" name="workoutsDays" value="3"> 3 </label>
+            <label class="radio-inline"><input type="radio" name="workoutsDays" value="4"> 4 </label>
+            <label class="radio-inline"><input type="radio" name="workoutsDays" value="5" > 5 </label>
+            <label class="radio-inline"><input type="radio" name="workoutsDays" value="6">6</label>
+            <label class="radio-inline"><input type="radio" name="workoutsDays" value="7">7</label><br/>
+
+            <div class="octava-pregunta">
+              <h2>Refresco y bebidas azucaradas</h2>
+              <p>Numero de bebidas que consumes a la semana</p>
+            </div>
+            <div class="seleccion">
+              <input type="text" id="azucar" value="" onKeyPress="return numbersMaximo(event,'azucar',2)" name="sugaryDrinks" class="form-control" placeholder="Consumo de bebidas azucaradas">
+            </div>
+
+          </div><!--SEGUNDO DIV-->
+
+          <div class="col-6 col-md-4">
+            <label for="sexualLife">
+              <h2>Vida Sexual:</h2>
+            </label><br/>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="sexualLife" value="Activo" checked> <span>Activo</span> </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="sexualLife" value="Inactivo"> <span>Inactivo</span> </label><br/>
+            <div class="novena-pregunta">
+              <h2>Alcoholismo</h2>
+              <p>Numero de bebidas alcoholicas que consumes a la semana</p>
+            </div>
+            <div class="seleccion">
+              <input type="text" id="alcohol" value="" onKeyPress="return numbersMaximo(event,'alcohol',2)" name="alcoholicDrinks" class="form-control" placeholder="Cantidad de bebidas alcoholicas que consumes">
+            </div>
+            <div class="decima-pregunta">
+              <h2>Tabaquismo</h2>
+              <p>Numero de cigarros que consumes al mes</p>
+            </div>
+            <div class="seleccion">
+              <input type="text" id="cigarettes" value="" onKeyPress="return numbersMaximo(event,'cigarettes',2)" name="cigarettes" class="form-control" placeholder="Cantidad cigarros">
+            </div>
+            <label for="otherDrugs">
+              <h2>Otras Drogas:</h2>
+              <p class="consumir">Consumes actualmente otro tipo de drogras</p>
+            </label><br/>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="otherDrugs" value="Si" checked> <span>Si</span> </label>
+            <label class="radio-inline"><input type="radio" class="radio-inline" name="otherDrugs" value="No"> <span>No</span> </label><br/>
+
+            <button type="submit" class="btn btn-default">Guardar</button>
+          </div> <!--TERCER DIV-->
+        </div> <!-- FORMULARIOS-->
