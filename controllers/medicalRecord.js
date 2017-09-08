@@ -12,7 +12,7 @@ function loadMedicalRecord(req, res){
     MRController.insert(req, res);
   }else{
     //nadita nanais
-    res.status(200).render('pages/updateMedicalRecord', {
+    res.status(200).render('dashboards/member/updateMedicalRecord', {
       user: req.user
     });
   }
