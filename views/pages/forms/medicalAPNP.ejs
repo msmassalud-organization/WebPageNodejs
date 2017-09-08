@@ -1,3 +1,10 @@
+<%
+  var binaryAnswers = ['Sí','No'];
+  var binaryAnswers2 = ['Activo','Inactivo'];
+  var numberAnswers = ['1','2','3','4','5'];
+  var numberAnswers2 = ['1','2','3','4','5','6','7'];
+  var numberAnswers3 = ['1','2','3','4','5','6','7','8'];
+%>
 <form class="form-signin" action="/updateMedicalRecord" method="post" enctype="application/x-www-form-urlencoded">
 <!-- <h2 class="form-signin-heading"> Completar Perfil </h2> -->
   <div class="row formularios">
@@ -11,7 +18,7 @@
         <p>Número de veces que has acudido al medico por enfermedad en los ultimos 365 dias</p>
       </div>
       <div class="seleccion">
-        <input type="text" id="txtCosto" value="" onKeyPress="return numbersMaximo(event,'txtCosto',2)" name="diseasesFreq" class="form-control" placeholder="Número de veces">
+        <input type="text" value="" onKeyPress="return numbersMaximo(event,'txtCosto',2)" name="diseasesFreq" class="form-control" placeholder="Número de veces">
       </div><br/>
       <div class="segunda-pregunta">
         <label class="pregunta">Horas de sueño</label>
@@ -23,23 +30,18 @@
       <label class="pregunta">Habitos alimenticios</label>
       <p class="consumir">Numero de comidas que realizas al dia</p>
       <div class="radio">
-        <label class="radio"><input type="radio" name="mealTimes" data-toggle="radio" value="1" checked> 1 </label>
-        <label class="radio"><input type="radio" name="mealTimes" data-toggle="radio" value="2"> 2</label>
-        <label class="radio"><input type="radio" name="mealTimes" data-toggle="radio" value="3"> 3 </label>
-        <label class="radio"><input type="radio" name="mealTimes" data-toggle="radio" value="4"> 4 </label>
-        <label class="radio"><input type="radio" name="mealTimes" data-toggle="radio" value="5" > 5 </label>
-        <label class="radio"><input type="radio" name="mealTimes" data-toggle="radio" value="6">6</label>
-        <label class="radio"><input type="radio" name="mealTimes" data-toggle="radio" value="7">7</label>
-        <label class="radio"><input type="radio" name="mealTimes" data-toggle="radio" value="8">8</label>
+        <% numberAnswers3.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="mealTimes" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div><br/>
       <label class="pregunta">Calidad alimentica</label>
       <p class="consumir">En una escala en donde 1 es mala y 5 es buena</p>
       <div class="radio">
-        <label class="radio"><input type="radio" name="mealQuality" data-toggle="radio" value="1" checked> 1 </label>
-        <label class="radio"><input type="radio" name="mealQuality" data-toggle="radio" value="2"> 2</label>
-        <label class="radio"><input type="radio" name="mealQuality" data-toggle="radio" value="3"> 3 </label>
-        <label class="radio"><input type="radio" name="mealQuality" data-toggle="radio" value="4"> 4 </label>
-        <label class="radio"><input type="radio" name="mealQuality" data-toggle="radio" value="5" > 5 </label>
+        <% numberAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="mealQuality" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div>
     </div><!--FIN PRIMER COLUMNA-->
 
@@ -47,40 +49,37 @@
       <label class="pregunta">Revisiones períodicas preventivas</label>
       <p class="consumir">En una escala donde 1 es nada frecuente y 5 es muy frecuente</p>
       <div class="radio">
-        <label class="radio"><input type="radio" name="preventiveReviews" data-toggle="radio" value="1" checked> 1 </label>
-        <label class="radio"><input type="radio" name="preventiveReviews" data-toggle="radio" value="2"> 2</label>
-        <label class="radio"><input type="radio" name="preventiveReviews" data-toggle="radio" value="3"> 3 </label>
-        <label class="radio"><input type="radio" name="preventiveReviews" data-toggle="radio" value="4"> 4 </label>
-        <label class="radio"><input type="radio" name="preventiveReviews" data-toggle="radio" value="5" > 5 </label>
-      </div><br/>
+        <% numberAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="preventiveReviews" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
       <label class="pregunta">Nivel de estrés</label>
       <p class="consumir">En una escala en donde 1 es muy bajo y 5 es muy alto</p>
       <div class="radio">
-        <label class="radio"><input type="radio" name="stressLevel" data-toggle="radio" value="1" checked> 1 </label>
-        <label class="radio"><input type="radio" name="stressLevel" data-toggle="radio" value="2"> 2</label>
-        <label class="radio"><input type="radio" name="stressLevel" data-toggle="radio" value="3"> 3 </label>
-        <label class="radio"><input type="radio" name="stressLevel" data-toggle="radio" value="4"> 4 </label>
-        <label class="radio"><input type="radio" name="stressLevel" data-toggle="radio" value="5" > 5 </label>
-      </div><br/>
+        <% numberAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="stressLevel" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
       <label class="pregunta">Habitos deportivos</label>
       <p class="consumir">Numero de dias que realizas deporte a la semana</p>
       <div class="radio">
-        <label class="radio"><input type="radio" name="workoutsDays" data-toggle="radio" value="1" checked> 1 </label>
-        <label class="radio"><input type="radio" name="workoutsDays" data-toggle="radio" value="2"> 2</label>
-        <label class="radio"><input type="radio" name="workoutsDays" data-toggle="radio" value="3"> 3 </label>
-        <label class="radio"><input type="radio" name="workoutsDays" data-toggle="radio" value="4"> 4 </label>
-        <label class="radio"><input type="radio" name="workoutsDays" data-toggle="radio" value="5" > 5 </label>
-        <label class="radio"><input type="radio" name="workoutsDays" data-toggle="radio" value="6">6</label>
-        <label class="radio"><input type="radio" name="workoutsDays" data-toggle="radio" value="7">7</label>
+        <% numberAnswers2.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="workoutsDays" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div><br/>
     </div><!--FIN SEGUNDA COLUMNA-->
 
     <div class="col-6 col-md-4"> <!-- INICIO TERCERA COLUMNA -->
       <label class="pregunta">Vida Sexual:</label>
       <div class="radio">
-        <label class="radio"><input type="radio" name="sexualLife" data-toggle="radio" value="Activo" checked>Activo</label>
-        <label class="radio"><input type="radio" name="sexualLife" data-toggle="radio" value="Inactivo">Inactivo</label>
-      </div><br/>
+        <% binaryAnswers2.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="sexualLife" data-toggle="radio" value="<%=answer%>"><%=answer%></label><br>
+        <%})%>
+      </div>
       <div class="seleccion">
         <label class="pregunta">Alcoholismo</label>
         <p>Numero de bebidas alcoholicas que consumes a la semana</p>
@@ -98,8 +97,10 @@
       <label class="pregunta">Otras Drogas:</label>
       <p class="consumir">Consumes actualmente otro tipo de drogras</p>
       <div class="radio">
-        <label class="radio"><input type="radio" class="radio-inline" name="otherDrugs" data-toggle="radio" value="Si" checked>Si</label>
-        <label class="radio"><input type="radio" class="radio-inline" name="otherDrugs" data-toggle="radio" value="No">No</label>
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="otherDrugs" data-toggle="radio" value="<%=answer%>"><%=answer%></label><br>
+        <%})%>
       </div>
       <div class="seleccion">
         <label class="pregunta">Refresco y bebidas azucaradas</label>

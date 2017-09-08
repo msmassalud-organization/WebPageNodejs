@@ -1,107 +1,106 @@
+<%
+  var diabetesType = locals.diabetesType;
+  var infectoType = locals.infectoType;
+  var hearthType = locals.hearthType;
+  var cancerType = locals.cancerType;
+  var cerebralPalsy = locals.cerebralPalsy;
+  var kidneyType = locals.kidneyType;
+  var lungType = locals.lungType;
+  var liverType = locals.liverType;
+  var binaryAnswers = ['Sí','No','Desconoce'];
+%>
 <form class="form-signin" action="/updateMedicalRecord" method="post" enctype="application/x-www-form-urlencoded">
   <div class="row formularios">
     <div class="texto-principal">
-      <h3 class="form-signin-heading bg-info">Antecedentes personales patologicos Enfermedades</h3>
+      <h3 class="form-signin-heading bg-info">Antecedentes personales patologicos</h3>
     </div><!--.texto-principal-->
     <div class="col-6 col-md-4"><!-- INICIO PRIMER COLUMNA -->
       <label class="pregunta">Enfermedades infectocontagiosas</label>
       <p>La manifestacion clinica consecuente a una infección provocada por un microorganismo como bacterias,hongos,
       virus o síntomas</p>
       <div class="radio" name="infect" id="infect">
-        <label class="radio"><input type="radio" name="enfInfectocontagiosas" id="sIC" data-toggle="radio" value="si">Si</label>
-        <label class="radio"><input type="radio" name="enfInfectocontagiosas" id="nIC" data-toggle="radio" value="no">No</label>
-        <label class="radio"><input type="radio" name="enfInfectocontagiosas" id="dIC" data-toggle="radio" value="desconoce">Desconoce</label>
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="enfInfectocontagiosas" id="<%=opt%>IC" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div>
       <div id="siIC" style="display:none">
           <label class="pregunta">Tipo de enfermedad infectocontagiosa</label>
-          <label class="checkbox"><input type="checkbox" name="infectoType" data-toggle="checkbox" value="Varicela" > Varicela </label>
-          <label class="checkbox"><input type="checkbox" name="infectoType" data-toggle="checkbox" value="Rubeola"> Rubeola</label>
-          <label class="checkbox"><input type="checkbox" name="infectoType" data-toggle="checkbox" value="Sarampion"> Sarampion </label>
-          <label class="checkbox"><input type="checkbox" name="infectoType" data-toggle="checkbox" value="Colera"> Colera </label>
-          <label class="checkbox"><input type="checkbox" name="infectoType" data-toggle="checkbox" value="Influenza" > Influenza </label>
-          <label class="checkbox"><input type="checkbox" name="infectoType" data-toggle="checkbox" value="Fiebre tifoidea"> Fiebra tifoidea </label>
-          <label class="checkbox"><input type="checkbox" name="infectoType" data-toggle="checkbox" value="Otro tipo"> Otro tipo </label><br/>
+          <% infectoType.forEach(function(type){ %>
+            <label class="checkbox"><input type="checkbox" name="infectoType" data-toggle="checkbox" value="<%=type%>"><%=type%></label>
+          <%})%>
       </div> <!--.Desplegar opciones-->
       <div>
         <label class="pregunta">Diabetes</label>
         <div class="radio" name="diabetesT" id="diabetesT">
-          <label class="radio"><input type="radio" name="diabetes" id="sD" data-toggle="radio" value="si">Si</label>
-          <label class="radio"><input type="radio" name="diabetes" id="nD" data-toggle="radio" value="no">No</label>
-          <label class="radio"><input type="radio" name="diabetes" id="dD" data-toggle="radio" value="desconoce">Desconoce</label>
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="diabetes" id="<%=opt%>D" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
         </div>
         <div id="siD" style="display:none">
           <label class="pregunta">Tipo de diabetes</label>
-          <label class="checkbox"><input type="checkbox" name="diabetesType" data-toggle="checkbox" value="Gestacional" > Gestacional </label>
-          <label class="checkbox"><input type="checkbox" name="diabetesType" data-toggle="checkbox" value="Tipo I"> Tipo I</label>
-          <label class="checkbox"><input type="checkbox" name="diabetesType" data-toggle="checkbox" value="Tipo II"> Tipo II</label>
-          <label class="checkbox"><input type="checkbox" name="diabetesType" data-toggle="checkbox" value="Tipo III"> Tipo II</label>
-          <label class="checkbox"><input type="checkbox" name="diabetesType" data-toggle="checkbox" value="Otro" > Otro </label>
+          <% diabetesType.forEach(function(type){ %>
+            <label class="radio"><input type="radio" name="diabetesType" data-toggle="radio" value="<%=type%>"><%=type%></label>
+          <%})%>
         </div> <!--.Desplegar opciones-->
       </div>
       <div>
         <label class="pregunta">Obesidad o sobrepeso</label>
         <p>Acumulacion anormal o excesiva de grasa que puede ser perjudicial para la salud</p>
         <div class="radio" name="obesidad" id="obesidad">
-            <label class="radio"><input type="radio" name="obesity" data-toggle="radio" value="Si">Si</label>
-            <label class="radio"><input type="radio" name="obesity" data-toggle="radio" value="No">No</label>
-            <label class="radio"><input type="radio" name="obesity" data-toggle="radio" value="Desconoce" checked> Desconoce </label>
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="obesity" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
         </div>
       </div>
       <div>
         <label class="pregunta">Artritis</label>
         <p class="consumir">Inflamación de una o más articulaciones que provoca dolor y rigidez, y puede empeorar con la edad</p>
         <div class="radio">
-          <label class="radio"><input type="radio" name="arthritis" data-toggle="radio" value="Si">Si</label>
-          <label class="radio"><input type="radio" name="arthritis" data-toggle="radio" value="No">No</label>
-          <label class="radio"><input type="radio" name="arthritis" data-toggle="radio" value="Desconoce" checked> Desconoce </label>
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="arthritis" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
         </div>
       </div>
     </div> <!--PRIMER DIV-->
     <div class="col-6 col-md-4"><!--INICIA SEGUNDO DIV-->
     <div>
       <label class="pregunta">Cardiopatias</label>
-      <p>Término que se aplica a todas las enfermadades del sistema circulatorio tanto congénitas, heredadas o
+      <p>Término que se aplica a todas las enfermedades del sistema circulatorio tanto congénitas, heredadas o
       adquiridas</p>
-      <label class="checkbox"><input type="checkbox" name="arthritis" data-toggle="checkbox" value="Hipertencion">Hipertencion</label>
-      <label class="checkbox"><input type="checkbox" name="arthritis" data-toggle="checkbox" value="Hipotension">Hipotension</label>
-      <label class="checkbox"><input type="checkbox" name="arthritis" data-toggle="checkbox" value="isquemia">Isquemia</label>
-      <label class="checkbox"><input type="checkbox" name="arthritis" data-toggle="checkbox" value="angina de pecho">Angina de pecho</label>
-      <label class="checkbox"><input type="checkbox" name="arthritis" data-toggle="checkbox" value="Infarto de miocardio">Infarto de miocardio </label>
-      <label class="checkbox"><input type="checkbox" name="arthritis" data-toggle="checkbox" value="Muerte súbita">Muerte súbita</label>
-      <label class="checkbox"><input type="checkbox" name="arthritis" data-toggle="checkbox" value="Enfermedad reumática">Enfermedad reumática </label>
-      <label class="checkbox"><input type="checkbox" name="arthritis" data-toggle="checkbox" value="No">No</label>
-      <label class="checkbox"><input type="checkbox" name="arthritis" data-toggle="checkbox" value="Desconoce"> Desconoce </label>
+      <% hearthType.forEach(function(answer){ %>
+      <% var opt = answer.charAt(0).toLowerCase(); %>
+        <label class="checkbox"><input type="checkbox" name="hearthType" data-toggle="checkbox" value="<%=answer%>"><%=answer%></label>
+      <%})%>
     </div>
     <div>
       <label class="pregunta">Cancer</label>
       <p>Enfermedad en la que células anómalas se dividen sin control y destruyen los tejidos corporales</p>
       <div class="radio" name="cancer" id="cancer">
-        <label class="radio"><input type="radio" name="cancer" id="sC" data-toggle="radio" value="si">Si</label>
-        <label class="radio"><input type="radio" name="cancer" id="nC" data-toggle="radio" value="no">No</label>
-        <label class="radio"><input type="radio" name="cancer" id="dC" data-toggle="radio" value="desconoce">Desconoce</label>
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="cancer" id="<%=opt%>C" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div>
       <div id="siC" style="display:none">
         <label class="pregunta">Tipo de cáncer</label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="colon y recto" > colon y recto </label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="pulmon"> pulmon</label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="endométrico"> endométrico </label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="Colera"> Colera </label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="mama" > mama </label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="prostata"> prostata </label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="leucemia"> leucemia </label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="páncreas" > páncreas </label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="tiroides"> tiroides </label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="riñon"> riñon </label>
-        <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="Otro tipo"> Otro tipo </label><br/>
+        <% cancerType.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="checkbox"><input type="checkbox" name="cancerType" data-toggle="checkbox" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div> <!--.Desplegar opciones-->
     </div>
     <div>
       <label class="pregunta">Cefalea</label>
       <p class="consumir">Dolores y molestias localizadas en cualquier parte de la cabeza</p>
       <div class="radio">
-        <label class="radio"><input type="radio" name="headache" data-toggle="radio" value="Si" > Si </label>
-        <label class="radio"><input type="radio" name="headache" data-toggle="radio" value="No"> No </label>
-        <label class="radio"><input type="radio" name="headache" data-toggle="radio" value="Desconoce" checked> Desconoce </label>
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="headache" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div>
     </div>
   </div><!--SEGUNDO DIV-->
@@ -110,86 +109,78 @@
       <label class="pregunta">Convulsiones</label>
        <p>Dolores y molestias localizadas en cualquier parte de la cabeza</p>
        <div class="radio">
-        <label class="radio"><input type="radio" name="convulsiones" data-toggle="radio" value="Si" > Si </label>
-        <label class="radio"><input type="radio" name="convulsiones" data-toggle="radio" value="No"> No </label>
-        <label class="radio"><input type="radio" name="convulsiones" data-toggle="radio" value="Desconoce" checked> Desconoce </label>
-      </div>
+         <% binaryAnswers.forEach(function(answer){ %>
+         <% var opt = answer.charAt(0).toLowerCase(); %>
+           <label class="radio"><input type="radio" name="convulsiones" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+         <%})%>
+       </div>
     </div>
     <div>
       <label class="pregunta">Parálisis cerebral</label>
       <p>La parálisis cerebral no permite y/o dificulta los mensajes enviados por el cerebro hacia
         los músculos, obstaculizando su movimiento</p>
       <div class="radio" name="cerebralPalsy">
-            <label class="radio"><input type="radio" name="enfInfectocontagiosas" id="sCP" data-toggle="radio" value="si">Si</label>
-            <label class="radio"><input type="radio" name="enfInfectocontagiosas" id="nCP" data-toggle="radio" value="no">No</label>
-            <label class="radio"><input type="radio" name="enfInfectocontagiosas" id="dCP" data-toggle="radio" value="desconoce">Desconoce</label>
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="cerebralPalsy" id="<%=opt%>CP" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div>
       <div id="siCP" style="display:none">
         <label class="pregunta">Tipo de paralisis</label>
-        <label class="checkbox"><input type="checkbox" name="cerebralType" data-toggle="checkbox" value="Extremidades superiores" > Extremidades superiores </label>
-        <label class="checkbox"><input type="checkbox" name="cerebralType" data-toggle="checkbox" value="Extremidades inferiores"> Extremidades inferiores </label>
-        <label class="checkbox"><input type="checkbox" name="cerebralType" data-toggle="checkbox" value="Facial"> Facial </label>
-        <label class="checkbox"><input type="checkbox" name="cerebralType" data-toggle="checkbox" value="Tipos Mixtos" > Tipos Mixtos </label>
-        <label class="checkbox"><input type="checkbox" name="cerebralType" data-toggle="checkbox" value="Otro tipo"> Otro tipo </label><br/>
+        <% cerebralPalsy.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="checkbox"><input type="checkbox" name="cerebralPalsy" data-toggle="checkbox" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div> <!--.Desplegar opciones-->
     </div>
     <div>
       <label class="pregunta">Enfermedades pulmonares</label>
       <div class="radio" name="lungDisease">
-            <label class="radio"><input type="radio" name="enfInfectocontagiosas" id="sEP" data-toggle="radio" value="si">Si</label>
-            <label class="radio"><input type="radio" name="enfInfectocontagiosas" id="nEP" data-toggle="radio" value="no">No</label>
-            <label class="radio"><input type="radio" name="enfInfectocontagiosas" id="dEP" data-toggle="radio" value="desconoce">Desconoce</label>
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="enfPulmonar" id="<%=opt%>EP" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div>
-      <div class="checkbox" id="siEP" style="display:none">
+      <div id="siEP" style="display:none">
         <label class="pregunta">Tipo de neumopatía</label>
-        <label class="checkbox"><input type="checkbox" name="lungType" data-toggle="checkbox" value="neumonia">neumonia </label>
-        <label class="checkbox"><input type="checkbox" name="lungType" data-toggle="checkbox" value="asma"> asma  </label>
-        <label class="checkbox"><input type="checkbox" name="lungType" data-toggle="checkbox" value="enfisema"> enfisema </label>
-        <label class="checkbox"><input type="checkbox" name="lungType" data-toggle="checkbox" value="EPOC" > EPOC  </label>
-        <label class="checkbox"><input type="checkbox" name="lungType" data-toggle="checkbox" value=" endema">  endema </label>
-        <label class="checkbox"><input type="checkbox" name="lungType" data-toggle="checkbox" value="Otro tipo"> Otro tipo </label>
+        <% lungType.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="checkbox"><input type="checkbox" name="lungType" data-toggle="checkbox" value="<%=answer%>"><%=answer%></label>
+        <%})%>
       </div> <!--.Desplegar opciones-->
     </div>
-            <label for="kindneyDiseases">
-              <label class="pregunta">Enfermedades renales</label>
-              <p class="consumir"></p>
-            </label><br/>
-                  <label onclick="toggleLabel('ki')" class="radio"><input type="radio"  name="kindneyDiseases" value="SI"> SI </label>
-                  <div id="ki" style="display:none">
-                    <label for="kindneyType">
-                      <label class="pregunta">Tipo de nefropatias</label>
-                    </label><br/>
-                      <label class="checkbox"><input type="checkbox" name="kindneyType" value="insuficiencia renal" >insuficiencia renal </label>
-                      <label class="checkbox"><input type="checkbox" name="kindneyType" value="calculos renales"> calculos renales  </label>
-                      <label class="checkbox"><input type="checkbox" name="kindneyType" value="Otro tipo"> Otro tipo </label><br/>
-                  </div> <!--.Desplegar opciones-->
-                  <label class="radio" onclick="ocultar('ki')"><input type="radio"  name="kindneyDiseases" value="NO"> NO </label>
-                  <label class="radio" onclick="ocultar('ki')"><input type="radio"  name="kindneyDiseases" value="DESCONOCE" checked> DESCONOCE </label>
-
-
-            <label for="liverDisease">
-              <label class="pregunta">Enfermedades hepaticas</label>
-              <p class="consumir"></p>
-            </label><br/>
-                  <label onclick="toggleLabel('liver')" class="radio"><input type="radio"  name="liverDisease" value="SI"> SI </label>
-                  <div id="liver" style="display:none">
-                    <label for="liverType">
-                      <label class="pregunta">Tipo de hepatopatias</label>
-                    </label><br/>
-                      <label class="checkbox"><input type="checkbox" name="liverType" value="hepatitis A" >hepatitis A</label>
-                      <label class="checkbox"><input type="checkbox" name="liverType" value="hepatitis B">hepatitis B</label>
-                      <label class="checkbox"><input type="checkbox" name="liverType" value="hepatitis C" >hepatitis C</label>
-                      <label class="checkbox"><input type="checkbox" name="liverType" value="cirrosis">Cirrosis</label>
-                      <label class="checkbox"><input type="checkbox" name="liverType" value="nemocromatosis">Nemocromatosis</label>
-                      <label class="checkbox"><input type="checkbox" name="liverType" value="Otro tipo"> Otro tipo </label>
-                  </div> <!--.Desplegar opciones-->
-                  <label class="radio" onclick="ocultar('liver')"><input type="radio"  name="liverDisease" value="NO"> NO </label>
-                  <label class="radio" onclick="ocultar('liver')"><input type="radio"  name="liverDisease" value="DESCONOCE" checked> DESCONOCE </label>
-
-
-
-
-
+    <div>
+      <label class="pregunta">Enfermedades renales</label>
+      <div class="radio" name="kidneyDisease">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="enfPulmonar" id="<%=opt%>KT" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <div id="siKT" style="display:none">
+        <label class="pregunta">Tipo de neumopatía</label>
+        <% kidneyType.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="checkbox"><input type="checkbox" name="kidneyType" data-toggle="checkbox" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div> <!--.Desplegar opciones-->
+    </div>
+    <div>
+      <label class="pregunta">Enfermedades hepaticas</label>
+      <div class="radio" name="liverDisease">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="liverDisease" id="<%=opt%>TH" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <div id="siTH" style="display:none">
+        <label class="pregunta">Tipo de hepatopatias</label>
+        <% liverType.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="checkbox"><input type="checkbox" name="liverType" data-toggle="checkbox" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+    </div>
+  </div>
         </div> <!--TERCER DIV-->
 
   </div><!--.row formularios-->
