@@ -2,7 +2,11 @@
 
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
+const SystemEvent = require('../models/systemEvent')
+const SEC = require('../controllers/systemEvent')
 
+//Cadenas para los eventos del sistema
+const LOGIN = 'LOGIN';
 
 module.exports = function(passport) {
 
@@ -37,7 +41,15 @@ module.exports = function(passport) {
         if(!user.validPassword(password)){
           return done(null, false, req.flash('loginMessage', 'Contraeña incorrecta!'));
         }
-        return done(null, user);
+        let systemEvent = new SystemEvent();
+        systemEvent.description = SEC.getEventDescription(LOGIN, user);
+        systemEvent.performedBy = user._id;
+        systemEvent.save((err)=>{
+          if(err){
+            throw err;
+          }
+          return done(null, user);
+        });
       });
     });
 

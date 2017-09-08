@@ -18,45 +18,61 @@ function isAuth(req, res, next){
   });
 
 }
-
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    return next();
-  }
-
-  res.redirect('/signin');
-}
-
-function isAdmin(req, res, next){
-  if(req.isAuthenticated()){
-    if(req.user.accType == 'admin'){
-      return next();
-    }
-  }
-  res.redirect('/signin');
-}
-
-function isDoctor(req, res, next){
-  if(req.isAuthenticated()){
-    if(req.user.accType == 'doctor'){
-      return next();
-    }
-  }
-  res.redirect('/signin');
-}
-
-function isMember(req, res, next){
-  if(req.isAuthenticated()){
-    if(req.user.accType == 'member'){
-      return next();
-    }
-  }
-  res.redirect('/signin');
-}
-
 module.exports = {
-  isLoggedIn,
-  isAdmin,
-  isDoctor,
-  isMember
+  //TODO: Indicar acceso prohibido
+  isLoggedIn: function(req, res, next){
+    if(req.isAuthenticated()){
+      return next();
+    }
+
+    res.redirect('/signin');
+  },
+
+  hasAccessToMembers: function(req, res, next){
+    if(req.isAuthenticated){
+      switch (req.user.accType) {
+        case 'admin':
+        case 'recepcionist':
+          return next();
+        default:
+          res.redirect('/signin');
+      }
+    }
+  },
+
+  isAdmin: function(req, res, next){
+    if(req.isAuthenticated()){
+      if(req.user.accType == 'admin'){
+        return next();
+      }
+    }
+    res.redirect('/signin');
+  },
+
+  isDoctor: function(req, res, next){
+    if(req.isAuthenticated()){
+      if(req.user.accType == 'doctor'){
+        return next();
+      }
+    }
+    res.redirect('/signin');
+  },
+
+  isMember: function(req, res, next){
+    if(req.isAuthenticated()){
+      if(req.user.accType == 'member'){
+        return next();
+      }
+    }
+    res.redirect('/signin');
+  },
+
+  isRecepcionist: function(req, res, next){
+    if(req.isAuthenticated()){
+      if(req.user.accType == 'recepcionist'){
+        return next();
+      }
+    }
+    res.redirect('/signin');
+  }
 }

@@ -386,7 +386,7 @@ demo = {
 
     	$.notify({
         	icon: "pe-7s-gift",
-        	message: "<b>Light Bootstrap Dashboard PRO</b> - forget about boring dashboards."
+        	message: "<b>Light Bootstrap ¡Que tengas un buen día!</b> - forget about boring dashboards."
 
         },{
             type: type[color],

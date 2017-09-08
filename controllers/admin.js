@@ -75,7 +75,10 @@ module.exports = {
     })
   },
 
-  loadSignupMember: function(req, res) {
+  loadSignupMember: function(req, res, next) {
+    if(req.user.accType == 'recepcionist'){
+      next();
+    }
     res.status(200).render(`${route}/signupMember`, {
       user: req.user,
       'memberTypes': memberTypes,
@@ -129,34 +132,6 @@ module.exports = {
     });
   },
 
-  loadAllMembers: function(req, res) {
-    console.log('/loadAllMembers');
-    Membership.find({
-      'isActive': true
-    }).
-    populate({
-      path: 'userProfile',
-      model: 'User',
-      select: '-id -helpedBy'
-    }).exec((err, memberships) => {
-      if (err) {
-        throw err;
-      }
-      if (memberships) {
-        res.status(200).render(`${route}allMembers`, {
-          user: req.user,
-          'memberships': memberships,
-          menu: '/loadAllMembers'
-        });
-      } else {
-        res.status(200).render(`${route}allMembers`, {
-          user: req.user,
-          'memberships': [],
-          menu: '/loadAllMembers'
-        });
-      }
-    });
-  },
   loadAllNoMembers: function(req, res) {
     User.find({
       'accType': 'noMember'
@@ -289,9 +264,11 @@ module.exports = {
 
     });
   },
-
+  //Realiza la conversión de la query en un archivo csv
   getMembershipsFile: function(req, res) {
     console.log('/getMembershipsFile');
+    res.setHeader('Content-disposition', 'attachment; filename=memberships.csv');
+    res.setHeader('Content-type', 'text/csv');
     Membership.find({}).
     select('-_id memberId verificationCode').
     sort('memberId').
@@ -299,21 +276,10 @@ module.exports = {
         if(err){
           throw err;
         }
-        res.csv(memberships);
-    })
+    }).then(function(docs){
+      Membership.csvReadStream(docs)
+      .pipe(res);
+    });
 
   }
-
 } //FIN EXPORTS
-/*
-module.exports = {
-  signupUser,
-  loadSignupUser,
-  loadSignupMember,
-  createMemberships,
-  loadServices,
-  getServices,
-  getServiceByCve,
-  loadEditService
-}
-*/

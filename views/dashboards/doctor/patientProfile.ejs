@@ -1,0 +1,313 @@
+<!doctype html>
+<%
+	var birthday = patient.birthday.getDate();
+		birthday += '/'+ patient.birthday.getMonth();
+		birthday += '/'+ patient.birthday.getFullYear();
+	var year = new Date().getFullYear();
+	var age = year - patient.birthday.getFullYear();
+	var mr = patient.medicalRecord;
+	console.log(mr.noPathological);
+%>
+	<html lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/png" href="/public/bootstrap-dashboard/assets/img/favicon.ico">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>MS MAS SALUD</title>
+
+		<% include head %>
+	</head>
+
+	<body>
+
+		<div class="wrapper">
+			<% include sideNavBar %>
+
+				<div class="main-panel">
+					<% include topNavBar %>
+
+						<div class="content">
+							<div class="container-fluid">
+								<div class="row">
+									<div class="col-md-4">
+										<!-- Datos del paciente -->
+										<div id="personales" class="row">
+											<div class="card">
+												<div class="content">
+													<div class="row">
+														<div class="col-md-4">
+															<!--foto-->
+															<div class="photo">
+																<img width="75%" height="75%" src="bootstrap-dashboard/assets/img/faces/face-0.jpg" />
+															</div>
+
+														</div>
+														<div class="col-md-8">
+															<p>
+																<strong><%=patient.fullName %></strong>
+															</p>
+															<p class="text-muted">
+																<%=birthday%> -
+																	<%=age%> años
+															</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div id="signosVitales" class="row">
+											<div class="card">
+												<div class="header text-center">
+													<h5 class="title"><strong>Signos vitales</strong></h5>
+												</div>
+												<div class="content table-responsive table-full-width">
+													<table class="table">
+														<tbody>
+															<tr>
+																<td><i style="font-size: 2em" class="pe-7s-like" aria-hidden="true"></i></td>
+																<td>Ritmo Cardiaco</td>
+																<td>
+																	<%=80%>
+																</td>
+																<td>l/m</td>
+															</tr>
+															<tr>
+																<td><i style="font-size: 2em" class="pe-7s-display1" aria-hidden="true"></i></td>
+																<td>Presión arterial</td>
+																<td>
+																	<%=120/80%>
+																</td>
+																<td>mmHg</td>
+															</tr>
+															<tr>
+																<td><i style="font-size: 2em" class="fa fa-thermometer-full" aria-hidden="true"></i></td>
+																<td>Temperatura</td>
+																<td>
+																	<%=37.5%>
+																</td>
+																<td>C</td>
+															</tr>
+															<tr>
+																<td><i style="font-size: 2em" class="fa fa-male" aria-hidden="true"></i></td>
+																<td>Estatura</td>
+																<td>
+																	<%=1.80%>
+																</td>
+																<td>Mts</td>
+															</tr>
+															<tr>
+																<td><i style="font-size: 2em" class="pe-7s-compass" aria-hidden="true"></i></td>
+																<td>Peso</td>
+																<td>
+																	<%=80%>
+																</td>
+																<td>Kg</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+
+											</div>
+										</div>
+
+										<div id="archivos" class="row">
+										</div>
+									</div>
+
+									<div class="col-md-5">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="card">
+													<div class="header text-center">
+														<h5>Antecedentes</h5>
+													</div>
+													<div class="content">
+														<div class="panel-group" id="accordion"><!--No patologicos -->
+															<div class="panel panel-default">
+																<div class="panel-heading">
+																	<h4 class="panel-title">
+																		<a data-target="#noPathological" href="#" data-toggle="collapse">
+																			No patológicos
+																			<b class="caret"></b>
+																		</a>
+																	</h4>
+																</div>
+																<div id="noPathological" class="panel-collapse collapse">
+																	<div class="panel-body">
+																		<% if(mr.noPathological.valueOf().toString() != '{}'){%>
+																			<% var noPathological = mr.noPathological %>
+																			<ul class="list-unstyled">
+																				<% if(noPathological.diseasesFreq){%>
+																					<li><strong>Frecuencia enfermedades:</strong><span class="pull-right"><%=noPathological.diseasesFreq%> al año</span></li>
+																					<% } %>
+																					<% if(noPathological.sleepingHours){ %>
+																						<li><strong>Horas de sueño:</strong><span class="pull-right"><%=noPathological.sleepingHours%> al día</span></li>
+																						<% } %>
+																						<% if(noPathological.sleepingHours){ %>
+																							<li><strong>Comidas al día:</strong><span class="pull-right"><%=noPathological.mealTimes%></span></li>
+																							<% } %>
+																							<% if(noPathological.sleepingHours){ %>
+																								<li><strong>Calidad alimentación:</strong><span class="pull-right"><%=noPathological.mealQuality%></span></li>
+																								<% } %>
+																								<% if(noPathological.sleepingHours){ %>
+																									<li><strong>Revisiones periódicas:</strong><span class="pull-right"><%=noPathological.preventiveReviews%></span></li>
+																									<% } %>
+																									<% if(noPathological.sleepingHours){ %>
+																										<li><strong>Niveles de estrés:</strong><span class="pull-right"><%=noPathological.stressLevel%></span></li>
+																										<% } %>
+																										<% if(noPathological.sleepingHours){ %>
+																											<li><strong>Deporte a la semana:</strong><span class="pull-right"><%=noPathological.workoutsDays%> veces</span></li>
+																											<% } %>
+																											<% if(noPathological.sleepingHours){ %>
+																												<li><strong>Bebidas azucaradas a la semana:</strong><span class="pull-right"><%=noPathological.sugaryDrinks%></span></li>
+																												<% } %>
+																												<% if(noPathological.sleepingHours){ %>
+																													<li><strong>Vida sexual:</strong><span class="pull-right"><%=noPathological.sexualLife?'Activa':'Inactiva'%></span></li>
+																													<% } %>
+																													<% if(noPathological.sleepingHours){ %>
+																														<li><strong>Bebidas alcoholicas a la semana:</strong><span class="pull-right"><%=noPathological.alcoholicDrinks%></span></li>
+																														<% } %>
+																														<% if(noPathological.sleepingHours){ %>
+																															<li><strong>Cigarros a la semana:</strong><span class="pull-right"><%=noPathological.cigarettes%></span></li>
+																															<% } %>
+																															<% if(noPathological.sleepingHours){ %>
+																																<li><strong>Vida sexual:</strong><span class="pull-right"><%=noPathological.otherDrugs?'Sí':'No'%></span></li>
+																																<% } %>
+																															</ul>
+																															<%}else{%>
+																																<p>Aún no se han llenado los datos del paciente.</p>
+																																<%}%>
+																															</div>
+																														</div>
+																													</div>
+																												</div>
+														<div class="panel-group" id="accordion"><!--Dispositivos implantables -->
+																													<div class="panel panel-default">
+																														<div class="panel-heading">
+																															<h4 class="panel-title">
+																																<a data-target="#implantableMD" href="#" data-toggle="collapse">
+																																	Dispositivos médicos implantables
+																																	<b class="caret"></b>
+																																</a>
+																															</h4>
+																														</div>
+																														<div id="implantableMD" class="panel-collapse collapse">
+																															<div class="panel-body">
+																																<% if(mr.implantableMD.valueOf().toString() != '{}'){%>
+																																	<% var implantableMD = mr.implantableMD %>
+																																	<ul class="list-unstyled">
+																																		<% if(implantableMD.dental){%>
+																																			<li><strong>Prótesis dentales:</strong><span class="pull-right">
+																																				<i style="font-size: 1em" class="<%=implantableMD.dental?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																			</span></li>
+																																			<% }else{%>
+																																				<li><strong>Prótesis dentales:</strong><span class="pull-right">Desconoce</span></li>
+																																				<%}%>
+																																				<% if(implantableMD.ocular){ %>
+																																					<li><strong>Prótesis oculares:</strong><span class="pull-right">
+																																						<i style="font-size: 1em" class="<%=implantableMD.ocular?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																					</span></li>
+																																					<% }else{%>
+																																						<li><strong>Prótesis oculares:</strong><span class="pull-right">Desconoce</span></li>
+																																						<%}%>
+																																						<% if(implantableMD.hearing){ %>
+																																							<li><strong>Prótesis auditivas:</strong><span class="pull-right">
+																																								<i style="font-size: 1em" class="<%=implantableMD.hearing?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																							</span></li>
+																																							<% }else{%>
+																																								<li><strong>Prótesis auditivas:</strong><span class="pull-right">Desconoce</span></li>
+																																								<%}%>
+																																								<% if(implantableMD.cosmetic){ %>
+																																									<li><strong>Estéticas o cosméticas:</strong><span class="pull-right">
+																																										<i style="font-size: 1em" class="<%=implantableMD.cosmetic?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																									</span></li>
+																																									<% }else{%>
+																																										<li><strong>Estéticas o cosméticas:</strong><span class="pull-right">Desconoce</span></li>
+																																										<%}%>
+																																										<% if(implantableMD.cranial){ %>
+																																											<li><strong>Prótesis craneales:</strong><span class="pull-right">
+																																												<i style="font-size: 1em" class="<%=implantableMD.cranial?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																											</span></li>
+																																											<% }else{%>
+																																												<li><strong>Prótesis craneales:</strong><span class="pull-right">Desconoce</span></li>
+																																												<%}%>
+																																												<% if(implantableMD.upperLimb){ %>
+																																													<li><strong>Prótesis miembros superiores:</strong><span class="pull-right">
+																																														<i style="font-size: 1em" class="<%=implantableMD.upperLimb?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																													</span></li>
+																																													<% }else{%>
+																																														<li><strong>Prótesis miembros superiores:</strong><span class="pull-right">Desconoce</span></li>
+																																														<%}%>
+																																														<% if(implantableMD.coloum){ %>
+																																															<li><strong>Prótesis columna:</strong><span class="pull-right">
+																																																<i style="font-size: 1em" class="<%=implantableMD.coloum?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																															</span></li>
+																																															<% }else{%>
+																																																<li><strong>Prótesis columna:</strong><span class="pull-right">Desconoce</span></li>
+																																																<%}%>
+																																																<% if(implantableMD.lowerLimb){ %>
+																																																	<li><strong>Prótesis miembros inferiores:</strong><span class="pull-right">
+																																																		<i style="font-size: 1em" class="<%=implantableMD.lowerLimb?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																																	</span></li>
+																																																	<% }else{%>
+																																																		<li><strong>Prótesis miembros inferiores:</strong><span class="pull-right">Desconoce</span></li>
+																																																		<%}%>
+																																																		<% if(implantableMD.vascular){ %>
+																																																			<li><strong>Prótesis vasculares:</strong><span class="pull-right">
+																																																				<i style="font-size: 1em" class="<%=implantableMD.vascular?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																																			</span></li>
+																																																			<% }else{%>
+																																																				<li><strong>Prótesis vasculares:</strong><span class="pull-right">Desconoce</span></li>
+																																																				<%}%>
+
+																																																				<% if(implantableMD.cathers){ %>
+																																																					<li><strong>Catéteres:</strong><span class="pull-right">
+																																																						<i style="font-size: 1em" class="<%=implantableMD.cathers?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																																					</span></li>
+																																																					<% }else{%>
+																																																						<li><strong>Catéteres:</strong><span class="pull-right">Desconoce</span></li>
+																																																						<%}%>
+																																																						<% if(implantableMD.cardiac){ %>
+																																																							<li><strong>Dispositivos cardiácos:</strong><span class="pull-right">
+																																																								<i style="font-size: 1em" class="<%=implantableMD.cardiac?'pe-7s-check':'pe-7s-close-circle'%>" aria-hidden="true"></i>
+																																																							</span></li>
+																																																							<% }else{%>
+																																																								<li><strong>Dispositivos cardiácos:</strong><span class="pull-right">Desconoce</span></li>
+																																																								<%}%>
+																																																							</ul>
+																																																							<%}else{%>
+																																																								<p>Aún no se han llenado los datos del paciente.</p>
+																																																								<%}%>
+																																																							</div>
+																																																						</div>
+																																																					</div>
+																																																				</div>
+
+													</div>
+																																																	</div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="card">
+											<div class="content">
+
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+				</div>
+		</div>
+
+
+	</body>
+	<% include ../dashboardScripts %>
+
+	</html>

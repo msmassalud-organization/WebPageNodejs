@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 const bCrypt = require('bcrypt-nodejs');
 const randToken = require('rand-token')
+const mongooseToCsv = require('mongoose-to-csv')
 
 var membershipSchema = new Schema({
   memberId: {
@@ -36,7 +37,25 @@ var membershipSchema = new Schema({
   isActive: {
     type: Boolean,
     default: 'false'
+  },
+  folio: {
+    type: Number,
+  },
+  completedMR: {
+    type: Boolean,
+    default: false
+  },
+  freeBC: {
+    type: Boolean,
+    default: false
   }
 });
 
+membershipSchema.plugin(mongooseToCsv,{
+  headers: 'memberId verificationCode',
+  constraints: {
+    'memberId': 'memberId',
+    'verificationCode': 'verificationCode'
+  }
+});
 module.exports = mongoose.model('Membership', membershipSchema);

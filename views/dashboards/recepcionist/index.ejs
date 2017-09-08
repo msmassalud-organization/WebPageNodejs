@@ -30,14 +30,57 @@
 										</div>
 										<div class="content">
 											<div class="row">
-												<div class="col-md-3">
-													<a href="/updateMedicalRecord" class="btn btn-lg btn-info btn-fill">Completar perfil médico</a>
+												<div class="row">
+													<div class="col-md-3">
+														<a href="/signupMember" class="btn btn-lg btn-info btn-fill">Registrar miembro</a>
+													</div>
+												</div>
+												<hr />
+												<div class="row">
+													<div class="col-md-3">
+														<a href="#" class="btn btn-lg btn-info btn-fill">Agendar una consulta</a>
+													</div>
+												</div>
+												<hr />
+												<div class="row">
+													<div class="col-md-3">
+														<a href="#" class="btn btn-lg btn-info btn-fill">Verificar Membresia</a>
+													</div>
 												</div>
 											</div>
-											<hr />
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="card">
+										<div class="header">
+											<h4 class="title">Verificación de membresía</h4>
+										</div>
+										<div class="content">
 											<div class="row">
-												<div class="col-md-3">
-													<a href="#" class="btn btn-lg btn-info btn-fill">Agendar una consulta</a>
+												<div class="col-md-6">
+													<div class="form-group">
+														<label>Id de la membresía:</label>
+														<input id="memberIdInput" class="form-control" type="text" />
+													</div>
+													<div class="form-group">
+														<label>Token:</label>
+														<input id="tokenInput" class="form-control" type="text" />
+														<div class="footer text-center">
+															<button id="btnVerToken" class="btn btn-success btn-fill btn-wd">Verificar</button>
+														</div>
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div id="memberPanel" class="typo-line" hidden>
+		                          <p id="result">
+																<strong>Membresía:</strong><br />
+																<hr />
+																<strong>Usuario:</strong><br />
+																<hr />
+																<strong>Contraseña:</strong><br />
+															</p>
+		                      </div>
 												</div>
 											</div>
 										</div>
@@ -46,14 +89,15 @@
 							</div>
 						</div>
 					</div>
-
 			</div>
+
+	</div>
 	</div>
 
 
 </body>
 
 <% include ../dashboardScripts %>
-	<script src="/js/member.js"></script>
+	<script src="/js/recepcionist.js"></script>
 
 </html>

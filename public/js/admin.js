@@ -39,25 +39,14 @@ $(function() {
 
 $(function() {
   $('#downloadMemberships').click(function() {
-    $.ajax({
-      type: "GET",
-      url: '/getMembershipsFile',
-      success: function(data) {
-        console.log(data);
-        $.notify({
-          icon: "pe-7s-rocket",
-          message: "Success"
+    var form = document.createElement('form');
+    form.setAttribute('method', 'get');
+    form.setAttribute('action', '/getMembershipsFile');
+    form.setAttribute('id', 'hiddenForm');
+    form.style.display = 'hidden';
+    document.body.appendChild(form);
 
-        }, {
-          type: 'info',
-          timer: 4000,
-          placement: {
-            from: 'bottom',
-            align: 'center'
-          }
-        });
-      }
-    });
+    form.submit();
   })
 });
 
