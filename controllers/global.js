@@ -6,6 +6,17 @@ const User = require('../models/user')
 const NAC_CATALOG = require('../models/nac_catalog')
 //Enumeraciones
 const memberTypes = Membership.schema.path('type').enumValues;
+const traumaAreasE = MR.schema.path('pathological.Trauma.physicalTraumaAreas').options.enum;
+const hospitalizationTypeE = MR.schema.path('pathological.Hospitalizations.hospitalizationType').options.enum;
+const allergiesE = MR.schema.path('pathological.Hospitalizations.allergies').options.enum;
+const infectoTypeE = MR.schema.path('pathological.Diseases.infectoType').options.enum;
+const lungTypeE = MR.schema.path('pathological.Diseases.lungType').options.enum;
+const kindneyTypeE = MR.schema.path('pathological.Diseases.kindneyType').options.enum;
+const liverTypeE = MR.schema.path('pathological.Diseases.liverType').options.enum;
+const cerebralPalsyE = MR.schema.path('pathological.Diseases.cerebralPalsy').options.enum;
+const diabetesTypeE = MR.schema.path('pathological.Diseases.diabetesType').options.enum;
+const hearthTypeE = MR.schema.path('pathological.Diseases.hearthType').options.enum;
+const cancerTypeE = MR.schema.path('pathological.Diseases.cancerType').options.enum;
 /**
   Para funciones que requieren de la misma dirección pero no queremos que todos
   tengan acceso. Por ejemplo: /signupMember es algo que pueden realizar diferentes
@@ -114,13 +125,23 @@ module.exports = {
           res.status(200).render('pages/updateMedicalRecord', {
             user: req.user,
             menu: '/medicalRecord',
-            message: ''
+            message: '',
+            'physicalTraumaAreas': traumaAreasE,
+            'hospitalizationType':hospitalizationTypeE,
+            'allergies':allergiesE,
+            'infectoType':infectoTypeE,
+            'kindneyType':kindneyTypeE,
+            'liverType':liverTypeE,
+            'cerebralPalsy':cerebralPalsyE,
+            'diabetesType':diabetesTypeE,
+            'hearthType':hearthTypeE,
+            'cancerType':cancerTypeE,
           });
         }
       });
     }
   },
-  
+
   updateProfile: (req, res) => {
     console.log(req.body);
     var update = req.body;
