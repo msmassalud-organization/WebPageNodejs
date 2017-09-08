@@ -47,10 +47,10 @@ var MemberMedicalRecord = new mongoose.Schema({
         type: [String],
         enum: ['NEUMONIA', 'ASMA', 'ENFISEMA', 'EPOC', 'EDEMA', 'OTRO']
       },
-      kindneyDiseases: {
+      kidneyDisease: {
         type: String
       },
-      kindneyType: {
+      kidneyType: {
         type: [String],
         enum: ['INSUFICIENCIA RENAL', 'CÁLCULOS RENALES', 'NEFROPATÍAS', 'OTRO']
       },
@@ -106,10 +106,10 @@ var MemberMedicalRecord = new mongoose.Schema({
         type: [String],
         enum: ['NEUMONIA', 'ASMA', 'ENFISEMA', 'EPOC', 'EDEMA', 'OTRO']
       },
-      kindneyDiseases: {
+      kidneyDisease: {
         type: String
       },
-      kindneyType: {
+      kidneyType: {
         type: [String],
         enum: ['INSUFICIENCIA RENAL', 'CÁLCULOS RENALES', 'NEFROPATÍAS', 'OTRO']
       },
@@ -207,7 +207,7 @@ var MemberMedicalRecord = new mongoose.Schema({
       },
       diabetesType: {
         type: String,
-        enum: ['Tipo I', 'Tipo II', 'Otro']
+        enum: ['TIPO I', 'TIPO II', 'OTRO']
       },
       lungDisease: {
         type: Boolean
@@ -216,10 +216,10 @@ var MemberMedicalRecord = new mongoose.Schema({
         type: [String],
         enum: ['NEUMONIA', 'ASMA', 'ENFISEMA', 'EPOC', 'EDEMA', 'OTRO']
       },
-      kindneyDisease: {
+      kidneyDisease: {
         type: String
       },
-      kindneyType: {
+      kidneyType: {
         type: [String],
         enum: ['INSUFICIENCIA RENAL', 'CÁLCULOS RENALES', 'NEFROPATÍAS', 'OTRO']
       },

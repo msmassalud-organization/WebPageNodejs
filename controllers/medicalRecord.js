@@ -7,7 +7,7 @@ const hospitalizationTypeE = MR.schema.path('pathological.Hospitalizations.hospi
 const allergiesE = MR.schema.path('pathological.Hospitalizations.allergies').options.enum;
 const infectoTypeE = MR.schema.path('pathological.Diseases.infectoType').options.enum;
 const lungTypeE = MR.schema.path('pathological.Diseases.lungType').options.enum;
-const kindneyTypeE = MR.schema.path('pathological.Diseases.kindneyType').options.enum;
+const kidneyTypeE = MR.schema.path('pathological.Diseases.kidneyType').options.enum;
 const liverTypeE = MR.schema.path('pathological.Diseases.liverType').options.enum;
 const cerebralPalsyE = MR.schema.path('pathological.Diseases.cerebralPalsy').options.enum;
 const diabetesTypeE = MR.schema.path('pathological.Diseases.diabetesType').options.enum;
@@ -323,12 +323,13 @@ module.exports = {
         'hospitalizationType':hospitalizationTypeE,
         'allergies':allergiesE,
         'infectoType':infectoTypeE,
-        'kindneyType':kindneyTypeE,
+        'kidneyType':kidneyTypeE,
         'liverType':liverTypeE,
         'cerebralPalsy':cerebralPalsyE,
         'diabetesType':diabetesTypeE,
         'hearthType':hearthTypeE,
         'cancerType':cancerTypeE,
+        'lungType':lungTypeE,
         'menu':'/updateMedicalRecord'
       });
     }

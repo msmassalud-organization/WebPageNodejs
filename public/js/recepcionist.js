@@ -21,10 +21,13 @@ $(function() {
           var activa = data.isActive?'Activa':'Inactiva';
 
           $("#result").html(
-            '<strong>'+activa+'</strong><br/>'+
-            '<strong>Nombre:</strong>'+data.userProfile.fullName+'<br/>'
-
+            'Membresía: <strong>'+activa+'</strong><br/>'+
+            '<strong>Nombre:</strong>'+data.userProfile.fullName+'<br/>'+
+            '<strong>Usuario:</strong>'+data.userProfile.email+'<br/>'
           );
+
+          $("#aMR").attr("href", "/medicalRecord?email="+data.userProfile.email);
+          localStorage.setItem("member",data.userProfile.email);
         },
         204: function(data) {
           //No se encontró la membresía, pone una equis

@@ -11,7 +11,7 @@ const hospitalizationTypeE = MR.schema.path('pathological.Hospitalizations.hospi
 const allergiesE = MR.schema.path('pathological.Hospitalizations.allergies').options.enum;
 const infectoTypeE = MR.schema.path('pathological.Diseases.infectoType').options.enum;
 const lungTypeE = MR.schema.path('pathological.Diseases.lungType').options.enum;
-const kindneyTypeE = MR.schema.path('pathological.Diseases.kindneyType').options.enum;
+const kidneyTypeE = MR.schema.path('pathological.Diseases.kidneyType').options.enum;
 const liverTypeE = MR.schema.path('pathological.Diseases.liverType').options.enum;
 const cerebralPalsyE = MR.schema.path('pathological.Diseases.cerebralPalsy').options.enum;
 const diabetesTypeE = MR.schema.path('pathological.Diseases.diabetesType').options.enum;
@@ -115,27 +115,29 @@ module.exports = {
         path: 'medicalRecord',
         model: 'MemberMedicalRecord',
         select: '-_id'
-      }).exec((err, user) => {
+      }).exec((err, member) => {
         if (err) {
           throw err;
         }
         //si existe el usuario (debería)
-        if (user) {
+        if (member) {
           //Renderizamos la página para la captura de la historia clínica
-          res.status(200).render('pages/updateMedicalRecord', {
-            user: req.user,
+          res.status(200).render('pages/medicalRecord', {
+            'user': req.user,
             menu: '/medicalRecord',
+            'member': member,
             message: '',
             'physicalTraumaAreas': traumaAreasE,
             'hospitalizationType':hospitalizationTypeE,
             'allergies':allergiesE,
             'infectoType':infectoTypeE,
-            'kindneyType':kindneyTypeE,
+            'kidneyType':kidneyTypeE,
             'liverType':liverTypeE,
             'cerebralPalsy':cerebralPalsyE,
             'diabetesType':diabetesTypeE,
             'hearthType':hearthTypeE,
             'cancerType':cancerTypeE,
+            'lungType':lungTypeE,
           });
         }
       });

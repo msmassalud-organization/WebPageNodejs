@@ -218,7 +218,7 @@ function verifyToken(req, res) {
   populate({
     path:'userProfile',
     model: 'User',
-    select: '-_id fullName',
+    select: '-_id fullName email',
   }).
   exec((err, membership) => {
     if (membership) {
