@@ -175,7 +175,7 @@ var MemberMedicalRecord = new mongoose.Schema({
         enum: ['URGENCIAS', 'CUIDADOS INTENSIVOS', 'ENFERMEDADES O PATOLOGÍAS', 'CIRUGÍAS', 'OTRO']
       },
       bloodType: {
-        type: String,
+        type: [String],
         enum: ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+']
       },
       bloodTransfer: {
@@ -183,7 +183,7 @@ var MemberMedicalRecord = new mongoose.Schema({
       },
       allergies: {
         type: [String],
-        enum: ['MEDICAMENTOS', 'RESPIRATORIAS', 'alimentarias', 'cutaneas', 'OTRO']
+        enum: ['MEDICAMENTOS', 'RESPIRATORIAS', 'ALIMENTARIAS', 'CUTANEAS', 'OTRO']
       },
       drugAddiction: {
         type: Boolean

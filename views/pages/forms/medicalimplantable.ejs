@@ -1,0 +1,101 @@
+<%
+  var binaryAnswers = ['Sí','No','Desconoce'];
+%>
+<form class="form-signin" action="/updateMedicalRecord" method="post" enctype="application/x-www-form-urlencoded">
+  <div class="row formularios">
+    <h3>Dispositivos médicos implantables</h3>
+    <div class="col-6 col-md-4"><!-- INICIA PRIMER DIV-->
+      <label class="pregunta">Protesis dentales</label>
+      <!-- <p class="consumir">Es un elemento artifical destinado a restaurar la anatomía de una o varias piezas mentales</p> -->
+      <div class="radio">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="dental" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <label class="pregunta">Protesis oculares</label>
+      <!-- <p class="consumir">Es un elemento artifical destinado a restaurar la anatomía de una o varias piezas mentales</p> -->
+      <div class="radio">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="ocular" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <label class="pregunta"> Protesis auditivas</label>
+      <!-- <p class="consumir">Es un elemento artifical destinado a restaurar la anatomía de una o varias piezas mentales</p> -->
+      <div class="radio">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="hearing" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <label class="pregunta">Protesis esteticas o cosmeticas</label>
+      <!-- <p class="consumir">Sirver para mejorar el aspecto exterior del cuerpo, no tienen una función fuera de eso</p> -->
+      <div class="radio">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="cosmetic" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+  </div> <!--FINALIZA PRIMER DIV-->
+  <div class="col-6 col-md-4"><!--INICIA SEGUNDO DIV-->
+    <label class="pregunta">Protesis craneales</label>
+    <!-- <p class="consumir">Incluye implante personalizado, miniplacas, tornillos, valvulas, stents coronarios y cerebrales</p> -->
+    <div class="radio">
+      <% binaryAnswers.forEach(function(answer){ %>
+      <% var opt = answer.charAt(0).toLowerCase(); %>
+        <label class="radio"><input type="radio" name="cranial" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+      <%})%>
+    </div>
+    <label class="pregunta"> Protesis de miembros superiores</label>
+    <!-- <p class="consumir">Incluye dedos, manos, codo, hombo, brazo completo, así como placas y tornillos en la zona</p> -->
+    <div class="radio">
+      <% binaryAnswers.forEach(function(answer){ %>
+      <% var opt = answer.charAt(0).toLowerCase(); %>
+        <label class="radio"><input type="radio" name="upperLimb" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+      <%})%>
+    </div>
+    <label class="pregunta"> Protesis de columna </label>
+    <!-- <p class="consumir">Sirver para mejorar el aspecto exterior del cuerpo, no tienen una función fuera de eso</p> -->
+    <div class="radio">
+      <% binaryAnswers.forEach(function(answer){ %>
+      <% var opt = answer.charAt(0).toLowerCase(); %>
+        <label class="radio"><input type="radio" name="coloum" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+      <%})%>
+    </div>
+    <label class="pregunta"> Protesis de miembros inferioress </label>
+    <!-- <p class="consumir">Incluye cadera, rodilla, pie, pierna completa, asi como placas y tornillos en la zona</p> -->
+    <div class="radio">
+      <% binaryAnswers.forEach(function(answer){ %>
+      <% var opt = answer.charAt(0).toLowerCase(); %>
+        <label class="radio"><input type="radio" name="lowerLimb" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+      <%})%>
+    </div>
+  </div><!--FINALIZA SEGUNDO DIV-->
+  <div class="col-6 col-md-4"><!--INICIA TERCER DIV-->
+    <label class="pregunta"> Protesis vasculares </label>
+    <div class="radio">
+      <% binaryAnswers.forEach(function(answer){ %>
+      <% var opt = answer.charAt(0).toLowerCase(); %>
+        <label class="radio"><input type="radio" name="vascular" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+      <%})%>
+    </div>
+    <label class="pregunta"> Protesis de columna </label>
+    <!-- <p class="consumir">Sirver para mejorar el aspecto exterior del cuerpo, no tienen una función fuera de eso</p> -->
+    <div class="radio">
+      <% binaryAnswers.forEach(function(answer){ %>
+      <% var opt = answer.charAt(0).toLowerCase(); %>
+        <label class="radio"><input type="radio" name="cathers" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+      <%})%>
+    </div>
+    <label class="pregunta">Protesis de miembros inferioress</label>
+    <!-- <p class="consumir">Incluye cadera, rodilla, pie, pierna completa, asi como placas y tornillos en la zona</p> -->
+    <div class="radio">
+      <% binaryAnswers.forEach(function(answer){ %>
+      <% var opt = answer.charAt(0).toLowerCase(); %>
+        <label class="radio"><input type="radio" name="cardiac" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+      <%})%>
+    </div>
+  </div> <!--FINALIZA TERCER DIV-->
+  </div><!--row formularios-->
+</form>

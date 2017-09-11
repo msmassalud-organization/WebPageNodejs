@@ -32,7 +32,7 @@
                                     <form id="wizardForm" method="" action="">
                                     <div class="header text-center">
                                         <h3 class="title">Perfil Médico</h3>
-                                        <p class="category">Split a complicated flow in multiple steps</p>
+                                        <!-- <p class="category">Split a complicated flow in multiple steps</p> -->
                                     </div>
 				                            <div class="content">
 				                                <ul class="nav">
@@ -40,33 +40,29 @@
 					                                <li><a href="#tab2" data-toggle="tab">Patologicos</a></li>
 					                                <li><a href="#tab3" data-toggle="tab">Hospitalizaciones</a></li>
 					                                <li><a href="#tab4" data-toggle="tab">Traumatismos</a></li>
-					                                <li><a href="#tab5" data-toggle="tab">Implantes</a></li>
-					                                <li><a href="#tab6" data-toggle="tab">Familiares</a></li>
+					                                <!-- <li><a href="#tab5" data-toggle="tab">Implantes</a></li> -->
+					                                <!-- <li><a href="#tab6" data-toggle="tab">Antecedentes Madre</a></li> -->
+																					<!-- <li><a href="#tab7" data-toggle="tab">Antecedentes Padre</a></li> -->
 				                              	</ul>
 																			<div class="tab-content">
 																					<div class="tab-pane" id="tab1">
-																						<%include forms/familyTestM%>
+																						<%include forms/medicalImplantable%>
 																					</div>
 																					<div class="tab-pane" id="tab2">
-																						<%include forms/familyTestP%>
+																						<h2>prueba</h2>
 				                                  </div>
 				                                  <div class="tab-pane" id="tab3">
-																						<%include forms/medicalAPNP%>
+																						<h2>prueba</h2>
 				                                  </div>
-				                                  <div class="tab-pane" id="tab4">
-																						<%include forms/medicalAPP%>
-				                                  </div>
-																					<div class="tab-pane" id="tab5">
+																					<div class="tab-pane" id="tab4">
 				                                  	<h2 class="text-center text-space">Yuhuuu! <br><small> Click on "<b>Finish</b>" to join our community</small></h2>
 				                                 	</div>
 				                              	</div>
 				                            </div>
 					                            <div class="footer">
 					                                        <button type="button" class="btn btn-default btn-fill btn-wd btn-back pull-left">Back</button>
-
 					                                        <button type="button" class="btn btn-info btn-fill btn-wd btn-next pull-right">Next</button>
 					                                        <button type="button" class="btn btn-info btn-fill btn-wd btn-finish pull-right" onclick="onFinishWizard()">Finish</button>
-
 					                                        <div class="clearfix"></div>
 					                            </div>
                                     </form>

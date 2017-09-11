@@ -1,117 +1,94 @@
-<div class="conteiner-fluid">
-  <form class="form-signin" action="/updateMedicalRecord" method="post" enctype="application/x-www-form-urlencoded">
-    <div class="row formularios">
-      <div class="texto-principal"><h2>Hospitalización y cirugias</h2></div>
-
-
-
-        <div class="col-6 col-md-4"><!-- INICIA PRIMER DIV-->
-
-          <label for="isBeenHospitalizes">
-            <h2>Alguna vez se le ha hospitalizado</h2>
-            <p class="consumir">La persona que visita un establecimiento de atención de la salud por razón de diagnóstico o tratamiento y pasa la noche en el recinto</p>
-          </label><br/>
-                <label onclick="toggleLabel('hospital')" class="radio"><input type="radio"  name="isBeenHospitalizes" value="SI"> SI </label>
-                <div id="hospital" style="display:none">
-                  <label for="times">
-                    <h2>Número de veces de hospitalización</h2>
-                  </label><br/>
-                  <div class="seleccion">
-                    <input type="text" id="timeHospitalizacion" value="" onKeyPress="return numbersMaximo(event,'timeHospitalizacion',1)" name="times" class="form-control" placeholder="Número de veces que te han hospitalizado">
-                  </div>
-
-                  <label for="HospitalizationType">
-                    <h2>Tipo de hospitalización</h2>
-                  </label><br/>
-                    <label class="checkbox"><input type="checkbox" name="HospitalizationType" value="urgencias(medicas o traumaticas)" > Urgencias(medicas o traumaticas)</label>
-                    <label class="checkbox"><input type="checkbox" name="HospitalizationType" value="unidad de cuidados intensivos"> Unidad de cuidados intensivos </label>
-                    <label class="checkbox"><input type="checkbox" name="HospitalizationType" value="enfermedades o patologias"> Enfermedades o patologias </label>
-                    <label class="checkbox"><input type="checkbox" name="HospitalizationType" value="cirugias programadas" > cirugias programadas </label></br>
-
-                </div> <!--.Desplegar opciones-->
-                <label class="radio" onclick="ocultar('hospital')"><input type="radio"  name="isBeenHospitalizes" value="NO" checked> NO </label>
-
-
-        </div> <!--FINALIZA PRIMER DIV-->
-
-        <div class="col-6 col-md-4"><!--INICIA SEGUNDO DIV-->
-          <label for="blood">
-            <h2>Conoces tu tipo sanguineo</h2>
-            <p class="consumir"></p>
-          </label><br/>
-                <label onclick="toggleLabel('sangre')" class="radio"><input type="radio"  name="blood" value="SI"> SI </label>
-                <div id="sangre" style="display:none">
-                  <label for="bloodType">
-                    <h2>Tipo de sangre</h2>
-                  </label><br/>
-                    <label class="checkbox"><input type="checkbox" name="bloodType" value="O-" > O- </label>
-                    <label class="checkbox"><input type="checkbox" name="bloodType" value=" O+"> O+  </label>
-                    <label class="checkbox"><input type="checkbox" name="bloodType" value="A-"> A- </label>
-                    <label class="checkbox"><input type="checkbox" name="bloodType" value="A+" > A+ </label>
-                    <label class="checkbox"><input type="checkbox" name="bloodType" value="B-"> B- </label>
-                    <label class="checkbox"><input type="checkbox" name="bloodType" value="B+"> B+ </label>
-                    <label class="checkbox"><input type="checkbox" name="bloodType" value="AB-"> AB- </label>
-                    <label class="checkbox"><input type="checkbox" name="bloodType" value="AB"> AB </label>
-                    <br/>
-                </div> <!--.Desplegar opciones-->
-                <label class="radio" onclick="ocultar('sangre')"><input type="radio"  name="blood" value="NO"> NO </label>
-
-        <label for="bloodTransfer">
-          <h2>Alguna vez ha recibido transfusiones sanguineas</h2>
-        </label><br/>
-        <label class="radio"><input type="radio" name="bloodTransfer" value="Si" > Si </label>
-        <label class="radio"><input type="radio" name="bloodTransfer" value="No"> No </label>
-        <label class="radio"><input type="radio" name="bloodTransfer" value="Desconoce" checked> Desconoce </label>
-
-        </div><!--FINALIZA SEGUNDO DIV-->
-
-
-        <div class="col-6 col-md-4"><!--INICIA TERCER DIV-->
-
-
-          <label for="allergies">
-            <h2>Alergias</h2>
-            <p class="consumir"></p>
-          </label><br/>
-                <label onclick="toggleLabel('alle')" class="radio"><input type="radio"  name="allergies" value="SI"> SI </label>
-                <div id="alle" style="display:none">
-                  <label for="allergiesType">
-                    <h2>Tipo de alergias</h2>
-                  </label><br/>
-                    <label class="checkbox"><input type="checkbox" name="allergiesType" value="Medicamentos " > medicamentos </label>
-                    <label class="checkbox"><input type="checkbox" name="allergiesType" value="respiratorias "> respiratorias </label>
-                    <label class="checkbox"><input type="checkbox" name="allergiesType" value="alimentarias "> alimentarias  </label>
-                    <label class="checkbox"><input type="checkbox" name="allergiesType" value="cutaneas "> cutaneas  </label>
-                    <label class="checkbox"><input type="checkbox" name="allergiesType" value="Otro tipo "> Otro tipo  </label><br/>
-                </div> <!--.Desplegar opciones-->
-                <label class="radio" onclick="ocultar('alle')"><input type="radio"  name="allergies" value="NO"> NO </label>
-                <label class="radio" onclick="ocultar('alle')"><input type="radio"  name="allergies" value="DESCONOCE" checked> DESCONOCE </label>
-
-
-                <label for="drugAddiction">
-                  <h2>¿Tienes alguna farmacodependencia?</h2>
-                  <p class="consumir">Es el estado físico y psicológico que causa la acción recíproca entre el organismo y el fármaco. Ocurre cuando una persona requiere uno o más fármacos para funcionar con normalidad</p>
-                </label><br/>
-                <label class="radio"><input type="radio" name="drugAddiction" value="Si" > Si </label>
-                <label class="radio"><input type="radio" name="drugAddiction" value="No"> No </label>
-
-
-                <label for="vaccineScheme">
-                  <h2>¿Tiene completo el esquema de vacunación?</h2>
-                  <p class="consumir">Considera que hay un esquema para menores y otro para adultos</p>
-                </label><br/>
-                <label class="radio"><input type="radio" name="vaccineScheme" value="Si" > Si </label>
-                <label class="radio"><input type="radio" name="vaccineScheme" value="No"> No </label>
-                <label class="radio"><input type="radio" name="vaccineScheme" value="Desconoce"> Desconoce </label>
-
-        </div> <!--FINALIZA TERCER DIV-->
-
-
-
-
-
-
-
-      </div><!--.row formularios-->
-  </form>
-</div><!--Container Fluid-->
+<%
+  var binaryAnswers = ['Sí','No','Desconoce'];
+  var HospitalizationType = locals.hospitalizationType;
+  var bloodType = locals.bloodType;
+  var allergies = locals.allergies;
+%>
+<form class="form-signin" action="/updateMedicalRecord" method="post" enctype="application/x-www-form-urlencoded">
+  <div class="row formularios">
+    <div class="texto-principal">
+      <h3>Hospitalización y cirugias</h3>
+    </div>
+      <div class="col-6 col-md-4"><!-- INICIA PRIMER DIV-->
+        <div>
+          <label class="pregunta">¿Alguna vez se le ha hospitalizado?</label>
+          <!-- <p>La persona que visita un establecimiento de atención de la salud por razón de diagnóstico o tratamiento y pasa la noche en el recinto</p> -->
+          <div class="radio" name="isBeenHospitalizes" id="isBeenHospitalizes">
+            <% binaryAnswers.forEach(function(answer){ %>
+            <% var opt = answer.charAt(0).toLowerCase(); %>
+              <label class="radio"><input type="radio" name="sH" id="<%=opt%>H" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+            <%})%>
+          </div>
+          <div id="siH" style="display:none">
+            <label class="pregunta">Número de veces de hospitalización</label>
+            <div class="seleccion">
+              <input type="text" id="timeHospitalizacion" value="" onKeyPress="return numbersMaximo(event,'timeHospitalizacion',1)" name="times" class="form-control" placeholder="Número de veces que te han hospitalizado">
+            </div>
+            <br><label class="pregunta">Tipo de hospitalización</label>
+            <% HospitalizationType.forEach(function(type){ %>
+              <label class="checkbox"><input type="checkbox" name="HospitalizationType" data-toggle="checkbox" value="<%=type%>"><%=type%></label>
+            <%})%>
+          </div>
+        </div>
+        <label class="pregunta">¿Tiene alguna farmacodependencia?</label>
+        <!-- <p>Es el estado físico y psicológico que causa la acción recíproca entre el organismo y el fármaco. Ocurre cuando una persona requiere uno o más fármacos para funcionar con normalidad</p> -->
+        <div class="radio" name="drugAddiction" id="drugAddiction">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="sH" id="<%=opt%>D" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+      </div>
+      <!-- SEGUNDA COLUMNA -->
+    <div class="col-6 col-md-4">
+      <div>
+        <label class="pregunta">¿Conoces tu tipo sanguineo?</label>
+        <div class="radio" name="tipoSanguineo" id="tipoSanguineo">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="sH" id="<%=opt%>TS" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+        <div class="radio" name="siTS" id="siTS" style="display:none">
+          <label class="pregunta">Tipo de sangre</label>
+            <% bloodType.forEach(function(type){ %>
+              <label class="radio"><input type="radio" name="bloodType" data-toggle="radio" value="<%=type%>"><%=type%></label>
+            <%})%>
+        </div>
+      </div>
+      <div>
+        <label class="pregunta">¿Alguna vez ha recibido transfusiones sanguineas?</label>
+        <div class="radio" name="bloodTransfer" id="bloodTransfer">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="sH" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+      </div>
+    </div><!--FINALIZA SEGUNDO DIV-->
+    <!--INICIA TERCER DIV-->
+    <div class="col-6 col-md-4">
+      <label class="pregunta">Alergias</label>
+      <div class="radio" name="allergies" id="allergies">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+        <label class="radio"><input type="radio" name="sA" id="<%=opt%>A" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <div class="radio" name="siA" id="siA" style="display:none">
+        <label class="pregunta">Tipo de alergías:</label>
+          <% allergies.forEach(function(type){ %>
+            <label class="checkbox"><input type="checkbox" name="allergiesType" data-toggle="checkbox" value="<%=type%>"><%=type%></label>
+          <%})%>
+      </div>
+      <label class="pregunta">¿Tiene completo el esquema de vacunación?</label>
+      <!-- <p class="consumir">Considera que hay un esquema para menores y otro para adultos</p> -->
+      <div class="radio" name="vaccineScheme" id="vaccineScheme">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="sH" id="<%=opt%>V" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+    </div> <!--FINALIZA TERCER DIV-->
+  </div><!--.row formularios-->
+</form>

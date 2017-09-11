@@ -5,149 +5,134 @@
   var kidneyType = locals.kidneyType;
   var lungType = locals.lungType;
   var liverType = locals.liverType;
-
   var binaryAnswers = ['Sí','No','Desconoce'];
 %>
-
-<!-- ANTECEDENTES MADRE -->
-<div class="row"> <!--PRIMERA FILA MADRE -->
-  <h3 class="form-signin-heading bg-info">Antecedentes Familiares Madre</h3>
-  <h4 class="form-signin-heading">Mencione si padece o padecio alguna de las siguientes enfermedades o sintomas:</h4>
-  <div class="row">
-    <div class="col-xs-12 col-sm-2">
-      <p class="text-center"><label class="pregunta">Vive:</label></p>
-    </div>
-    <div class="col-xs-12 col-sm-10">
+<form class="form-signin" action="/updateMedicalRecord" method="post" enctype="application/x-www-form-urlencoded">
+  <div class="row formularios">
+    <h3 class="form-signin-heading bg-info">Antecedentes Familiares Madre</h3>
+    <h4 class="form-signin-heading">Mencione si padece o padecio alguna de las siguientes enfermedades o sintomas:</h4>
+    <!-- PRIMER COLUMNA -->
+    <div class="col-sm-6 col-md-4">
+      <p><label class="pregunta">Vive:</label></p>
       <div class="switch"
-       data-on-label="SI"
-       data-off-label="NO">
-       <input type="checkbox" name="isAliveM" checked/>
-       </div>
-     </div>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-3">
+         data-on-label="SI"
+         data-off-label="NO">
+         <input type="checkbox" name="isAliveM" checked/>
+      </div>
+      <div>
+        <label class="pregunta">Obesidad o sobrepreso</label>
+        <div class="radio" name="obesidadMadre" id="obesidadMadre">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="obesityM" id="<%=opt%>OM" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+      </div>
+      <div>
+        <label class="pregunta">Cancer</label>
+        <div class="radio" name="cancerMadre" id="cancerMadre">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="cancerM" id="<%=opt%>TC" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+        <div class="radio" name="siTC" id="siTC" style="display:none">
+          <label class="pregunta">Tipo de cancer</label>
+            <% cancerType.forEach(function(type){ %>
+              <label class="radio"><input type="radio" name="cancerTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label>
+            <%})%>
+        </div>
+      </div>
+      <div>
+        <label class="pregunta">Enfermedades Renales</label>
+        <div class="radio" name="renalesMadre" id="renalesMadre">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="kidneyDisease" id="<%=opt%>RM" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+        <div class="radio" name="siRM" id="siRM" style="display:none">
+          <label class="pregunta">Tipo de Nefropatias</label>
+          <% kidneyType.forEach(function(type){ %>
+            <label class="radio"><input type="radio" name="kidneyTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label>
+          <%})%>
+        </div>
+      </div>
+    </div>
+    <!-- SEGUNDA COLUMNA -->
+    <div class="col-sm-6 col-md-4">
+      <div>
+          <label class="pregunta">Cefalea</label>
+          <div class="radio" name="cefaleaMadre" id="cefaleaMadre">
+            <% binaryAnswers.forEach(function(answer){ %>
+            <% var opt = answer.charAt(0).toLowerCase(); %>
+              <label class="radio"><input type="radio" name="headacheM" id="<%=opt%>CM" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+            <%})%>
+          </div>
+      </div>
+      <div>
+          <label class="pregunta">Cardiopatias</label>
+          <div class="radio" name="cardiopatiasMadre" id="cardiopatiasMadre">
+            <% hearthType.forEach(function(type){ %>
+              <label class="radio"><input type="radio" name="hearthTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label>
+            <%})%>
+          </div>
+      </div>
+      <div>
+        <label class="pregunta">Enfermedades Hepaticas</label>
+        <div class="radio" name="hepaticasMadre" id="hepaticasMadre">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="liverDisease" id="<%=opt%>HM" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+        <div class="radio" name="siHM" id="siHM" style="display:none">
+          <label class="pregunta">Tipo de nefropatias</label>
+          <% liverType.forEach(function(type){ %>
+            <label class="radio"><input type="radio" name="liverTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label>
+          <%})%>
+        </div>
+      </div>
+    </div>
+    <!-- TERCER COLUMNA -->
+    <div class="col-sm-6 col-md-4">
+      <div>
+          <label class="pregunta">Artitris</label>
+          <div class="radio" name="artitrisMadre" id="artitrisMadre">
+            <% binaryAnswers.forEach(function(answer){ %>
+            <% var opt = answer.charAt(0).toLowerCase(); %>
+              <label class="radio"><input type="radio" name="arthritisM" id="<%=opt%>AM" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+            <%})%>
+          </div>
+      </div>
       <label class="pregunta">Diabetes</label>
       <div class="radio" name="diabetesMadre" id="diabetesMadre">
         <% binaryAnswers.forEach(function(answer){ %>
         <% var opt = answer.charAt(0).toLowerCase(); %>
-          <label class="radio"><input type="radio" name="diabetesM" id="<%=opt%>DM" data-toggle="radio" value="<%=answer%>"><%=answer%></label><br>
+          <label class="radio"><input type="radio" name="diabetesM" id="<%=opt%>DM" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
         <%})%>
       </div>
-      <!-- OCULTO DIABETES SI -->
       <div class="radio" name="siDM" id="siDM" style="display:none">
         <label class="pregunta">Tipo de diabetes</label>
         <% diabetesType.forEach(function(type){ %>
-          <label class="radio"><input type="radio" name="diabetesTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label><br>
+          <label class="radio"><input type="radio" name="diabetesTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label>
         <%})%>
       </div>
-      <!-- FIN  OCULTO DIABETES SI -->
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-3">
-      <label class="pregunta">Artitris</label>
-      <div class="radio" name="artitrisMadre" id="artitrisMadre">
-        <% binaryAnswers.forEach(function(answer){ %>
-        <% var opt = answer.charAt(0).toLowerCase(); %>
-          <label class="radio"><input type="radio" name="arthritisM" id="<%=opt%>AM" data-toggle="radio" value="<%=answer%>"><%=answer%></label><br>
-        <%})%>
-      </div>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-3">
-      <label class="pregunta">Cefalea</label>
-      <div class="radio" name="cefaleaMadre" id="cefaleaMadre">
-        <% binaryAnswers.forEach(function(answer){ %>
-        <% var opt = answer.charAt(0).toLowerCase(); %>
-          <label class="radio"><input type="radio" name="headacheM" id="<%=opt%>CM" data-toggle="radio" value="<%=answer%>"><%=answer%></label><br>
-        <%})%>
-      </div>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-3">
-      <label class="pregunta">Obesidad o sobrepreso</label>
-      <div class="radio" name="obesidadMadre" id="obesidadMadre">
-        <% binaryAnswers.forEach(function(answer){ %>
-        <% var opt = answer.charAt(0).toLowerCase(); %>
-          <label class="radio"><input type="radio" name="obesityM" id="<%=opt%>OM" data-toggle="radio" value="<%=answer%>"><%=answer%></label><br>
-        <%})%>
-      </div>
-  </div>
-</div> <!--FIN PRIMERA FILA MADRE -->
-<div class="row"> <!--SEGUNDA FILA MADRE -->
-  <div class="col-xs-12 col-sm-6 col-md-3">
-      <label class="pregunta">Cardiopatias</label>
-      <div class="radio" name="cardiopatiasMadre" id="cardiopatiasMadre">
-        <% hearthType.forEach(function(type){ %>
-          <label class="radio"><input type="radio" name="hearthTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label><br>
-        <%})%>
-      </div>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-3">
-      <label class="pregunta">Enfermedades Pulmonares</label>
-      <div class="radio" name="pulmonaresMadre" id="pulmonaresMadre">
-        <% binaryAnswers.forEach(function(answer){ %>
-        <% var opt = answer.charAt(0).toLowerCase(); %>
-          <label class="radio"><input type="radio" name="lungDiseaseM" id="<%=opt%>PM" data-toggle="radio" value="<%=answer%>"><%=answer%></label><br>
-        <%})%>
-      </div>
-      <!-- OCULTO PULMONARES SI -->
-      <div class="radio" name="siPM" id="siPM" style="display:none">
-        <label class="pregunta">Tipo de neumopatias</label>
-        <% lungType.forEach(function(type){ %>
-          <label class="radio"><input type="radio" name="lungTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label><br>
-        <%})%>
-      </div>
-      <!-- FIN OCULTO CANCER SI -->
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-3">
-    <label class="pregunta">Cancer</label>
-    <div class="radio" name="cancerMadre" id="cancerMadre">
-      <% binaryAnswers.forEach(function(answer){ %>
-      <% var opt = answer.charAt(0).toLowerCase(); %>
-        <label class="radio"><input type="radio" name="cancer" id="<%=opt%>TC" data-toggle="radio" value="<%=answer%>"><%=answer%></label><br>
-      <%})%>
+    <div>
+        <label class="pregunta">Enfermedades Pulmonares</label>
+        <div class="radio" name="pulmonaresMadre" id="pulmonaresMadre">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="lungDiseaseM" id="<%=opt%>PM" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+        <div class="radio" name="siPM" id="siPM" style="display:none">
+          <label class="pregunta">Tipo de neumopatias</label>
+          <% lungType.forEach(function(type){ %>
+            <label class="radio"><input type="radio" name="lungTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label>
+          <%})%>
+        </div>
     </div>
-    <!-- OCULTO CANCER SI -->
-    <div class="radio" name="siTC" id="siTC" style="display:none">
-      <label class="pregunta">Tipo de cancer</label>
-        <% cancerType.forEach(function(type){ %>
-          <label class="radio"><input type="radio" name="cancerTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label><br>
-        <%})%>
     </div>
-    <!-- FIN OCULTO CANCER SI -->
   </div>
-  <div class="col-xs-12 col-sm-6 col-md-3">
-    <label class="pregunta">Enfermedades Renales</label>
-    <div class="radio" name="renalesMadre" id="renalesMadre">
-      <% binaryAnswers.forEach(function(answer){ %>
-      <% var opt = answer.charAt(0).toLowerCase(); %>
-        <label class="radio"><input type="radio" name="kidneyDisease" id="<%=opt%>RM" data-toggle="radio" value="<%=answer%>"><%=answer%></label><br>
-      <%})%>
-    </div>
-    <!-- OCULTO RENALES SI -->
-    <div class="radio" name="siRM" id="siRM" style="display:none">
-      <label class="pregunta">Tipo de Nefropatias</label>
-      <% kidneyType.forEach(function(type){ %>
-        <label class="radio"><input type="radio" name="kidneyTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label><br>
-      <%})%>
-    </div>
-    <!-- FIN OCULTO RENALES SI -->
-  </div>
-</div> <!--FIN SEGUNDA FILA MADRE -->
-<div class="row"><!--TERCERA FILA MADRE -->
-  <div class="col-xs-12 col-sm-6 col-md-3">
-    <label class="pregunta">Enfermedades Hepaticas</label>
-    <div class="radio" name="hepaticasMadre" id="hepaticasMadre">
-      <% binaryAnswers.forEach(function(answer){ %>
-      <% var opt = answer.charAt(0).toLowerCase(); %>
-        <label class="radio"><input type="radio" name="liverDisease" id="<%=opt%>HM" data-toggle="radio" value="<%=answer%>"><%=answer%></label><br>
-      <%})%>
-    </div>
-    <!-- OCULTO RENALES SI -->
-    <div class="radio" name="siHM" id="siHM" style="display:none">
-      <label class="pregunta">Tipo de nefropatias</label>
-      <% liverType.forEach(function(type){ %>
-        <label class="radio"><input type="radio" name="liverTypeM" data-toggle="radio" value="<%=type%>"><%=type%></label><br>
-      <%})%>
-    </div>
-    <!-- FIN OCULTO RENALES SI -->
-  </div>
-</div><!--FIN TERCERA FILA MADRE -->
-<!-- FIN ANTECEDENTES MADRE -->
+</form>
