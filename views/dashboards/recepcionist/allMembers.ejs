@@ -34,9 +34,7 @@
 
                             <table id="bootstrap-table" class="table">
                                 <thead>
-                                  <th data-field="state" data-checkbox="true"></th>
-																	<th data-field="memberId" class="text-center">Membresía</th>
-                                  <th data-field="verificationCode" class="text-center">Token</th>
+																	<th data-field="memberId" data-sortable="true" class="text-center">Membresía</th>
                                 	<th data-field="fullName" data-sortable="true">Nombre</th>
 																	<th data-field="email" data-sortable="true">Correo</th>
 																	<th data-field="cellphone" data-sortable="true">Telefono</th>
@@ -56,9 +54,7 @@
                                         dEnd += '/'+ member.expiringDate.getFullYear();
                                     %>
 																			<tr>
-	                                      <td></td>
 																				<td><%=member.memberId%></td>
-                                        <td><%=member.verificationCode%></td>
 	                                    	<td><%=member.userProfile.fullName%></td>
 	                                    	<td><%=member.userProfile.email%></td>
 	                                    	<td><%=member.userProfile.cellphone%></td>
@@ -91,9 +87,6 @@
                 '</a>',
                 '<a rel="tooltip" title="Edit" class="btn btn-simple btn-warning btn-icon table-action edit" href="javascript:void(0)">',
                     '<i class="fa fa-edit"></i>',
-                '</a>',
-                '<a rel="tooltip" title="Remove" class="btn btn-simple btn-danger btn-icon table-action remove" href="javascript:void(0)">',
-                    '<i class="fa fa-remove"></i>',
                 '</a>'
             ].join('');
         }
@@ -109,15 +102,8 @@
                 'click .edit': function (e, value, row, index) {
                     info = JSON.stringify(row);
 
-                    swal('You click edit icon, row: ', info);
-                    console.log(info);
-                },
-                'click .remove': function (e, value, row, index) {
+                    swal('You click edit icon, row: ', row.email);
                     console.log(row);
-                    $table.bootstrapTable('remove', {
-                        field: 'id',
-                        values: [row.id]
-                    });
                 }
             };
 

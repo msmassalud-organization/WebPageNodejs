@@ -41,6 +41,12 @@
       <li>
         <a href="/dashboard"><i class="pe-7s-graph"></i><p>Panel de control</p></a>
       </li>
+      <%if(locals.menu == '/calendar'){%>
+      <li class="active">
+      <%}%>
+      <li>
+        <a href="/calendar"><i class="pe-7s-date"></i><p>Citas</p></a>
+      </li>
       <%if(locals.menu == '/loadAllMembers'){%>
       <li class="active">
       <%}%>

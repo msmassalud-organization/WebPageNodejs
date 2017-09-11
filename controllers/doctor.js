@@ -343,20 +343,34 @@ module.exports = {
         res.status(200).redirect('/dashboard');
       });
     })
+  },
+
+  getEventsByEmail: (req, res)=>{
+    let email = req.query.email;
+    User.findOne({
+      'email': email,
+      'accType':'doctor'
+    }).select('-_id doctorProfile').populate({
+      path:'doctorProfile',
+      model:'Doctor',
+      select:'-_id agenda',
+      populate: {
+        path: 'agenda',
+        model: 'Event',
+        select: '-_id calendar'
+      }
+    }).exec((err, agenda)=>{
+      if(err){
+        //TODO: error 500
+        throw err;
+      }
+
+      if(agenda){
+        res.status(200).send(agenda);
+      }else{
+        res.status(404).send("La agenda está vacia");
+      }
+    })
   }
 
 }
-/*module.exports = {
-  loadPatients,
-  addPatient,
-  sendPatients,
-  findPatientByName,
-  loadPatientForm,
-  addPatientByMemberIdToken,
-  loadPatientProfile,
-  deletePatient,
-  loadCalendar,
-  getEvents,
-  registerEvent,
-  loadServices
-}*/

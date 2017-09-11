@@ -74,5 +74,13 @@ module.exports = {
       }
     }
     res.redirect('/signin');
+  },
+
+  isAjax: function(req, res, next){
+    if(req.xhr){
+      return next();
+    }else{
+      res.status(403).send("Acceso restringido.");
+    }
   }
 }

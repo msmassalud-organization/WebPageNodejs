@@ -43,13 +43,12 @@ if (nconf.get('mongoDatabase')) {
 
 console.log(uri);
 
-//mongodb.MongoClient.connect(uri, (err, db) => {
+
 mongodb.Promise = global.Promise;
-mongodb.connect(uri, (err, db) => {
-  if (err) {
-    throw err;
-  }  
-  // Create a simple little server.
+var promise = mongodb.connect(uri, {
+  useMongoClient: true
+});
+promise.then((db)=>{
   app.listen(process.env.PORT || 8080, () => {
     console.log('Magic happens in PORT 8080');
   });

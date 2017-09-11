@@ -31,12 +31,13 @@ module.exports = function(app, passport) {
     failureFlash: true
   }));
   app.get('/logout', userController.logOut);
+  app.get('/user/existsByEmail', auth.isLoggedIn, userController.existsByEmail);
   //Fin User
 
   //Miembros
-  app.get('/isMember', auth.isLoggedIn, memberController.isMember);
+  app.get('/membership/existsById', auth.isLoggedIn, memberController.existsById);
+  app.get('/membership/isTaken', auth.isLoggedIn, memberController.isTaken);
   app.get('/getMembersByName', memberController.getMembersByName);
-  app.post('/signupMember', memberController.signupMember);
   app.post('/verifyToken', auth.isLoggedIn, memberController.verifyToken);
   //Fin Miembros
 
@@ -53,6 +54,7 @@ module.exports = function(app, passport) {
   app.get('/doctorCalendar', auth.isDoctor, doctorController.loadCalendar);
   app.get('/myServices', auth.isDoctor, doctorController.loadServices);
   app.get('/getDoctorEvents', auth.isDoctor, doctorController.getEvents);
+  app.get('/doctor/eventsByEmail', doctorController.getEventsByEmail);
   app.post('/addPatient', auth.isDoctor, doctorController.addPatient);
   app.post('/getMyPatients', auth.isDoctor, doctorController.sendPatients);
   app.post('/addPatientByMemberIdToken', auth.isDoctor, doctorController.addPatientByMemberIdToken);
@@ -79,10 +81,11 @@ module.exports = function(app, passport) {
   app.get('/medicalRecord', auth.isLoggedIn, globalController.loadMedicalRecord);
 
   app.post('/updateProfile', auth.isLoggedIn, globalController.updateProfile);
+  app.post('/signupMember', auth.isLoggedIn,  globalController.signupMember);
   //Fin globales
 
   //Recepcionista
-  //app.get('/signupMember', auth.isRecepcionist, recepcionistController.loadSignupMember);
+  app.get('/calendar', auth.isRecepcionist, recepcionistController.loadCalendar);
   //Fin Recepcionista
 
   //TEST ONLY

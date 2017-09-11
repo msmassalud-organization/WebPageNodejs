@@ -28,159 +28,159 @@
 											<h4 class="title">Registro de miembros</h4>
 										</div>
 										<div class="content">
-											<% if(locals.message.length > 0){ %>
-												<div class="alert alert-danger">
-													<strong><%= locals.message %></strong>
-												</div>
+											<form id="signupForm" action="/signupMember" method="post">
+												<%if (locals.message.length > 0){%>
+													<div class="alert alert-danger"><%=locals.message%></div>
 												<%}%>
-													<form action="/signupMember" method="post">
-														<div class="row">
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="accType">Tipo de cuenta:</label>
-																	<select class="form-control" name="accType">
+
+												<div class="row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="accType">Tipo de cuenta:</label>
+															<select class="form-control" name="accType">
                               <% for(var i = 0; i < memberTypes.length; i++){ %>
                                 <option value="<%=memberTypes[i]%>"><%=memberTypes[i]%></option>
                               <%} %>
                             </select>
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="memberId">Número de membresía</label>
-																	<input type="number" class="form-control" name="memberId" id="memberId" required/>
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="memberId">Folio</label>
-																	<input type="number" class="form-control" name="folio" id="folio" required/>
-																</div>
-															</div>
 														</div>
-
-														<div class="row">
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="name">Nombre(s):</label>
-																	<input type="text" class="text-uppercase form-control" id="name" name="name" required />
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="dadLastName">Apellido Paterno:</label>
-																	<input type="text" class="text-uppercase form-control" id="dadLastName" name="dadLastName" required />
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="momLastName">Apellido Materno:</label>
-																	<input type="text" class="text-uppercase form-control" id="momLastName" name="momLastName" required />
-																</div>
-															</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="memberId">Número de membresía</label>
+															<input type="number" class="form-control" name="memberId" id="memberId" value="<%=locals.data?locals.data.memberId:''%>" required/>
 														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="memberId">Folio</label>
 
-														<div class="row">
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="cellphone">Celular:</label>
-																	<input placeholder="3315643598" type="number" class="form-control" id="cellphone" name="cellphone" required/>
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="email">Correo:</label>
-																	<input email="true" placeholder="ramon.corona@gmail.com" type="email" class="form-control text-lowercase" id="email" name="email" />
-																</div>
-															</div>
-															<div class="col-md-4">
-																<div class="form-group">
-																	<label for="birthday">Fecha de nacimiento:</label>
-																	<input id="birthday" type="text" class="form-control datepicker" placeholder="Date Picker Here" name="birthday" required/>
-																</div>
-															</div>
+															<input type="number" class="form-control" name="folio" id="folio" value="<%=locals.data?locals.data.folio:''%>"required/>
 														</div>
+													</div>
+												</div>
 
-														<div class="row">
-															<div class="col-md-6">
-																<div class="form-group">
-																	<label for="edo_nac">Estado de nacimiento</label>
-																	<select id="edo_nac" name="edo_nac" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue" required>
+												<div class="row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="name">Nombre(s):</label>
+															<input type="text" class="text-uppercase form-control" id="name" name="name"  value="<%=locals.data?locals.data.name:''%>"required />
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="dadLastName">Apellido Paterno:</label>
+															<input type="text" class="text-uppercase form-control" id="dadLastName" name="dadLastName" value="<%=locals.data?locals.data.dadLastName:''%>"required />
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="momLastName">Apellido Materno:</label>
+															<input type="text" class="text-uppercase form-control" id="momLastName" name="momLastName" value="<%=locals.data?locals.data.momLastName:''%>" required />
+														</div>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="cellphone">Celular:</label>
+															<input minLength="10" aria-invalid="false" placeholder="3315643598" type="number" class="form-control" id="cellphone" name="cellphone" value="<%=locals.data?locals.data.cellphone:''%>" required/>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="email">Correo:</label>
+															<input email="true" placeholder="ramon.corona@gmail.com" type="email" class="form-control text-lowercase" id="email" name="email" value="<%=locals.data?locals.data.email:''%>"/>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<div class="form-group">
+															<label for="birthday">Fecha de nacimiento:</label>
+															<input id="birthday" type="text" class="form-control datepicker" placeholder="Date Picker Here" name="birthday" value="<%=locals.data?locals.data.birthday:''%>" required/>
+														</div>
+													</div>
+												</div>
+
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="edo_nac">Estado de nacimiento</label>
+															<select id="edo_nac" name="edo_nac" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue" required>
 																		<%include ../partials/selectEDONAC %>
 																	</select>
-																</div>
-															</div>
-															<div class="col-md-6">
-																<div class="form-group">
-																	<label for="nac_origen">Nacionalidad de origen</label>
-																	<%include ../partials/selectNAC %>
-																</div>
-															</div>
 														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label for="nac_origen">Nacionalidad de origen</label>
+															<%include ../partials/selectNAC %>
+														</div>
+													</div>
+												</div>
 
-														<div class="row">
-															<div class="col-md-3">
-																<div class="form-group">
-																	<label for="residence">Estado residencia:</label>
-																	<select id="residence" name="residence" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+												<div class="row">
+													<div class="col-md-3">
+														<div class="form-group">
+															<label for="residence">Estado residencia:</label>
+															<select id="residence" name="residence" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
 																		<%include ../partials/selectEDONAC %>
 																	</select>
-																</div>
-															</div>
-															<div class="col-md-3">
-																<div class="form-group">
-																	<label for="mun">Municipio:</label>
-																	<select id="municipio" name="mun" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group">
+															<label for="mun">Municipio:</label>
+															<select id="municipio" name="mun" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
 																	<% include ../partials/Municipios/Jalisco %>
 																</select>
-																</div>
-															</div>
-															<div class="col-md-3">
-																<div class="form-group">
-																	<label for="loc">Localidad:</label>
-																	<select id="localidad" name="loc" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group">
+															<label for="loc">Localidad:</label>
+															<select id="localidad" name="loc" class="selectpicker" data-title="Single Select" data-style="btn-default btn-block" data-menu-style="dropdown-blue">
 																	<% include ../partials/Localidades/Zapopan %>
 																</select>
-																</div>
-															</div>
-															<div class="col-md-3">
-																<div class="form-group">
-																	<label for="cp">Código postal:</label>
-																	<input placeholder="45390" type="number" class="form-control text-lowercase" id="cp" name="cp" />
-																</div>
-															</div>
 														</div>
-														<div class="row">
-															<div class="col-md-2">
-																<div class="form-group">
-																	<div class="btn-group" id="gender" data-toggle="buttons">
-																		<label class="radio">
+													</div>
+													<div class="col-md-3">
+														<div class="form-group">
+															<label for="cp">Código postal:</label>
+															<input placeholder="45390" type="number" class="form-control text-lowercase" id="cp" name="cp" value="<%=locals.data?locals.data.cp:''%>"/>
+														</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-2">
+														<div class="form-group">
+															<div class="btn-group" id="gender" data-toggle="buttons">
+																<label class="radio">
 	                                      <input type="radio" data-toggle="radio" name="gender" value="M" checked="">Mujer
 	                                  </label>
 
-	                                  <label class="radio">
+																<label class="radio">
 	                                      <input type="radio" data-toggle="radio" name="gender" value="H">Hombre
 	                                  </label>
-																	</div>
-																</div>
 															</div>
-															<div class="col-md-6">
-																<div class="form-group">
-																	<input id="curp" placeholder="CURP" type="text" class="form-control text-uppercase" name="curp" required/></div>
-																	<button id="curpBtn" class="btn btn-success btn-fill" onclick="return false;">Generar CURP</button>
-															</div>
-															<button type="submit" class="btn btn-info btn-fill pull-right">Registrar</button>
 														</div>
-														<div class="clearfix"></div>
 													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<input id="curp" placeholder="CURP" type="text" class="form-control text-uppercase" name="curp" value="<%=locals.data?locals.data.curp:''%>" required/></div>
+															<button id="curpBtn" class="btn btn-success btn-fill" onclick="return false;">Generar CURP</button>
+													</div>
+													<button type="submit" class="btn btn-info btn-fill pull-right">Registrar</button>
 												</div>
-										</form>
+												<div class="clearfix"></div>
+										</div>
 									</div>
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
 			</div>
+	</div>
 	</div>
 	</div>
 </body>
@@ -190,6 +190,8 @@
 	<script src="/js/curp.js"></script>
 	<script>
 		$().ready(function() {
+			$("#signupForm").validate();
+
 			$("#edo_nac").selectpicker().append($("<option></option>")
 				.attr("value", "NE").text("EXTRANJERO"));
 			$("#edo_nac").selectpicker("refresh");
@@ -231,7 +233,7 @@
 
 			//TODO: Validar que exista información en los campos antes de generar la curp
 			//Generacion curp
-			$('#curpBtn').click(function(){
+			$('#curpBtn').click(function() {
 				var estado = $("#edo_nac").find("option:selected").text();
 				var appPaterno = $("#dadLastName").val();
 				var appMaterno = $("#momLastName").val();
@@ -242,12 +244,12 @@
 				var month = datepicker.getMonth() + 1;
 				var year = datepicker.getFullYear();
 				var curp = generaCurp({
-				  nombre          	: name,
-				  apellido_paterno  : appPaterno,
-				  apellido_materno  : appMaterno,
-				  sexo              : sexo,
-				  estado            : estados_valores[estado.toUpperCase()],
-				  fecha_nacimiento  : [day, month, year]
+					nombre: name,
+					apellido_paterno: appPaterno,
+					apellido_materno: appMaterno,
+					sexo: sexo,
+					estado: estados_valores[estado.toUpperCase()],
+					fecha_nacimiento: [day, month, year]
 				});
 				$('#curp').val(curp);
 			});

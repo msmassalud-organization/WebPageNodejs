@@ -111,5 +111,25 @@ module.exports = {
     }else{
       res.redirect('/signin');
     }
+  },
+  //AJAX
+  existsByEmail: (req, res)=>{
+    if(req.xhr){
+      User.findOne({
+        'email':req.query.email
+      }, (err, user)=>{
+        if(err){
+          res.status(500).send();
+        }
+
+        if(user){
+          res.status(200).send();
+        }else{
+          res.status(204).send();
+        }
+      })
+    }else{
+      res.status(403).send("Acceso restringido");
+    }
   }
 }
