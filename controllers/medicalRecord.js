@@ -446,7 +446,7 @@ function getDiseasesData(req) {
     else {
       diseases['cancerType'] = [type];
     }
-    
+
 
   return diseases;
 }
