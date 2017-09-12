@@ -201,7 +201,7 @@ module.exports = {
 
   loadProfile: (req, res) => {
     var accType = req.user.accType;
-    var route = `dashboards/${accType}/profile`;
+    var route = `pages/profile`;
     res.status(200).render(route, {
       user: req.user,
       menu: req.route.path
@@ -264,14 +264,14 @@ module.exports = {
     var update = req.body;
     res.send(req.body);
     //TODO
-    /*
+
     User.findByIdAndUpdate(req.user._id, update, function(err, userUpdated) {
       if (err) {
         res.status(500).send(err);
       }
       console.log(userUpdated);
       res.status(200).redirect("/loadDashboard");
-    });*/
+    });
   },
 
   signupMember: (req, res) => {
