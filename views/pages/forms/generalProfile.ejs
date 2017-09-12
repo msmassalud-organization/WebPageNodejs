@@ -1,0 +1,73 @@
+<form action="/updateProfile" method="post">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="email">Correo</label>
+        <input type="email" name="email" class="form-control" placeholder="Email" value="<%= user.email %>">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Nombre(s)</label>
+        <input type="text" name="name" class="form-control" placeholder="Nombre(s)" value="<%= user.name %>">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Apellido Paterno</label>
+        <input type="text" name="dadLastName" class="form-control" placeholder="Apellido Paterno" value="<%= user.dadLastName %>">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Apellido Materno</label>
+        <input type="text" name="momLastName" class="form-control" placeholder="Apellido Materno" value="<%= user.momLastName %>">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Dirección</label>
+        <input type="text" class="form-control" placeholder="Calle número, Colonia" value="<%= user.adress %>">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Ciudad</label>
+        <input type="text" name="residence" class="form-control" placeholder="Ciudad" value="<%= user.residence %>">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>País</label>
+        <input type="text" class="form-control" placeholder="País" value="<%= user.country %>">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label>Código Postal</label>
+        <input type="number" name="cp" class="form-control" placeholder="CP" value="<%= user.cp %>">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>About Me</label>
+        <textarea rows="5" class="form-control" placeholder="Here can be your description" value="Mike">Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</textarea>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-info btn-fill pull-right">Actualizar perfil</button>
+  <div class="clearfix"></div>
+</form>
