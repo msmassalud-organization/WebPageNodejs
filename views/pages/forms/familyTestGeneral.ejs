@@ -1,0 +1,148 @@
+<%
+  var binaryAnswers = ['Sí','No'];
+%>
+<form class="" action="#" method="post">
+  <!-- PRIMERA FILA -->
+  <div class="row">
+  <h4 class="form-signin-heading">Mencione si padece o padecio alguna de las siguientes enfermedades o sintomas.</h4>
+  <!-- COLUMNA PARA ANTECEDENTES MAMA 1-->
+  <div class="col-xs-12 col-sm-6">
+    <h4 class="form-signin-heading bg-info">Antecedentes Familiares Madre</h4>
+    <label class="pregunta">Diabetes</label>
+      <div class="radio" name="diabetesMadre" id="diabetesMadre">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="diabetesM" id="<%=opt%>DM" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <label class="pregunta">Hipertension</label>
+      <div class="radio" name="highbloodMadre" id="highbloodMadre">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="highbloodM" id="<%=opt%>HM" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <label class="pregunta">Cancer</label>
+        <div class="radio" name="cancerMadre" id="cancerMadre">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="cancerM" id="<%=opt%>CM" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+  </div>
+  <!-- COLUMNA PARA ANTECEDENTES PAPA -->
+  <div class="col-xs-12 col-sm-6">
+    <h4 class="form-signin-heading bg-info">Antecedentes Familiares Padre</h3>
+      <label class="pregunta">Diabetes</label>
+        <div class="radio" name="diabetesPadre" id="diabetesPadre">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="diabetesP" id="<%=opt%>DP" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+        <label class="pregunta">Hipertension</label>
+        <div class="radio" name="highbloodPadre" id="highbloodPadre">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="highbloodP" id="<%=opt%>HP" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+        <label class="pregunta">Cancer</label>
+          <div class="radio" name="cancerPadre" id="cancerPadre">
+            <% binaryAnswers.forEach(function(answer){ %>
+            <% var opt = answer.charAt(0).toLowerCase(); %>
+              <label class="radio"><input type="radio" name="cancerP" id="<%=opt%>CP" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+            <%})%>
+          </div>
+    </div>
+  </div><!-- FIN PRIMERA FILA -->
+  <!-- SEGUNDA FILA -->
+  <div class="row">
+    <h4 class="form-signin-heading bg-info">Antecedentes Patologicos</h4>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+    <label class="pregunta">Fracturas</label>
+      <div class="radio" name="fractures" id="fractures">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="fractures" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+    <label class="pregunta">Cirugias Previas</label>
+      <div class="radio" name="surgerys" id="surgerys">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="surgerys" id="<%=opt%>S" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      <!-- OCULTO CIRUGIAS -->
+      </div >
+      <div id="siS" style="display:none">
+        <label class="pregunta">¿Cuales?</label>
+        <input type="text" value="" placeholder="Ingrese datos de cirugias previas" class="form-control" />
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+    <label class="pregunta">Alergías</label>
+      <div class="radio" name="allergys" id="allergys">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="allergys" id="<%=opt%>A" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <div id="siA" style="display:none">
+        <label class="pregunta">¿Cuales?</label>
+        <input type="text" value="" placeholder="Ingrese datos de alergias identificadas" class="form-control" />
+      </div>
+    </div>
+  </div>
+  <!-- TERCERA FILA -->
+  <div class="row">
+    <h4 class="form-signin-heading bg-info">Antecedentes No Patologicos</h4>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+    <label class="pregunta">¿Padece alguna enfermedad?</label>
+      <div class="radio" name="diseases" id="diseases">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="diseases" id="<%=opt%>E" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <div id="siE" style="display:none">
+        <label class="pregunta">¿Cuales?</label>
+        <input type="text" value="" placeholder="Ingrese datos de enfermedades" class="form-control" /><br/>
+      </div>
+      <label class="pregunta">Toxicomanías(Drogas)</label>
+        <div class="radio" name="drugAddiction" id="drugAddiction">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="drugs" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+    <label class="pregunta">Vida sexual activa</label>
+      <div class="radio" name="sexualLife" id="sexualLife">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="sexual" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+      <label class="pregunta">Tabaquismo</label>
+        <div class="radio" name="smokingAddiction" id="smokingAddiction">
+          <% binaryAnswers.forEach(function(answer){ %>
+          <% var opt = answer.charAt(0).toLowerCase(); %>
+            <label class="radio"><input type="radio" name="cigarettes" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+          <%})%>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+    <label class="pregunta">Alcoholismo</label>
+      <div class="radio" name="alcoholicAdiction" id="alcoholicAdiction">
+        <% binaryAnswers.forEach(function(answer){ %>
+        <% var opt = answer.charAt(0).toLowerCase(); %>
+          <label class="radio"><input type="radio" name="alcohol" data-toggle="radio" value="<%=answer%>"><%=answer%></label>
+        <%})%>
+      </div>
+    </div>
+  </div>
+</form>
