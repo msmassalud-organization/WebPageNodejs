@@ -56,7 +56,7 @@ function getImplantableMD(req) {
 function getRelativeData(req, relative) {
   let relativeRecord = {};
   //Inicia relativeRecord
-
+  var type;
   relativeRecord['isAlive'] = req.body['isAlive' + relative] == 'SI';
   relativeRecord['obesity'] = req.body['obesity' + relative] == 'SI';
   relativeRecord['arthritis'] = req.body['arthritis' + relative] == 'SI';
@@ -65,7 +65,7 @@ function getRelativeData(req, relative) {
   if (req.body['diabetes' + relative] != "Desconoce") {
     relativeRecord['diabetes'] = req.body['diabetes' + relative].toUpperCase() == 'SI';
     if (relativeRecord['diabetes']) {
-      var type = req.body['diabetesTypeM'];
+      type = req.body['diabetesTypeM'];
       if (Array.isArray(type)) {
         if (type.length == 0) {
           relativeRecord['diabetesType'] = ['Desconoce'];
@@ -82,7 +82,7 @@ function getRelativeData(req, relative) {
   if (req.body['hearthDisease' + relative] = !"Desconoce") {
     relativeRecord['hearthDisease'] = req.body['hearthDisease' + relative].toUpperCase() == 'SI';
     if (relativeRecord['hearthDisease']) {
-      var type = req.body['hearthType' + relative];
+      type = req.body['hearthType' + relative];
       if (Array.isArray(type)) {
         if (type.length == 0) {
           hearthType = ['Desconoce'];
@@ -99,7 +99,7 @@ function getRelativeData(req, relative) {
   if (req.body['cancer' + relative] != "Desconoce") {
     relativeRecord['cancer'] = req.body['cancer' + relative].toUpperCase() == 'SI';
     if (relativeRecord['cancer']) {
-      var type = req.body['cancerType' + relative];
+      type = req.body['cancerType' + relative];
       if (Array.isArray(type)) {
         if (type.length == 0) {
           relativeRecord['cancerType'] = ['Desconoce'];
@@ -116,7 +116,7 @@ function getRelativeData(req, relative) {
   if (req.body['lungDisease' + relative] != "Desconoce") {
     relativeRecord['lungDisease'] = req.body['lungDisease' + relative].toUpperCase() == 'SI';
     if (relativeRecord['lungDisease']) {
-      var type = req.body['lungType' + relative];
+      type = req.body['lungType' + relative];
       if (Array.isArray(type)) {
         if (type.length == 0) {
           relativeRecord['lungType'] = ['Desconoce'];
@@ -133,7 +133,7 @@ function getRelativeData(req, relative) {
   if (req.body['kidneyDiseases' + relative] != "Desconoce") {
     relativeRecord['kidneyDiseases'] = req.body['kidneyDiseases' + relative].toUpperCase() == 'SI';
     if (relativeRecord['kidneyDiseases']) {
-      var type = req.body['kidneyType' + relative];
+      type = req.body['kidneyType' + relative];
       if (Array.isArray(type)) {
         if (type.length == 0) {
           relativeRecord['kidneyType'] = ['Desconoce'];
@@ -150,7 +150,7 @@ function getRelativeData(req, relative) {
   if (req.body['liverDisease' + relative] != "Desconoce") {
     relativeRecord['liverDisease'] = req.body['liverDisease' + relative].toUpperCase() == 'SI';
     if (relativeRecord['liverDisease']) {
-      var type = req.body['liverType' + relative];
+      type = req.body['liverType' + relative];
       if (Array.isArray(type)) {
         if (type.length == 0) { //si no hay infomracion crea un desconoce
           relativeRecord['liverType'] = ['Desconoce'];
@@ -246,7 +246,7 @@ function getDiseasesData(req) {
   let diseases = {};
   diseases['enfInfectocontagiosas'] = req.body.enfInfectocontagiosas.toUpperCase() == 'SI';
 
-  var type = req.body.infectoType;
+  type = req.body.infectoType;
   if (Array.isArray(type)) {
     if (type.length == 0) {
       diseases['infectoType'] = ['Desconoce'];
@@ -261,7 +261,7 @@ function getDiseasesData(req) {
   if (req.body['diabetes'] != "Desconoce") {
     diseases['diabetes'] = req.body['diabetes'].toUpperCase() == 'SI';
     if (diseases['diabetes']) {
-      var type = req.body['diabetesTypeM'];
+      type = req.body['diabetesTypeM'];
       if (Array.isArray(type)) {
         if (type.length == 0) {
           diseases['diabetesType'] = ['Desconoce'];
@@ -278,7 +278,7 @@ function getDiseasesData(req) {
   if (req.body['hearthDisease'] = !"Desconoce") {
     diseases['hearthDisease'] = req.body['hearthDisease'].toUpperCase() == 'SI';
     if (diseases['hearthDisease']) {
-      var type = req.body['hearthType'];
+      type = req.body['hearthType'];
       if (Array.isArray(type)) {
         if (type.length == 0) {
           hearthType = ['Desconoce'];
@@ -295,7 +295,7 @@ function getDiseasesData(req) {
   if (req.body['cancer'] != "Desconoce") {
     diseases['cancer'] = req.body['cancer'].toUpperCase() == 'SI';
     if (diseases['cancer']) {
-      var type = req.body['cancerType'];
+      type = req.body['cancerType'];
       if (Array.isArray(type)) {
         if (type.length == 0) {
           diseases['cancerType'] = ['Desconoce'];
@@ -312,7 +312,7 @@ function getDiseasesData(req) {
   if (req.body['lungDisease'] != "Desconoce") {
     diseases['lungDisease'] = req.body['lungDisease'].toUpperCase() == 'SI';
     if (diseases['lungDisease']) {
-      var type = req.body['lungType'];
+      type = req.body['lungType'];
       if (Array.isArray(type)) {
         if (type.length == 0) {
           diseases['lungType'] = ['Desconoce'];
@@ -329,7 +329,7 @@ function getDiseasesData(req) {
   if (req.body['kidneyDiseases'] != "Desconoce") {
     diseases['kidneyDiseases'] = req.body['kidneyDiseases'].toUpperCase() == 'SI';
     if (diseases['kidneyDiseases']) {
-      var type = req.body['kidneyType'];
+      type = req.body['kidneyType'];
       if (Array.isArray(type)) {
         if (type.length == 0) {
           diseases['kidneyType'] = ['Desconoce'];
@@ -346,7 +346,7 @@ function getDiseasesData(req) {
   if (req.body['liverDisease'] != "Desconoce") {
     diseases['liverDisease'] = req.body['liverDisease'].toUpperCase() == 'SI';
     if (diseases['liverDisease']) {
-      var type = req.body['liverType'];
+      type = req.body['liverType'];
       if (Array.isArray(type)) {
         if (type.length == 0) { //si no hay infomracion crea un desconoce
           diseases['liverType'] = ['Desconoce'];
@@ -362,7 +362,7 @@ function getDiseasesData(req) {
 
   diseases['convulsiones'] == req.body.convulsiones.toUpperCase() == 'SI';
 
-  let type = req.body.cerebralPalsy;
+  type = req.body.cerebralPalsy;
   if (Array.isArray(type)) {
     if (type.length == 0) {
       diseases['cerebralPalsy'] = ['Desconoce'];
