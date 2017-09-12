@@ -83,15 +83,15 @@ function getRelativeData(req, relative) {
     relativeRecord['hearthDisease'] = req.body['hearthDisease' + relative].toUpperCase() == 'SI';
     if (relativeRecord['hearthDisease']) {
       type = req.body['hearthType' + relative];
-      if (Array.isArray(type)) {
-        if (type.length == 0) {
-          hearthType = ['Desconoce'];
-        } else {
+      if(type != undefined){
+        if (Array.isArray(type)) { //verificar si hay más de una seleccionada
           relativeRecord['hearthType'] = type;
+        } // Fin de IF hearthType ARRAY
+        else { //Solo hay una seleccionada
+          relativeRecord['hearthType'] = [type];
         }
-      } // Fin de IF hearthType ARRAY
-      else {
-        relativeRecord['hearthType'] = [type];
+      }else{//No se seleccionó ni madres
+        hearthType = ['Desconoce'];
       }
     }
   } // Fin del IF desconoce
@@ -130,9 +130,9 @@ function getRelativeData(req, relative) {
     }
   } // Fin del IF de Lung Desconoce
 
-  if (req.body['kidneyDiseases' + relative] != "Desconoce") {
-    relativeRecord['kidneyDiseases'] = req.body['kidneyDiseases' + relative].toUpperCase() == 'SI';
-    if (relativeRecord['kidneyDiseases']) {
+  if (req.body['kidneyDisease' + relative] != "Desconoce") {
+    relativeRecord['kidneyDisease'] = req.body['kidneyDisease' + relative].toUpperCase() == 'SI';
+    if (relativeRecord['kidneyDisease']) {
       type = req.body['kidneyType' + relative];
       if (Array.isArray(type)) {
         if (type.length == 0) {
@@ -163,9 +163,7 @@ function getRelativeData(req, relative) {
       }
     }
   } // Fin del IF liverDisease
-
   return relativeRecord;
-
 }
 
 
@@ -180,8 +178,9 @@ function getTraumaData(req) {
   trauma['stingsOrBites'] = req.body.stingsOrBites.toUpperCase() == 'SI';
   trauma['considerableInjuries'] = req.body.considerableInjuries.toUpperCase() == 'SI';
   trauma['rehabilitationTherapy'] = req.body.rehabilitationTherapy.toUpperCase() == 'SI';
-  let physicalTraumaAreas = req.body.physicalTraumaAreas;
 
+  //TODO: verificar physicalTraumaAreas si undefined
+  let physicalTraumaAreas = req.body.physicalTraumaAreas;
   if (Array.isArray(physicalTraumaAreas)) {
     if (physicalTraumaAreas.length == 0) {
       trauma['physicalTraumaAreas'] = ['Desconoce'];
@@ -206,6 +205,7 @@ function getHospitalizationsData(req) {
 
   if (hospitalizations['isBeenHospitalized']) {
     let type = req.body.hospitalizationType;
+    //TODO: hospitalizationType es undefined
     if (Array.isArray(type)) {
       if (type.length == 0) {
         hospitalizations['hospitalizationType'] = ['Desconoce'];
@@ -219,11 +219,12 @@ function getHospitalizationsData(req) {
   }
 
   if (req.body.bloodType != "Desconoce") {
-    hospitalization['bloodType'] = req.body.bloodType;
+    hospitalizations['bloodType'] = req.body.bloodType;
   }
 
   hospitalizations['bloodTransfer'] = req.body.bloodTransfer.toUpperCase() == 'SI';
 
+  //TODO: allergies es undefined
   var allergies = req.body.allergies;
   if (Array.isArray(allergies)) {
     if (type.length == 0) {
@@ -236,8 +237,8 @@ function getHospitalizationsData(req) {
     hospitalizations['allergies'] = [allergies];
   }
 
-  hospitalizacion['drugAddiction'] = req.body.drugAddiction.toUpperCase() == 'SI';
-  hospitalizacion['vaccineScheme'] = req.body.vaccineScheme.toUpperCase() == 'SI';
+  hospitalizations['drugAddiction'] = req.body.drugAddiction.toUpperCase() == 'SI';
+  hospitalizations['vaccineScheme'] = req.body.vaccineScheme.toUpperCase() == 'SI';
 
   return hospitalizations;
 } //Function Hospitalization
@@ -247,6 +248,7 @@ function getDiseasesData(req) {
   diseases['enfInfectocontagiosas'] = req.body.enfInfectocontagiosas.toUpperCase() == 'SI';
 
   type = req.body.infectoType;
+  //TODO: type es undefined
   if (Array.isArray(type)) {
     if (type.length == 0) {
       diseases['infectoType'] = ['Desconoce'];
@@ -279,6 +281,7 @@ function getDiseasesData(req) {
     diseases['hearthDisease'] = req.body['hearthDisease'].toUpperCase() == 'SI';
     if (diseases['hearthDisease']) {
       type = req.body['hearthType'];
+      //TODO: type es undefined
       if (Array.isArray(type)) {
         if (type.length == 0) {
           hearthType = ['Desconoce'];
@@ -296,6 +299,7 @@ function getDiseasesData(req) {
     diseases['cancer'] = req.body['cancer'].toUpperCase() == 'SI';
     if (diseases['cancer']) {
       type = req.body['cancerType'];
+      //TODO: type es undefined
       if (Array.isArray(type)) {
         if (type.length == 0) {
           diseases['cancerType'] = ['Desconoce'];
@@ -313,6 +317,7 @@ function getDiseasesData(req) {
     diseases['lungDisease'] = req.body['lungDisease'].toUpperCase() == 'SI';
     if (diseases['lungDisease']) {
       type = req.body['lungType'];
+      //TODO: type es undefined
       if (Array.isArray(type)) {
         if (type.length == 0) {
           diseases['lungType'] = ['Desconoce'];
@@ -326,10 +331,11 @@ function getDiseasesData(req) {
     }
   } // Fin del IF de Lung Desconoce
 
-  if (req.body['kidneyDiseases'] != "Desconoce") {
-    diseases['kidneyDiseases'] = req.body['kidneyDiseases'].toUpperCase() == 'SI';
-    if (diseases['kidneyDiseases']) {
+  if (req.body['kidneyDisease'] != "Desconoce") {
+    diseases['kidneyDisease'] = req.body['kidneyDisease'].toUpperCase() == 'SI';
+    if (diseases['kidneyDisease']) {
       type = req.body['kidneyType'];
+      //TODO: type es undefined
       if (Array.isArray(type)) {
         if (type.length == 0) {
           diseases['kidneyType'] = ['Desconoce'];
@@ -347,6 +353,7 @@ function getDiseasesData(req) {
     diseases['liverDisease'] = req.body['liverDisease'].toUpperCase() == 'SI';
     if (diseases['liverDisease']) {
       type = req.body['liverType'];
+      //TODO: type es undefined
       if (Array.isArray(type)) {
         if (type.length == 0) { //si no hay infomracion crea un desconoce
           diseases['liverType'] = ['Desconoce'];
@@ -363,6 +370,7 @@ function getDiseasesData(req) {
   diseases['convulsiones'] == req.body.convulsiones.toUpperCase() == 'SI';
 
   type = req.body.cerebralPalsy;
+  //TODO: type es undefined
   if (Array.isArray(type)) {
     if (type.length == 0) {
       diseases['cerebralPalsy'] = ['Desconoce'];
