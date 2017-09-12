@@ -7,7 +7,7 @@ const hospitalizationTypeE = MR.schema.path('pathological.Hospitalizations.hospi
 const allergiesE = MR.schema.path('pathological.Hospitalizations.allergies').options.enum;
 const infectoTypeE = MR.schema.path('pathological.Diseases.infectoType').options.enum;
 const lungTypeE = MR.schema.path('pathological.Diseases.lungType').options.enum;
-const kidneyTypeE = MR.schema.path('pathological.Diseases.kidneyType').options.enum;
+const kindneyTypeE = MR.schema.path('pathological.Diseases.kindneyType').options.enum;
 const liverTypeE = MR.schema.path('pathological.Diseases.liverType').options.enum;
 const cerebralPalsyE = MR.schema.path('pathological.Diseases.cerebralPalsy').options.enum;
 const diabetesTypeE = MR.schema.path('pathological.Diseases.diabetesType').options.enum;
@@ -255,18 +255,198 @@ function getTraumaData(req) {
   trauma['dislocations'] = req.body.dislocations == 'Si';
   trauma['boneFracture'] = req.body.boneFracture == 'Si';
   trauma['muscleStrain'] = req.body.muscleStrain == 'Si';
+  trauma['bruises'] = req.body.bruises == 'Si';
+  trauma['stringsOrbites'] = req.body.stringsOrbites == 'Si';
+  trauma['considerableInjuries'] = req.body.considerableInjuries == 'Si';
+  trauma['rehabilitationTherapy'] = req.body.rehabilitationTherapy == 'Si';
+  trauma['physicalTraumaAreas'] = req.body.physicalTraumaAreas == 'Si';
+
+  let pyshicalTraumaAreas {};
+
+      if(Array.isArray(type)) {
+        if (type.length == 0){
+          trauma['pyshicalTraumaAreas'] = ['Desconoce'];
+        } else {
+          trauma['pyshicalTraumaAreas'] = type;
+        }
+      } //Fin Array isArray
+      else {
+        trauma['pyshicalTraumaAreas'] = type;
+ = [type];
+      }
+
+  trauma['pyschologicalTrauma'] = req.body.pyschologicalTrauma == 'Si';
 
   return trauma;
-}
+} //Function Trauma
 
 function getHospitalizationsData(req) {
   let hospitalizations = {};
 
+  hospitalizations['isBeenHospitalized'] = req.body.isBeenHospitalizes == 'Si';
+  hospitalizations['times'] = req.body.times == 'Si';
+  hospitalizations['hospitalizationType'] = req.body.hospitalizationType == 'Si';
+
+  let hospitalizationType = {};
+
+    if(Array.isArray(type)) {
+      if (type.length == 0){
+        hospitalizations['hospitalizationType'] = req.body.hospitalizationType == 'Si';
+      }
+      else{
+        hospitalizations['hospitalizationType']  = type;
+      }
+    } //Fin del If Arrray is Array
+    else {
+      hospitalizations['hospitalizationType'] = [type];
+    }
+
+  let bloodType = {};
+
+    if (req.body.bloodType != "Desconoce") {
+        hospitalization['bloodType'] = req.body.bloodType;
+      }
+
+  hospitalizations['bloodTransfer'] = req.body.bloodTransfer == 'Si';
+
+  let allergies {};
+
+      if(Array.isArray(type)) {
+        if (type.length == 0){
+          hospitalizations['allergies'] = ['Desconoce'];
+        } else {
+          hospitalizations['allergies'] = type;
+        }
+      } //Fin Array isArray
+      else {
+        hospitalizations['allergies'] = [type];
+      }
+
+  hospitalizacion['drugAddiction'] = req.body.drugAddiction == 'Si';
+  hospitalizacion['vaccineScheme'] = req.body.vaccineScheme == 'Si';
+
   return hospitalizations;
-}
+} //Function Hospitalization
 
 function getDiseasesData(req) {
   let diseases = {};
+    diseases['enfInfectocontagiosas'] = req.body.enfInfectocontagiosas == 'Si';
+
+  let infectoType {};
+
+    if(Array.isArray(type)) {
+      if(type.length == 0){
+        diseases['infectoType'] = req.body.infectoType == 'Si';
+      } else {
+        diseases['infectoType'] = type;
+      }
+    } // Fin del Array isArray
+    else {
+      diseases['infectoType'] = [type];
+    }
+
+    diseases['diabetes'] = req.body.diabetes == 'Si';
+
+  let diabetesType{};
+
+    if (req.body.diabetesType != "Desconoce") {
+        hospitalization['diabetesType'] = req.body.diabetesType;
+      }
+
+    diseases['lungDisease'] = req.body.lungDisease == 'Si';
+
+  let lungType {};
+
+    if(Array.isArray(type)){
+      if(type.length == 0){
+        diseases['lungType'] = req.body.lungType == 'Si';
+      } else {
+        diseases['lungType'] = type;
+      }
+    } // Fin del Array is Array
+    else {
+      diseases['lungType'] = [type];
+    }
+
+    diseases['kindneyDiseases'] == req.body.kindneyDiseases == "Si";
+
+    let kindneyType {};
+
+    if(Array.isArray(type)){
+      if(type.length == 0){
+        diseases['kindneyType'] = req.body.kindneyType == 'Si';
+      } else {
+        diseases['kindneyType'] = type;
+      }
+    } // Fin del Array is Array
+    else {
+      diseases['kindneyType'] = [type];
+    }
+
+    diseases['liverDisease'] == req.body.liverDisease == "Si";
+
+
+    let liverType {};
+
+    if(Array.isArray(type)){
+      if(type.length == 0){
+        diseases['liverType'] = req.body.liverType == 'Si';
+      } else {
+        diseases['liverType'] = type;
+      }
+    } // Fin del Array is Array
+    else {
+      diseases['liverType'] = [type];
+    }
+
+    diseases['convulsiones'] == req.body.convulsiones == "Si";
+
+
+    let cerebralPalsy {};
+
+    if(Array.isArray(type)){
+      if(type.length == 0){
+        diseases['cerebralPalsy'] = req.body.cerebralPalsy == 'Si';
+      } else {
+        diseases['cerebralPalsy'] = type;
+      }
+    } // Fin del Array is Array
+    else {
+      diseases['cerebralPalsy'] = [type];
+    }
+
+
+    diseases['hearthDisease'] == req.body.hearthDisease == "Si";
+
+
+    let hearthType {};
+
+    if(Array.isArray(type)){
+      if(type.length == 0){
+        diseases['hearthType'] = req.body.hearthType == 'Si';
+      } else {
+        diseases['hearthType'] = type;
+      }
+    } // Fin del Array is Array
+    else {
+      diseases['hearthType'] = [type];
+    }
+
+    diseases['cancer'] == req.body.cancer == "Si";
+
+    let cancerType {};
+
+    if(Array.isArray(type)){
+      if(type.length == 0){
+        diseases['cancerType'] = req.body.cancerType == 'Si';
+      } else {
+        diseases['cancerType'] = type;
+      }
+    } // Fin del Array is Array
+    else {
+      diseases['cancerType'] = [type];
+    }
+    
 
   return diseases;
 }
@@ -323,13 +503,12 @@ module.exports = {
         'hospitalizationType':hospitalizationTypeE,
         'allergies':allergiesE,
         'infectoType':infectoTypeE,
-        'kidneyType':kidneyTypeE,
+        'kindneyType':kindneyTypeE,
         'liverType':liverTypeE,
         'cerebralPalsy':cerebralPalsyE,
         'diabetesType':diabetesTypeE,
         'hearthType':hearthTypeE,
         'cancerType':cancerTypeE,
-        'lungType':lungTypeE,
         'menu':'/updateMedicalRecord'
       });
     }

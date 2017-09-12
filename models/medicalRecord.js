@@ -164,7 +164,7 @@ var MemberMedicalRecord = new mongoose.Schema({
     }, // **Cierre Trauma**
 
     Hospitalizations: {
-      isBeenHospitalizes: {
+      isBeenHospitalized: {
         type: Boolean
       },
       times: {
@@ -217,14 +217,14 @@ var MemberMedicalRecord = new mongoose.Schema({
         enum: ['NEUMONIA', 'ASMA', 'ENFISEMA', 'EPOC', 'EDEMA', 'OTRO']
       },
       kidneyDisease: {
-        type: String
+        type: Boolean
       },
       kidneyType: {
         type: [String],
         enum: ['INSUFICIENCIA RENAL', 'CÁLCULOS RENALES', 'NEFROPATÍAS', 'OTRO']
       },
       liverDisease: {
-        type: String
+        type: Boolean
       },
       liverType: {
         type: [String],
