@@ -92,6 +92,9 @@ module.exports = function(app, passport) {
   app.post('/test', testController.test);
   app.post('/testTwilio', testController.twilioTest);
   app.get('/test', testController.loadTest);
+  app.post('/testBody', (req, res)=>{
+    res.send(req.body);
+  });
 
 }
 //Fin Dashboard

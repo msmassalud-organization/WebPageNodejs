@@ -7,7 +7,7 @@ const hospitalizationTypeE = MR.schema.path('pathological.Hospitalizations.hospi
 const allergiesE = MR.schema.path('pathological.Hospitalizations.allergies').options.enum;
 const infectoTypeE = MR.schema.path('pathological.Diseases.infectoType').options.enum;
 const lungTypeE = MR.schema.path('pathological.Diseases.lungType').options.enum;
-const kindneyTypeE = MR.schema.path('pathological.Diseases.kindneyType').options.enum;
+const kidneyTypeE = MR.schema.path('pathological.Diseases.kidneyType').options.enum;
 const liverTypeE = MR.schema.path('pathological.Diseases.liverType').options.enum;
 const cerebralPalsyE = MR.schema.path('pathological.Diseases.cerebralPalsy').options.enum;
 const diabetesTypeE = MR.schema.path('pathological.Diseases.diabetesType').options.enum;
@@ -25,257 +25,175 @@ function getNoPathological(req) {
     stressLevel: req.body.stressLevel,
     workoutsDays: req.body.workoutsDays,
     sugaryDrinks: req.body.sugaryDrinks,
-    sexualLife: req.body.sexualLife == 'Activo',
-    alcoholicDrinks: req.body.alcoholicDrinks == "Si",
-    cigarettes: req.body.cigarettes == "Si",
-    otherDrugs: req.body.otherDrugs == "Si"
+    sexualLife: req.body.sexualLife.toUpperCase() == 'ACTIVO',
+    alcoholicDrinks: req.body.alcoholicDrinks,
+    cigarettes: req.body.cigarettes,
+    otherDrugs: req.body.otherDrugs.toUpperCase() == 'SI'
   };
   return noPathological;
 }
 
 function getImplantableMD(req) {
   let implantableMD = {
-    dental: req.body.dental == 'Si',
-    ocular: req.body.ocular == 'SI',
-    hearing: req.body.hearing == 'SI',
-    cosmetic: req.body.cosmetic == 'SI',
-    cranial: req.body.cranial == 'SI',
-    upperLimb: req.body.upperLimb == 'SI',
-    coloum: req.body.colum == 'SI',
-    lowerLimb: req.body.lowerLimb == 'SI',
-    vascular: req.body.vasculas,
-    cathers: req.body.cathers == 'SI',
-    cardiac: req.body.cardiac == 'SI'
+    dental: req.body.dental.toUpperCase() == 'SI',
+    ocular: req.body.ocular.toUpperCase() == 'SI',
+    hearing: req.body.hearing.toUpperCase() == 'SI',
+    cosmetic: req.body.cosmetic.toUpperCase() == 'SI',
+    cranial: req.body.cranial.toUpperCase() == 'SI',
+    upperLimb: req.body.upperLimb.toUpperCase() == 'SI',
+    coloum: req.body.coloum.toUpperCase() == 'SI',
+    lowerLimb: req.body.lowerLimb.toUpperCase() == 'SI',
+    vascular: req.body.vascular.toUpperCase() == 'SI',
+    cathers: req.body.cathers.toUpperCase() == 'SI',
+    cardiac: req.body.cardiac.toUpperCase() == 'SI'
   };
   return implantableMD;
 }
 
-function getMomData(req) {
-  let momRecord = {};
-  //Inicia momRecord
+/**
+@param relative: 'M' o 'P'
+*/
+function getRelativeData(req, relative) {
+  let relativeRecord = {};
+  //Inicia relativeRecord
 
-  if (req.body.diabetesM != "Desconoce") {
-    momRecord['diabetesM'] = req.body.diabetesM == 'Si';
-    var type = req.body.diabetesTypeM;
-    if (Array.isArray(type)) {
-      if (type.length == 0) {
-        momRecord['diabetesType'] = ['Desconoce'];
-      } else {
-        momRecord['diabetesType'] = type;
+  relativeRecord['isAlive'] = req.body['isAlive' + relative] == 'SI';
+  relativeRecord['obesity'] = req.body['obesity' + relative] == 'SI';
+  relativeRecord['arthritis'] = req.body['arthritis' + relative] == 'SI';
+  relativeRecord['headache'] = req.body['headache' + relative] == 'SI';
+
+  if (req.body['diabetes' + relative] != "Desconoce") {
+    relativeRecord['diabetes'] = req.body['diabetes' + relative].toUpperCase() == 'SI';
+    if (relativeRecord['diabetes']) {
+      var type = req.body['diabetesTypeM'];
+      if (Array.isArray(type)) {
+        if (type.length == 0) {
+          relativeRecord['diabetesType'] = ['Desconoce'];
+        } else {
+          relativeRecord['diabetesType'] = type;
+        }
+      } // Fin de IF ISArray
+      else {
+        relativeRecord['diabetesType'] = [type];
       }
-    } // Fin de IF ISArray
-    else {
-      momRecord['diabetesType'] = [type];
     }
   } // Fin del IF desconoce
 
-  if (req.body.hearthDiseaseM = !"Desconoce") {
-    momRecord['hearthDisease'] = req.body.hearthDiseaseM == 'Si';
-    var type = req.body.hearthTypeM;
-    if (Array.isArray(type)) {
-      if (type.length == 0) {
-        hearthType = ['Desconoce'];
-      } else {
-        momRecord['hearthType'] = type;
+  if (req.body['hearthDisease' + relative] = !"Desconoce") {
+    relativeRecord['hearthDisease'] = req.body['hearthDisease' + relative].toUpperCase() == 'SI';
+    if (relativeRecord['hearthDisease']) {
+      var type = req.body['hearthType' + relative];
+      if (Array.isArray(type)) {
+        if (type.length == 0) {
+          hearthType = ['Desconoce'];
+        } else {
+          relativeRecord['hearthType'] = type;
+        }
+      } // Fin de IF hearthType ARRAY
+      else {
+        relativeRecord['hearthType'] = [type];
       }
-    } // Fin de IF hearthType ARRAY
-    else {
-      momRecord['hearthType'] = [type];
     }
   } // Fin del IF desconoce
 
-  console.log(req.body.cancerM);
-  if (req.body.cancer != "Desconoce") {
-    momRecord['cancer'] = req.body.cancerM == 'Si';
-    var type = req.body.cancerTypeM;
-    if (Array.isArray(type)) {
-      if (type.length == 0) {
-        momRecord['cancerType'] = ['Desconoce'];
-      } else {
-        momRecord['cancerType'] = type;
+  if (req.body['cancer' + relative] != "Desconoce") {
+    relativeRecord['cancer'] = req.body['cancer' + relative].toUpperCase() == 'SI';
+    if (relativeRecord['cancer']) {
+      var type = req.body['cancerType' + relative];
+      if (Array.isArray(type)) {
+        if (type.length == 0) {
+          relativeRecord['cancerType'] = ['Desconoce'];
+        } else {
+          relativeRecord['cancerType'] = type;
+        }
+      } // Fin del IF relativeRecord['cancerType'] Array
+      else {
+        relativeRecord['cancerType'] = [type];
       }
-    } // Fin del IF momRecord['cancerType'] Array
-    else {
-      momRecord['cancerType'] = [type];
     }
   } // Fin del IF de cancer Desconoce
 
-  if (req.body.lungDiseaseM != "Desconoce") {
-    momRecord['lungDisease'] = req.body.lungDiseaseM == 'Si';
-    var type = req.body.lungTypeM;
-    if (Array.isArray(type)) {
-      if (type.length == 0) {
-        momRecord['lungType'] = ['Desconoce'];
-      } else {
-        momRecord['lungType'] = type;
+  if (req.body['lungDisease' + relative] != "Desconoce") {
+    relativeRecord['lungDisease'] = req.body['lungDisease' + relative].toUpperCase() == 'SI';
+    if (relativeRecord['lungDisease']) {
+      var type = req.body['lungType' + relative];
+      if (Array.isArray(type)) {
+        if (type.length == 0) {
+          relativeRecord['lungType'] = ['Desconoce'];
+        } else {
+          relativeRecord['lungType'] = type;
+        }
+      } // Fin del IF de relativeRecord['lungType'] Array
+      else {
+        relativeRecord['lungType'] = [type];
       }
-    } // Fin del IF de momRecord['lungType'] Array
-    else {
-      momRecord['lungType'] = [type];
     }
   } // Fin del IF de Lung Desconoce
 
-  if (req.body.kindneyDiseasesM != "Desconoce") {
-    momRecord['kindneyDiseases'] = req.body.kindneyDiseasesM == 'Si';
-    var type = req.body.kindneyTypeM;
-    if (Array.isArray(type)) {
-      if (type.length == 0) {
-        momRecord['kindneyType'] = ['Desconoce'];
-      } else {
-        momRecord['kindneyType'] = type;
+  if (req.body['kidneyDiseases' + relative] != "Desconoce") {
+    relativeRecord['kidneyDiseases'] = req.body['kidneyDiseases' + relative].toUpperCase() == 'SI';
+    if (relativeRecord['kidneyDiseases']) {
+      var type = req.body['kidneyType' + relative];
+      if (Array.isArray(type)) {
+        if (type.length == 0) {
+          relativeRecord['kidneyType'] = ['Desconoce'];
+        } else {
+          relativeRecord['kidneyType'] = type;
+        }
+      } //Fin del Array de relativeRecord['kidneyType'] Array
+      else {
+        relativeRecord['kidneyType'] = [type];
       }
-    } //Fin del Array de momRecord['kindneyType'] Array
-    else {
-      momRecord['kindneyType'] = [type];
     }
   } // Fin del IF kidney Desconoce
 
-  if (req.body.liverDiseaseM != "Desconoce") {
-    momRecord['liverDiseas'] = req.body.liverDiseasM == 'Si';
-    var type = req.body.liverDiseaseM;
-    if (Array.isArray(type)) {
-      if (type.length == 0) { //si no hay infomracion crea un desconoce
-        momRecord['liverType'] = ['Desconoce'];
-      } else {
-        momRecord['liverType'] = type;
+  if (req.body['liverDisease' + relative] != "Desconoce") {
+    relativeRecord['liverDisease'] = req.body['liverDisease' + relative].toUpperCase() == 'SI';
+    if (relativeRecord['liverDisease']) {
+      var type = req.body['liverType' + relative];
+      if (Array.isArray(type)) {
+        if (type.length == 0) { //si no hay infomracion crea un desconoce
+          relativeRecord['liverType'] = ['Desconoce'];
+        } else {
+          relativeRecord['liverType'] = type;
+        }
+      } // Fin del If Array
+      else {
+        relativeRecord['liverType'] = [type]; //crear un arreglo en caso de introducir solo 1 opcion
       }
-    } // Fin del If Array
-    else {
-      momRecord['liverType'] = [type]; //crear un arreglo en caso de introducir solo 1 opcion
     }
   } // Fin del IF liverDisease
 
-  return momRecord;
+  return relativeRecord;
 
 }
 
-function getDadData(req) {
-  let dadRecord = {};
-
-  if (req.body.diabetesP != "Desconoce") {
-    dadRecord['diabetes'] = req.body.diabetesP == 'Si';
-    var type = req.body.diabetesTypeP;
-    if (Array.isArray(type)) {
-      if (type.length == 0) {
-        dadRecord['diabetesType'] = ['Desconoce'];
-      } else {
-        dadRecord['diabetesType'] = type;
-      }
-    } // Fin de IF ISArray
-    else {
-      dadRecord['diabetesType'] = [type];
-    }
-  } // Fin del IF desconoce
-
-  if (req.body.hearthDiseaseP = !"Desconoce") {
-    dadRecord['hearthDisease'] = req.body.hearthDiseaseP == 'Si';
-    var type = req.body.hearTypeP;
-    if (Array.isArray(type)) {
-      if (type.length == 0) {
-        dadRecord['hearthType'] = ['Desconoce'];
-      } else {
-        dadRecord['hearthType'] = type;
-      }
-    } // Fin de IF hearthType ARRAY
-    else {
-      dadRecord['hearthType'] = [type];
-    }
-  } // Fin del IF desconoce
-
-  if (req.body.cancerP != "Desconoce") {
-    dadRecord['cancer'] = req.body.cancerP == 'Si';
-    var type = req.body.cancerTypeP;
-    if (Array.isArray(type)) {
-      if (type.length == 0) {
-        dadRecord['cancerType'] = ['Desconoce'];
-      } else {
-        dadRecord['cancerType'] = type;
-      }
-    } // Fin del IF dadRecord['cancerType'] Array
-    else {
-      dadRecord['cancerType'] = [type];
-    }
-  } // Fin del IF de cancer Desconoce
-
-  headache: req.body.headache == 'Si'
-
-  if (req.body.lungDiseaseP != "Desconoce") {
-    dadRecord['lungDisease'] = req.body.lungDiseaseP == 'Si';
-    var type = req.body.lungTypeP;
-    if (Array.isArray(type)) {
-      if (type.length == 0) {
-        dadRecord['lungType'] = ['Desconoce'];
-      } else {
-        dadRecord['lungType'] = type;
-      }
-    } // Fin del IF de dadRecord['lungType'] Array
-    else {
-      dadRecord['lungType'] = [type];
-    }
-  } // Fin del IF de Lung Desconoce
-
-  if (req.body.kindneyDiseasesP != "Desconoce") {
-    dadRecord['kindneyDiseases'] = req.body.kindneyDiseasesP == 'Si';
-    var type = req.body.kindneyTypeP;
-    if (Array.isArray(type)) {
-      if (type.length == 0) {
-        dadRecord['kindneyType'] = ['Desconoce'];
-      } else {
-        dadRecord['kindneyType'] = type;
-      }
-    } //Fin del Array de dadRecord['kindneyType'] Array
-    else {
-      dadRecord['kindneyDiseases'] = [type];
-    }
-  } // Fin del IF kidney Desconoce
-
-
-  if (req.body.liverDiseaseP != "Desconoce") {
-    dadRecord['liverDiseas'] = req.body.liverDiseasP == 'Si';
-    var type = req.body.liverDiseaseP;
-    if (Array.isArray(type)) {
-      if (type.length == 0) { //si no hay infomracion crea un desconoce
-        dadRecord['liverType'] = ['Desconoce'];
-      } else {
-        dadRecord['liverType'] = type;
-      }
-    } // Fin del If Array
-    else {
-      dadRecord['liverType'] = [type]; //crear un arreglo en caso de introducir solo 1 opcion
-    }
-  } // Fin del IF liverDisease
-
-  return dadRecord;
-}
 
 function getTraumaData(req) {
   let trauma = {};
 
-  trauma['sprains'] = req.body.sprains == 'Si';
-  trauma['dislocations'] = req.body.dislocations == 'Si';
-  trauma['boneFracture'] = req.body.boneFracture == 'Si';
-  trauma['muscleStrain'] = req.body.muscleStrain == 'Si';
-  trauma['bruises'] = req.body.bruises == 'Si';
-  trauma['stringsOrbites'] = req.body.stringsOrbites == 'Si';
-  trauma['considerableInjuries'] = req.body.considerableInjuries == 'Si';
-  trauma['rehabilitationTherapy'] = req.body.rehabilitationTherapy == 'Si';
-  trauma['physicalTraumaAreas'] = req.body.physicalTraumaAreas == 'Si';
+  trauma['sprains'] = req.body.sprains.toUpperCase() == 'SI';
+  trauma['dislocations'] = req.body.dislocations.toUpperCase() == 'SI';
+  trauma['boneFracture'] = req.body.boneFracture.toUpperCase() == 'SI';
+  trauma['muscleStrain'] = req.body.muscleStrain.toUpperCase() == 'SI';
+  trauma['bruises'] = req.body.bruises.toUpperCase() == 'SI';
+  trauma['stingsOrBites'] = req.body.stingsOrBites.toUpperCase() == 'SI';
+  trauma['considerableInjuries'] = req.body.considerableInjuries.toUpperCase() == 'SI';
+  trauma['rehabilitationTherapy'] = req.body.rehabilitationTherapy.toUpperCase() == 'SI';
+  let physicalTraumaAreas = req.body.physicalTraumaAreas;
 
-  let pyshicalTraumaAreas {};
+  if (Array.isArray(physicalTraumaAreas)) {
+    if (physicalTraumaAreas.length == 0) {
+      trauma['physicalTraumaAreas'] = ['Desconoce'];
+    } else {
+      trauma['physicalTraumaAreas'] = physicalTraumaAreas;
+    }
+  } //Fin Array isArray
+  else {
+    trauma['physicalTraumaAreas'] = [physicalTraumaAreas];
+  }
 
-      if(Array.isArray(type)) {
-        if (type.length == 0){
-          trauma['pyshicalTraumaAreas'] = ['Desconoce'];
-        } else {
-          trauma['pyshicalTraumaAreas'] = type;
-        }
-      } //Fin Array isArray
-      else {
-        trauma['pyshicalTraumaAreas'] = type;
- = [type];
-      }
-
-  trauma['pyschologicalTrauma'] = req.body.pyschologicalTrauma == 'Si';
+  trauma['pyschologicalTrauma'] = req.body.pyschologicalTrauma.toUpperCase() == 'SI';
 
   return trauma;
 } //Function Trauma
@@ -283,170 +201,178 @@ function getTraumaData(req) {
 function getHospitalizationsData(req) {
   let hospitalizations = {};
 
-  hospitalizations['isBeenHospitalized'] = req.body.isBeenHospitalizes == 'Si';
-  hospitalizations['times'] = req.body.times == 'Si';
-  hospitalizations['hospitalizationType'] = req.body.hospitalizationType == 'Si';
+  hospitalizations['isBeenHospitalized'] = req.body.isBeenHospitalized.toUpperCase() == 'SI';
+  hospitalizations['times'] = req.body.times.toUpperCase() == 'SI';
 
-  let hospitalizationType = {};
-
-    if(Array.isArray(type)) {
-      if (type.length == 0){
-        hospitalizations['hospitalizationType'] = req.body.hospitalizationType == 'Si';
-      }
-      else{
-        hospitalizations['hospitalizationType']  = type;
+  if (hospitalizations['isBeenHospitalized']) {
+    let type = req.body.hospitalizationType;
+    if (Array.isArray(type)) {
+      if (type.length == 0) {
+        hospitalizations['hospitalizationType'] = ['Desconoce'];
+      } else {
+        hospitalizations['hospitalizationType'] = type;
       }
     } //Fin del If Arrray is Array
     else {
       hospitalizations['hospitalizationType'] = [type];
     }
+  }
 
-  let bloodType = {};
+  if (req.body.bloodType != "Desconoce") {
+    hospitalization['bloodType'] = req.body.bloodType;
+  }
 
-    if (req.body.bloodType != "Desconoce") {
-        hospitalization['bloodType'] = req.body.bloodType;
-      }
+  hospitalizations['bloodTransfer'] = req.body.bloodTransfer.toUpperCase() == 'SI';
 
-  hospitalizations['bloodTransfer'] = req.body.bloodTransfer == 'Si';
+  var allergies = req.body.allergies;
+  if (Array.isArray(allergies)) {
+    if (type.length == 0) {
+      hospitalizations['allergies'] = ['Desconoce'];
+    } else {
+      hospitalizations['allergies'] = allergies;
+    }
+  } //Fin Array isArray
+  else {
+    hospitalizations['allergies'] = [allergies];
+  }
 
-  let allergies {};
-
-      if(Array.isArray(type)) {
-        if (type.length == 0){
-          hospitalizations['allergies'] = ['Desconoce'];
-        } else {
-          hospitalizations['allergies'] = type;
-        }
-      } //Fin Array isArray
-      else {
-        hospitalizations['allergies'] = [type];
-      }
-
-  hospitalizacion['drugAddiction'] = req.body.drugAddiction == 'Si';
-  hospitalizacion['vaccineScheme'] = req.body.vaccineScheme == 'Si';
+  hospitalizacion['drugAddiction'] = req.body.drugAddiction.toUpperCase() == 'SI';
+  hospitalizacion['vaccineScheme'] = req.body.vaccineScheme.toUpperCase() == 'SI';
 
   return hospitalizations;
 } //Function Hospitalization
 
 function getDiseasesData(req) {
   let diseases = {};
-    diseases['enfInfectocontagiosas'] = req.body.enfInfectocontagiosas == 'Si';
+  diseases['enfInfectocontagiosas'] = req.body.enfInfectocontagiosas.toUpperCase() == 'SI';
 
-  let infectoType {};
-
-    if(Array.isArray(type)) {
-      if(type.length == 0){
-        diseases['infectoType'] = req.body.infectoType == 'Si';
-      } else {
-        diseases['infectoType'] = type;
-      }
-    } // Fin del Array isArray
-    else {
-      diseases['infectoType'] = [type];
+  var type = req.body.infectoType;
+  if (Array.isArray(type)) {
+    if (type.length == 0) {
+      diseases['infectoType'] = ['Desconoce'];
+    } else {
+      diseases['infectoType'] = type;
     }
+  } // Fin del Array isArray
+  else {
+    diseases['infectoType'] = [type];
+  }
 
-    diseases['diabetes'] = req.body.diabetes == 'Si';
-
-  let diabetesType{};
-
-    if (req.body.diabetesType != "Desconoce") {
-        hospitalization['diabetesType'] = req.body.diabetesType;
+  if (req.body['diabetes'] != "Desconoce") {
+    diseases['diabetes'] = req.body['diabetes'].toUpperCase() == 'SI';
+    if (diseases['diabetes']) {
+      var type = req.body['diabetesTypeM'];
+      if (Array.isArray(type)) {
+        if (type.length == 0) {
+          diseases['diabetesType'] = ['Desconoce'];
+        } else {
+          diseases['diabetesType'] = type;
+        }
+      } // Fin de IF ISArray
+      else {
+        diseases['diabetesType'] = [type];
       }
-
-    diseases['lungDisease'] = req.body.lungDisease == 'Si';
-
-  let lungType {};
-
-    if(Array.isArray(type)){
-      if(type.length == 0){
-        diseases['lungType'] = req.body.lungType == 'Si';
-      } else {
-        diseases['lungType'] = type;
-      }
-    } // Fin del Array is Array
-    else {
-      diseases['lungType'] = [type];
     }
+  } // Fin del IF desconoce
 
-    diseases['kindneyDiseases'] == req.body.kindneyDiseases == "Si";
-
-    let kindneyType {};
-
-    if(Array.isArray(type)){
-      if(type.length == 0){
-        diseases['kindneyType'] = req.body.kindneyType == 'Si';
-      } else {
-        diseases['kindneyType'] = type;
+  if (req.body['hearthDisease'] = !"Desconoce") {
+    diseases['hearthDisease'] = req.body['hearthDisease'].toUpperCase() == 'SI';
+    if (diseases['hearthDisease']) {
+      var type = req.body['hearthType'];
+      if (Array.isArray(type)) {
+        if (type.length == 0) {
+          hearthType = ['Desconoce'];
+        } else {
+          diseases['hearthType'] = type;
+        }
+      } // Fin de IF hearthType ARRAY
+      else {
+        diseases['hearthType'] = [type];
       }
-    } // Fin del Array is Array
-    else {
-      diseases['kindneyType'] = [type];
     }
+  } // Fin del IF desconoce
 
-    diseases['liverDisease'] == req.body.liverDisease == "Si";
-
-
-    let liverType {};
-
-    if(Array.isArray(type)){
-      if(type.length == 0){
-        diseases['liverType'] = req.body.liverType == 'Si';
-      } else {
-        diseases['liverType'] = type;
+  if (req.body['cancer'] != "Desconoce") {
+    diseases['cancer'] = req.body['cancer'].toUpperCase() == 'SI';
+    if (diseases['cancer']) {
+      var type = req.body['cancerType'];
+      if (Array.isArray(type)) {
+        if (type.length == 0) {
+          diseases['cancerType'] = ['Desconoce'];
+        } else {
+          diseases['cancerType'] = type;
+        }
+      } // Fin del IF diseases['cancerType'] Array
+      else {
+        diseases['cancerType'] = [type];
       }
-    } // Fin del Array is Array
-    else {
-      diseases['liverType'] = [type];
     }
+  } // Fin del IF de cancer Desconoce
 
-    diseases['convulsiones'] == req.body.convulsiones == "Si";
-
-
-    let cerebralPalsy {};
-
-    if(Array.isArray(type)){
-      if(type.length == 0){
-        diseases['cerebralPalsy'] = req.body.cerebralPalsy == 'Si';
-      } else {
-        diseases['cerebralPalsy'] = type;
+  if (req.body['lungDisease'] != "Desconoce") {
+    diseases['lungDisease'] = req.body['lungDisease'].toUpperCase() == 'SI';
+    if (diseases['lungDisease']) {
+      var type = req.body['lungType'];
+      if (Array.isArray(type)) {
+        if (type.length == 0) {
+          diseases['lungType'] = ['Desconoce'];
+        } else {
+          diseases['lungType'] = type;
+        }
+      } // Fin del IF de diseases['lungType'] Array
+      else {
+        diseases['lungType'] = [type];
       }
-    } // Fin del Array is Array
-    else {
-      diseases['cerebralPalsy'] = [type];
     }
+  } // Fin del IF de Lung Desconoce
 
-
-    diseases['hearthDisease'] == req.body.hearthDisease == "Si";
-
-
-    let hearthType {};
-
-    if(Array.isArray(type)){
-      if(type.length == 0){
-        diseases['hearthType'] = req.body.hearthType == 'Si';
-      } else {
-        diseases['hearthType'] = type;
+  if (req.body['kidneyDiseases'] != "Desconoce") {
+    diseases['kidneyDiseases'] = req.body['kidneyDiseases'].toUpperCase() == 'SI';
+    if (diseases['kidneyDiseases']) {
+      var type = req.body['kidneyType'];
+      if (Array.isArray(type)) {
+        if (type.length == 0) {
+          diseases['kidneyType'] = ['Desconoce'];
+        } else {
+          diseases['kidneyType'] = type;
+        }
+      } //Fin del Array de diseases['kidneyType'] Array
+      else {
+        diseases['kidneyType'] = [type];
       }
-    } // Fin del Array is Array
-    else {
-      diseases['hearthType'] = [type];
     }
+  } // Fin del IF kidney Desconoce
 
-    diseases['cancer'] == req.body.cancer == "Si";
-
-    let cancerType {};
-
-    if(Array.isArray(type)){
-      if(type.length == 0){
-        diseases['cancerType'] = req.body.cancerType == 'Si';
-      } else {
-        diseases['cancerType'] = type;
+  if (req.body['liverDisease'] != "Desconoce") {
+    diseases['liverDisease'] = req.body['liverDisease'].toUpperCase() == 'SI';
+    if (diseases['liverDisease']) {
+      var type = req.body['liverType'];
+      if (Array.isArray(type)) {
+        if (type.length == 0) { //si no hay infomracion crea un desconoce
+          diseases['liverType'] = ['Desconoce'];
+        } else {
+          diseases['liverType'] = type;
+        }
+      } // Fin del If Array
+      else {
+        diseases['liverType'] = [type]; //crear un arreglo en caso de introducir solo 1 opcion
       }
-    } // Fin del Array is Array
-    else {
-      diseases['cancerType'] = [type];
     }
-    
+  } // Fin del IF liverDisease
+
+  diseases['convulsiones'] == req.body.convulsiones.toUpperCase() == 'SI';
+
+  let type = req.body.cerebralPalsy;
+  if (Array.isArray(type)) {
+    if (type.length == 0) {
+      diseases['cerebralPalsy'] = ['Desconoce'];
+    } else {
+      diseases['cerebralPalsy'] = type;
+    }
+  } // Fin del Array is Array
+  else {
+    diseases['cerebralPalsy'] = [type];
+  }
 
   return diseases;
 }
@@ -455,11 +381,14 @@ function getDiseasesData(req) {
 //FUNCIONES PRINCIPALES
 module.exports = {
 
-  updateMedicalRecord: (req, res)=>{
+  updateMedicalRecord: (req, res) => {
     //Expediente Médico - Antecedentes Familiares
     let relativeMR = {}
-    let dadRecord = getDadData(req);
-    let momRecord = getMomData(req);
+    let dadRecord = getRelativeData(req, 'P');
+    let momRecord = getRelativeData(req, 'M');
+
+    relativeMR['dadRecord'] = dadRecord;
+    relativeMR['momRecord'] = momRecord;
     //Fin antecedentes familiares
 
     //Expediente Médico - No Patologicos
@@ -491,7 +420,7 @@ module.exports = {
     res.send(update);
   },
 
-  loadMedicalRecord : (req, res)=>{
+  loadMedicalRecord: (req, res) => {
     if (!req.user.medicalRecord) {
       //Crear expediente médico
       MRController.insert(req, res);
@@ -500,21 +429,21 @@ module.exports = {
       res.status(200).render('pages/updateMedicalRecord', {
         user: req.user,
         'physicalTraumaAreas': traumaAreasE,
-        'hospitalizationType':hospitalizationTypeE,
-        'allergies':allergiesE,
-        'infectoType':infectoTypeE,
-        'kindneyType':kindneyTypeE,
-        'liverType':liverTypeE,
-        'cerebralPalsy':cerebralPalsyE,
-        'diabetesType':diabetesTypeE,
-        'hearthType':hearthTypeE,
-        'cancerType':cancerTypeE,
-        'menu':'/updateMedicalRecord'
+        'hospitalizationType': hospitalizationTypeE,
+        'allergies': allergiesE,
+        'infectoType': infectoTypeE,
+        'kidneyType': kidneyTypeE,
+        'liverType': liverTypeE,
+        'cerebralPalsy': cerebralPalsyE,
+        'diabetesType': diabetesTypeE,
+        'hearthType': hearthTypeE,
+        'cancerType': cancerTypeE,
+        'menu': '/updateMedicalRecord'
       });
     }
   },
 
-  insertMedicalRecord: (req, res)=>{
+  insertMedicalRecord: (req, res) => {
     //Creamos el expediente médico
     let mr = new MR();
     //Guardamos en base de datos y después lo asignamos a usuario

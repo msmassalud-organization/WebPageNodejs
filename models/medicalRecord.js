@@ -48,14 +48,14 @@ var MemberMedicalRecord = new mongoose.Schema({
         enum: ['NEUMONIA', 'ASMA', 'ENFISEMA', 'EPOC', 'EDEMA', 'OTRO']
       },
       kidneyDisease: {
-        type: String
+        type: Boolean
       },
       kidneyType: {
         type: [String],
         enum: ['INSUFICIENCIA RENAL', 'CÁLCULOS RENALES', 'NEFROPATÍAS', 'OTRO']
       },
       liverDisease: {
-        type: String
+        type: Boolean
       },
       liverType: {
         type: [String],
@@ -107,14 +107,14 @@ var MemberMedicalRecord = new mongoose.Schema({
         enum: ['NEUMONIA', 'ASMA', 'ENFISEMA', 'EPOC', 'EDEMA', 'OTRO']
       },
       kidneyDisease: {
-        type: String
+        type: Boolean
       },
       kidneyType: {
         type: [String],
         enum: ['INSUFICIENCIA RENAL', 'CÁLCULOS RENALES', 'NEFROPATÍAS', 'OTRO']
       },
       liverDisease: {
-        type: String
+        type: Boolean
       },
       liverType: {
         type: [String],
@@ -175,7 +175,7 @@ var MemberMedicalRecord = new mongoose.Schema({
         enum: ['URGENCIAS', 'CUIDADOS INTENSIVOS', 'ENFERMEDADES O PATOLOGÍAS', 'CIRUGÍAS', 'OTRO']
       },
       bloodType: {
-        type: [String],
+        type: String,
         enum: ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+']
       },
       bloodTransfer: {
@@ -319,7 +319,7 @@ var MemberMedicalRecord = new mongoose.Schema({
       type: Boolean
     },
     alcoholicDrinks: {
-      type: Boolean
+      type: Number
     },
     cigarettes: {
       type: Number
