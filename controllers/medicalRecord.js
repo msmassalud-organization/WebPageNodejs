@@ -377,14 +377,10 @@ function getDiseasesData(req) {
     } else {
       diseases['cerebralPalsy'] = type;
     }
-<<<<<<< HEAD
-
-=======
   } // Fin del Array is Array
   else {
     diseases['cerebralPalsy'] = [type];
   }
->>>>>>> 64307d586ec236f177a35de46b7705cd5f311679
 
   return diseases;
 }

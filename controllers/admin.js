@@ -210,9 +210,15 @@ module.exports = {
       if (err) {
         throw err;
       }
-      console.log(membership.memberId);
+      if(!membership){
+        var initId = 0;
+      }else{
+          console.log(membership.memberId);
+          var initId = membership.memberId;
+      }
+
       //Empezaremos a insertar a partir del siguiente
-      var initId = membership.memberId;
+
       var arr = [];
       console.log(`Cantidad a insertar: ${req.body.cant}`);
       console.log('Ultimo ID: ' + (parseInt(req.body.cant) + initId));

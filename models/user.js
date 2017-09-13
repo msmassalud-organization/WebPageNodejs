@@ -172,10 +172,6 @@ userSchema.methods.validPassword = function(password) {
   return bCrypt.compareSync(password, this.password);
 };
 
-userSchema.methods.validToken = function(token) {
-  return bCrypt.compareSync(token, this.verificationCode);
-}
-
 userSchema.methods.getAccTypes = function() {
   return userSchema.path('accType').enumValues;
 };

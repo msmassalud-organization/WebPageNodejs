@@ -30,7 +30,7 @@ var membershipSchema = new Schema({
   verificationCode: {
     type: String,
     default: function() {
-      return randToken.generate(6);
+      return randToken.generate(8,"ABCDEFGHIJKLMN0PQRSTUVWXYZ0123456789");
     },
     required: true
   },

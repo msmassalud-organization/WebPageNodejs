@@ -4,7 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user');
 const SystemEvent = require('../models/systemEvent')
 const SEC = require('../controllers/systemEvent')
-
+const images = require('../lib/images')
 //Cadenas para los eventos del sistema
 const LOGIN = 'LOGIN';
 

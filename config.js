@@ -8,5 +8,7 @@ module.exports = {
   systemEventStrings: {
     'LOGIN' : 'logged in',
     'LOGOUT': 'logged out',
-  }
+  },
+  'GCLOUD_PROJECT': "nodejscloudstorage",
+  'CLOUD_BUCKET': "nodejsmongo.appspot.com"
 }

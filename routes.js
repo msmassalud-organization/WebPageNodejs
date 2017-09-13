@@ -8,7 +8,7 @@ const doctorController = require('./controllers/doctor');
 const adminController = require('./controllers/admin');
 const recepcionistController = require('./controllers/recepcionist')
 const globalController = require('./controllers/global')
-
+const imagesController = require('./lib/images');
 //TEST
 const testController = require('./testControllers/test')
 //Rutas
@@ -80,7 +80,11 @@ module.exports = function(app, passport) {
   app.get('/profile', auth.isLoggedIn, globalController.loadProfile);
   app.get('/medicalRecord', auth.isLoggedIn, globalController.loadMedicalRecord);
 
-  app.post('/updateProfile', auth.isLoggedIn, globalController.updateProfile);
+  app.post('/updateProfile',
+   auth.isLoggedIn,
+   imagesController.multer.single('cv'),
+   imagesController.sendUploadToGCS,
+   globalController.updateProfile);
   app.post('/signupMember', auth.isLoggedIn,  globalController.signupMember);
   //Fin globales
 

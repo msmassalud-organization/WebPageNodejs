@@ -22,10 +22,12 @@ const bloodTypeE = MR.schema.path('pathological.Hospitalizations.bloodType').opt
 //Constantes
 const expiringTime = 365; //days
 
+const images = require('../lib/images')
+
 //Privadas
 function pad(num, size) {
-    var s = "0000" + num;
-    return s.substr(s.length-size);
+  var s = "0000" + num;
+  return s.substr(s.length - size);
 }
 
 function createMember(req) {
@@ -260,18 +262,23 @@ module.exports = {
   },
 
   updateProfile: (req, res) => {
-    console.log(req.body);
     var update = req.body;
-    res.send(req.body);
     //TODO
+    // Was an image uploaded? If so, we'll use its public URL
+    // in cloud storage.
+    if (req.file && req.file.cloudStoragePublicUrl) {
+      update.pictureURL = req.file.cloudStoragePublicUrl;
+    }
 
-    User.findByIdAndUpdate(req.user._id, update, function(err, userUpdated) {
-      if (err) {
-        res.status(500).send(err);
-      }
-      console.log(userUpdated);
-      res.status(200).redirect("/loadDashboard");
-    });
+    User.findByIdAndUpdate(req.user._id,
+      update,
+      (err, userUpdated) => {
+        if (err) {
+          res.status(500).send(err);
+        }
+
+        res.status(200).redirect("/dashboard");
+      });
   },
 
   signupMember: (req, res) => {

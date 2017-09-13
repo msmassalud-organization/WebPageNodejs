@@ -3,7 +3,6 @@ const User = require('../models/user')
 const Doctor = require('../models/doctor')
 const SystemEvent = require('../models/systemEvent')
 const SEC = require('../controllers/systemEvent')
-
 const LOGOUT = 'LOGOUT'
 
 function createUser(req, res) {
@@ -96,40 +95,57 @@ module.exports = {
     ); //fin FindOne
   },
 
-  logOut: (req,res)=>{
-    if(req.user){
+  logOut: (req, res) => {
+    if (req.user) {
       let systemEvent = new SystemEvent();
       systemEvent.description = SEC.getEventDescription(LOGOUT, req.user);
       systemEvent.performedBy = req.user._id;
-      systemEvent.save((err)=>{
-        if(err){
+      systemEvent.save((err) => {
+        if (err) {
           throw err;
         }
         req.logout();
         res.redirect('/signin');
       });
-    }else{
+    } else {
       res.redirect('/signin');
     }
   },
   //AJAX
-  existsByEmail: (req, res)=>{
-    if(req.xhr){
+  existsByEmail: (req, res) => {
+    if (req.xhr) {
       User.findOne({
-        'email':req.query.email
-      }, (err, user)=>{
-        if(err){
+        'email': req.query.email
+      }, (err, user) => {
+        if (err) {
           res.status(500).send();
         }
 
-        if(user){
+        if (user) {
           res.status(200).send();
-        }else{
+        } else {
           res.status(204).send();
         }
       })
-    }else{
+    } else {
       res.status(403).send("Acceso restringido");
+    }
+  },
+
+  updateProfilePhoto: (req, res) => {
+    if(req.file && req.file.cloudStoragePublicUrl){
+      User.findByIdAndUpdate(req.user_id,{
+        'pictureURL':req.file.cloudStoragePublicUrl
+      },(err, userUpdated) => {
+          if(err){
+            //TODO: mostrar error 500
+            throw err;
+          }
+          if(userUpdated){
+            res.status(200).send();
+          }
+
+        })
     }
   }
 }

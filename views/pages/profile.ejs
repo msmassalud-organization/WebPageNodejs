@@ -29,7 +29,7 @@
                       <h4 class="title">Perfil</h4>
                     </div>
                     <div class="content">
-                      <form id="formProfile" action="/updateProfile" method="post">
+                      <form id="formProfile" action="/updateProfile" method="post" enctype="multipart/form-data">
                         <div class="row">
                           <div class="col-md-12">
                             <div class="form-group">
@@ -81,11 +81,19 @@
                               <label>País</label>
                               <input type="text" class="form-control" placeholder="País" value="<%= user.country %>">
                             </div>
+                            <%if(accType == 'doctor'){%>
+                              <div class="form-group">
+                                <input type="file" class="form-control" name="cv" id="cv" />
+                              </div>
+                            <%}%>
                           </div>
                           <div class="col-md-4">
                             <div class="form-group">
                               <label>Código Postal</label>
                               <input type="number" name="cp" class="form-control" placeholder="CP" value="<%= user.cp %>">
+                            </div>
+                            <div class="file-loading">
+                              <input id="cv" name="cv" type="file">
                             </div>
                           </div>
                         </div>
@@ -104,9 +112,12 @@
                     <div class="content">
                       <div class="author">
                         <a href="#">
-                        <img class="avatar border-gray" src="/public/bootstrap-dashboard/assets/img/faces/face-0.jpg" alt="..."/>
-
-                          <h4 class="title"><%=user.name%><br />
+                          <% if(user.pictureURL){ %>
+                            <img class="avatar border-gray" src="<%=user.pictureURL%>" alt="..." />
+                            <% }else{ %>
+                              <img class="avatar border-gray" src="/public/bootstrap-dashboard/assets/img/faces/face-0.jpg" alt="..." />
+                              <% } %>
+                                <h4 class="title"><%=user.name%><br />
                              <small><%=user.dadLastName%></small>
                           </h4>
                         </a>

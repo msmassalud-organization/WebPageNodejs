@@ -79,11 +79,11 @@ var doctorSchema = new mongoose.Schema({
     type: [Schema.Types.ObjectId],
     ref: 'Event'
   },
-  trk : [{
-    service : String,
-    price : Number,
+  trk: [{
+    service: String,
+    price: Number,
     duration: Number
-     }]
+  }]
 }, {
   runSettersOnQuery: true
 });
